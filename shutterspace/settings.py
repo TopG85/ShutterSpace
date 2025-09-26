@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-your-temporary-key-here-change-in-production-123456789'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False 
 
 ALLOWED_HOSTS = ['django-project-shutterspace.herokuapp.com', '127.0.0.1']
 
