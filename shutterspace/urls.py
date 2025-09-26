@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from portfolio.views import home
+from portfolio.views import home, portfolio_home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  # Root URL
-    path('portfolio/', home, name='portfolio_home'),
+    path('portfolio/', portfolio_home, name='portfolio_home'),
 ]
