@@ -1,0 +1,9 @@
+#!/bin/sh
+'''exec' "/Users/danielcarson/Documents/Visual Studio Code Project/ShutterSpace/.venv/bin/python" "$0" "$@"
+' '''
+import sys
+from django.core.management import execute_from_command_line
+if __name__ == '__main__':
+    if sys.argv[0].endswith('.exe'):
+        sys.argv[0] = sys.argv[0][:-4]
+    sys.exit(execute_from_command_line())
