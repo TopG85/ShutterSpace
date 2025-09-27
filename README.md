@@ -39,3 +39,9 @@ https://drawsql.app/teams/daniel-carson/diagrams/shutterspace
 ## Testing
 
 Detailed testing documentation can be found [here.](./TESTING.md)
+
+# Resources 
+
+Copilot
+https://www.google.com/search?q=&sca_esv=8d061dbbff1738e7&sxsrf=AE3TifMDSt1uGQ1V7E2qGOclabDn5poumA%3A1758977381038&source=hp&ei=ZN3XaM6cO-WjkdUP7fvjqQM&iflsig=AOw8s4IAAAAAaNfrdSZxt8ZRKRg-qUPbAypTDRpsgrXv&aep=22&udm=50&ved=0ahUKEwjO3tev_fiPAxXlUaQEHe39ODUQteYPCCU&oq=&gs_lp=Egdnd3Mtd2l6IgBIAFAAWABwAHgAkAEAmAEAoAEAqgEAuAEByAEAmAIAoAIAmAMAkgcAoAcAsgcAuAcAwgcAyAcA&sclient=gws-wiz
+https://realpython.com/courses/django-portfolio-project/
