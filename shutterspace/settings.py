@@ -19,6 +19,10 @@ if os.path.isfile('env.py'):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Media files settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -27,11 +31,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True 
 
 ALLOWED_HOSTS = [
     'django-project-shutterspace.herokuapp.com', 
-    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com',
     '127.0.0.1',
     'localhost'
 ]
@@ -64,7 +67,7 @@ ROOT_URLCONF = 'shutterspace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,7 +144,16 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Additional locations of static files for development
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # project-level static directory where static/css/style.css lives
+    BASE_DIR / 'shutterspace' / 'static',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Where to redirect after login
+LOGIN_REDIRECT_URL = '/accounts/profile/'

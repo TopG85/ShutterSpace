@@ -15,11 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from portfolio.views import home
+from portfolio.views import accounts_profile_redirect
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  # Root URL
-    path('portfolio/', home, name='portfolio_home'),
+    path('portfolio/', include('portfolio.urls')),  # Include portfolio URLs
+    # Auth URLs (login, logout, password reset)
+    # Provide a friendly redirect for /accounts/profile/ to the user's profile
+    path('accounts/profile/', accounts_profile_redirect, name='accounts_profile_redirect'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+

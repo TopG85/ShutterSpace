@@ -1,0 +1,212 @@
+/* Color palette variables */
+:root {
+  --sand: #D3BC98;
+  --rose: #E8DBDB;
+  --coral: #FF6957;
+  --light: #F2F2F2;
+  --dark: #0D0D0D;
+  --muted: #6c757d;
+  --card-bg: #ffffff;
+  --container-max-width: 1100px;
+}
+
+/* Utility classes */
+.bg-sand { background-color: var(--sand) !important; }
+.bg-rose { background-color: var(--rose) !important; }
+.bg-coral { background-color: var(--coral) !important; }
+.bg-light { background-color: var(--light) !important; }
+.bg-dark { background-color: var(--dark) !important; color: #fff; }
+
+.text-sand { color: var(--sand) !important; }
+.text-rose { color: var(--rose) !important; }
+.text-coral { color: var(--coral) !important; }
+.text-light { color: var(--light) !important; }
+.text-dark { color: var(--dark) !important; }
+
+/* Basic layout */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+/* Global link styles: use coral accent instead of browser default blue */
+a, a:link, a:visited {
+  color: var(--coral);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover, a:focus {
+  /* Use a slightly darker coral for hover to ensure contrast */
+  color: #e65a48; /* darker than #FF6957 */
+  text-decoration: underline;
+}
+
+/* Smaller text links (e.g., captions or metadata) should be slightly lighter weight */
+.small a {
+  color: var(--coral);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.small a:hover, .small a:focus {
+  text-decoration: underline;
+}
+
+/* Constrain main content for better reading rhythm */
+main.container {
+  max-width: var(--container-max-width);
+}
+
+.navbar-brand { font-weight: 700; }
+
+.card { border-radius: 8px; }
+
+/* Gentle card elevation */
+.card {
+  background: var(--card-bg);
+  box-shadow: 0 6px 18px rgba(13,13,13,0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(13,13,13,0.08); }
+
+.btn-primary,
+.btn.btn-primary,
+.btn.btn-sm.btn-primary {
+  background-color: var(--coral) !important;
+  color: var(--light) !important;
+  border-color: var(--coral) !important;
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover,
+.btn.btn-sm.btn-primary:hover { 
+  background-color: var(--sand) !important;
+  filter: brightness(0.95);
+  /* when primary uses a light hover bg, ensure text is dark for contrast */
+  color: var(--dark) !important;
+  border-color: var(--sand) !important;
+}
+
+/* Make Bootstrap danger buttons follow the site's coral accent variable */
+.btn-danger,
+.btn.btn-danger,
+.btn.btn-sm.btn-danger {
+  background-color: var(--coral) !important;
+  border-color: var(--coral) !important;
+  color: var(--light) !important;
+}
+
+.btn-danger:hover,
+.btn.btn-sm.btn-danger:hover,
+.btn-danger:focus,
+.btn.btn-danger:focus {
+  color: var(--light) !important;   
+  filter: brightness(0.95);
+}
+
+.btn.btn-danger:hover {
+    background-color: var(--sand) !important;
+}
+
+/* Outline danger should use coral for text/border while keeping transparent background */
+.btn-outline-danger {
+  color: var(--coral) !important;
+  border-color: var(--coral) !important;
+  background-color: transparent !important;
+  transition: background-color 140ms ease, color 120ms ease;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+  background-color: rgba(255,105,87,0.08) !important; /* subtle coral tint */
+  color: var(--coral) !important;
+}
+
+/* When placed in a dark navbar or dark container, show light text for contrast */
+.navbar-dark .btn-outline-danger,
+.bg-dark .btn-outline-danger {
+  color: var(--light) !important;
+}
+
+.navbar-dark .btn-outline-danger:hover,
+.bg-dark .btn-outline-danger:hover {
+  background-color: rgba(255,105,87,0.12) !important;
+  color: var(--light) !important;
+}
+
+/* Secondary subtle buttons */
+.btn-outline-secondary {
+  color: var(--muted);
+  border-color: #e9ecef;
+}
+
+/* Utility spacing */
+.mb-sm { margin-bottom: 0.5rem !important; }
+.mt-sm { margin-top: 0.5rem !important; }
+
+/* Footer */
+footer.site-footer { padding: 24px 0; color: var(--muted); }
+
+
+/* Override jumbotron white text for specific element */
+div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
+  color: var(--light) !important; /* use --light (#F2F2F2) as text color */
+  background-color: var(--dark) !important; /* use --dark (#0D0D0D) as background */
+}
+
+.alert-info {
+  color: var(--dark) !important; /* use --dark (#0D0D0D) as text color */
+  background-color: var(--rose) !important; /* use --light (#F2F2F2) as background */
+}
+
+.card-img-top {
+  width: 100%;
+  /* let CSS control height via utility classes; default to a safe max-height
+     and use contain so the whole image shows inside the card without cropping */
+  max-height: 260px;
+  height: auto;
+  object-fit: contain;
+  background-color: #f8f8f8; /* light background for images with letterboxing */
+  display: block;
+}    
+
+/* Utility for tighter card thumbnails when desired (preserves aspect ratio) */
+.card-img-top--thumb {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+/* Large image display on photo detail (limit but don't crop) */
+.photo-detail-image {
+  width: 100%;
+  max-height: 600px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Avatar sizing */
+.avatar-sm { width: 120px; height: 120px; object-fit: cover; }
+.avatar-circle { border-radius: 50%; }
+
+/* Avatar initials fallback */
+.avatar-initials {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg,#6c5ce7,#a29bfe);
+  font-size: 32px;
+}
+
+.profile-stats { display:flex; gap:16px; justify-content:center; margin-top:12px; }
+.profile-stats .stat { text-align:center; }
+.profile-meta { color: var(--muted); font-size:0.9rem; }
+

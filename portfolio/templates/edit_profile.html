@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile - ShutterSpace{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Edit Profile</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.bio.id_for_label }}" class="form-label">Bio</label>
+                        {{ form.bio }}
+                        {% if form.bio.errors %}
+                            <div class="text-danger">{{ form.bio.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.display_name.id_for_label }}" class="form-label">Display name</label>
+                        {{ form.display_name }}
+                        <div class="form-text">This name will be shown on your profile and next to your photos.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.avatar.id_for_label }}" class="form-label">Avatar</label>
+                        {% if form.instance and form.instance.avatar %}
+                            <div class="mb-2">
+                                <img src="{{ form.instance.avatar.url }}" alt="avatar" class="avatar-sm avatar-circle">
+                            </div>
+                        {% endif %}
+                        {{ form.avatar }}
+                        <div class="form-text">Recommended: square image, at least 300x300px.</div>
+                        {% if form.avatar.errors %}
+                            <div class="text-danger">{{ form.avatar.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.website.id_for_label }}" class="form-label">Website</label>
+                        {{ form.website }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.location.id_for_label }}" class="form-label">Location</label>
+                        {{ form.location }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.instagram.id_for_label }}" class="form-label">Instagram</label>
+                        {{ form.instagram }}
+                        <div class="form-text">Enter just your handle (no @) or a full URL.</div>
+                    </div>
+                    <div class="form-check mb-3">
+                        {{ form.show_email }}
+                        <label class="form-check-label" for="{{ form.show_email.id_for_label }}">Show my email on my profile</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
