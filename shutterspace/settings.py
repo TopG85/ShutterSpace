@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'django-project-shutterspace.herokuapp.com', 
+    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com', 
     '127.0.0.1',
     'localhost'
 ]
