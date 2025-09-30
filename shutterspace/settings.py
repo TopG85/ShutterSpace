@@ -32,7 +32,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # In production set the SECRET_KEY env var. For development (or if missing)
 # fall back to a local dev key so the process can start and surface real
 # errors (only use the fallback locally, it's not secure for production).
-SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-dev-secret-key")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -50,20 +50,46 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.contenttypes',
-    # third-party apps
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'crispy_forms',
-    'crispy_bootstrap5',
-    'django_summernote',
-    'cloudinary_storage',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary',
     'portfolio',
 ]
+
+# Optional third-party apps: import-safely and conditionally enable them.
+try:
+    import allauth  # type: ignore
+    INSTALLED_APPS += [
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+    ]
+except Exception:
+    # allauth not installed — skip it
+    pass
+
+try:
+    import crispy_forms  # type: ignore
+    INSTALLED_APPS += ['crispy_forms', 'crispy_bootstrap5']
+except Exception:
+    pass
+
+try:
+    import django_summernote  # type: ignore
+    INSTALLED_APPS += ['django_summernote']
+except Exception:
+    pass
+
+# Cloudinary storage optional
+if os.environ.get('CLOUDINARY_URL'):
+    try:
+        import cloudinary  # type: ignore
+        import cloudinary_storage  # type: ignore
+        INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
+        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    except Exception:
+        # Cloudinary packages not installed; media will use MEDIA_ROOT
+        pass
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

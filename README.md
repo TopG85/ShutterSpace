@@ -51,3 +51,23 @@ https://www.google.com/search?q=&sca_esv=8d061dbbff1738e7&sxsrf=AE3TifMDSt1uGQ1V
 
 Getting Started with Django: Building a Portfolio App.
 https://realpython.com/courses/django-portfolio-project/
+
+## Deploy to Heroku (helper)
+
+This project includes a runtime pin (`runtime.txt`) to use Python 3.11 on Heroku and a small helper script to push, run migrations and collectstatic.
+
+Make the helper executable and run it:
+
+```bash
+chmod +x bin/deploy.sh
+./bin/deploy.sh <heroku-app-name>
+```
+
+Alternatively run the commands manually (replace `<app>` with your Heroku app name):
+
+```bash
+git push heroku main
+heroku run python manage.py migrate --app <app>
+heroku run python manage.py collectstatic --noinput --app <app>
+heroku restart --app <app>
+```
