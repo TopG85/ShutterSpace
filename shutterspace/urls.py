@@ -29,9 +29,20 @@ urlpatterns = [
     # Provide a friendly redirect for /accounts/profile/ to the user's profile
     path('accounts/profile/', accounts_profile_redirect, name='accounts_profile_redirect'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('summernote/', include('django_summernote.urls')),
 ]
+
+# Optional URL includes — only add when the package is available.
+try:
+    import allauth  # type: ignore
+    urlpatterns += [path('accounts/', include('allauth.urls'))]
+except Exception:
+    pass
+
+try:
+    import django_summernote  # type: ignore
+    urlpatterns += [path('summernote/', include('django_summernote.urls'))]
+except Exception:
+    pass
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
