@@ -98,7 +98,16 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+]
+
+# Add allauth middleware only if allauth is installed
+try:
+    import allauth  # type: ignore
+    MIDDLEWARE += ['allauth.account.middleware.AccountMiddleware']
+except Exception:
+    pass
+
+MIDDLEWARE += [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
