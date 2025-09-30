@@ -1,5 +1,14 @@
+asgiref==3.9.2
+dj-database-url==3.0.1
 Django==4.2.24
 gunicorn==20.1.0
 whitenoise==6.5.0
-dj-database-url==3.0.1
 psycopg2-binary==2.9.10
+setuptools==80.9.0
+sqlparse==0.5.3
+cloudinary==1.34.0
+django-cloudinary-storage==0.3.0
+django-allauth==0.59.2
+django-crispy-forms==2.0
+crispy-bootstrap5==0.6
+django-summernote==0.0.14
