@@ -34,9 +34,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-dev-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Allow turning on DEBUG via an environment variable for brief debugging
-# on Heroku (set DEBUG=True) — remember to unset it afterwards.
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+# Default to DEBUG=True for local development (so static/media are served
+# when you runserver). If running on Heroku (the DYNO env var is present)
+# default to False unless DEBUG is explicitly set. You can still explicitly
+# set DEBUG via env var in either environment.
+if os.environ.get('DYNO'):
+    # Running on Heroku
+    DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+else:
+    # Local development default
+    DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     'django-project-shutterspace-a676bf7fbd5b.herokuapp.com', 
