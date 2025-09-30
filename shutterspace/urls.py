@@ -29,6 +29,8 @@ urlpatterns = [
     # Provide a friendly redirect for /accounts/profile/ to the user's profile
     path('accounts/profile/', accounts_profile_redirect, name='accounts_profile_redirect'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('summernote/', include('django_summernote.urls')),
 ]
 
 if settings.DEBUG:
