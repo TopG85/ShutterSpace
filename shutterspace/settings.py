@@ -28,10 +28,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# In production set the SECRET_KEY env var. For development (or if missing)
+# fall back to a local dev key so the process can start and surface real
+# errors (only use the fallback locally, it's not secure for production).
+SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-dev-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Allow turning on DEBUG via an environment variable for brief debugging
+# on Heroku (set DEBUG=True) — remember to unset it afterwards.
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
     'django-project-shutterspace-a676bf7fbd5b.herokuapp.com', 
@@ -151,9 +156,12 @@ STATICFILES_DIRS = [
     BASE_DIR / 'shutterspace' / 'static',
 ]
 
-# Use WhiteNoise static files storage so collectstatic produces hashed filenames and
-# WhiteNoise can serve compressed static files in production (Heroku).
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Use WhiteNoise static files storage. The Manifest storage will raise during
+# startup if a referenced file is missing from the manifest (collectstatic
+# wasn't run or failed). Use the non-manifest compressed storage so the app
+# can boot and surface useful errors; you can switch to the manifest storage
+# once collectstatic succeeds in your CI/deploy pipeline.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
