@@ -206,17 +206,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Where to redirect after login
 LOGIN_REDIRECT_URL = '/accounts/profile/'
 
-# django-allauth configuration
+# django-allauth configuration (make optional)
 SITE_ID = int(os.environ.get('SITE_ID', 1))
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
-# allauth sensible defaults (adjust as you like)
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+# Default authentication backends - if allauth is installed we'll append
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+try:
+    import allauth  # type: ignore
+    # allauth is available; enable its backend and sane defaults
+    AUTHENTICATION_BACKENDS.append('allauth.account.auth_backends.AuthenticationBackend')
+
+    # allauth sensible defaults (adjust as you like)
+    ACCOUNT_AUTHENTICATION_METHOD = 'username'
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_EMAIL_VERIFICATION = 'optional'
+except Exception:
+    # allauth not installed; keep using the default Django backend only
+    pass
 
 # Email: print emails to console in development so account flows work locally
 if DEBUG:
