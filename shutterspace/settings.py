@@ -34,7 +34,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG is explicitly disabled here for production safety. Set to True
+# only for local development by editing this file or setting the
+# DJANGO_DEBUG/DEBUG environment variables (not recommended in prod).
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'django-project-shutterspace-a676bf7fbd5b.herokuapp.com', 'heroku.com',
@@ -176,12 +179,14 @@ MESSAGE_TAGS = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# Use leading slashes for URL settings so URLs are absolute and consistent
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Media URL/root are defined near the top of this file to avoid duplicates
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

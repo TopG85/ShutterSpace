@@ -21,3 +21,20 @@ class CommentWorkflowTests(TestCase):
 		self.assertTrue(Comment.objects.filter(photo=self.photo, author=self.user, text='Nice shot!').exists())
 		# Response should include comment text
 		self.assertContains(resp, 'Nice shot!')
+
+	def test_owner_can_delete_photo(self):
+		# owner should be able to delete their photo
+		self.client.login(username='tester', password='pass')
+		delete_url = f"/portfolio/photo/{self.photo.id}/delete/"
+		resp = self.client.post(delete_url, follow=True)
+		self.assertEqual(resp.status_code, 200)
+		self.assertFalse(Photo.objects.filter(id=self.photo.id).exists())
+
+	def test_non_owner_cannot_delete_photo(self):
+		# another user cannot delete the photo
+		other = User.objects.create_user(username='other', password='pass2')
+		self.client.login(username='other', password='pass2')
+		delete_url = f"/portfolio/photo/{self.photo.id}/delete/"
+		resp = self.client.post(delete_url)
+		# expecting 404 because get_object_or_404 restricts to owner
+		self.assertEqual(resp.status_code, 404)

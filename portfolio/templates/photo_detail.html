@@ -70,6 +70,15 @@
                     <small class="ms-2" data-likes-count="{{ photo.id }}">{{ photo.likes.count }}</small>
                 </div>
 
+                {% if user.is_authenticated and user == photo.owner %}
+                    <div class="mt-3">
+                        <form method="post" action="{% url 'delete_photo' photo.id %}" onsubmit="return confirm('Delete this photo? This cannot be undone.');">
+                            {% csrf_token %}
+                            <button class="btn btn-danger btn-sm">Delete Photo</button>
+                        </form>
+                    </div>
+                {% endif %}
+
     </div>
 </div>
 {% endblock %}

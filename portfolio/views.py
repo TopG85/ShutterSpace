@@ -164,6 +164,28 @@ def delete_comment(request, comment_id):
 
 
 @login_required
+def delete_photo(request, photo_id):
+    """Allow the owner to delete a photo and its stored file.
+
+    Uses POST to perform deletion (CSRF protected). After deletion redirect
+    to the owner's profile page.
+    """
+    photo = get_object_or_404(Photo, id=photo_id, owner=request.user)
+    if request.method == 'POST':
+        # Attempt to delete the underlying file from storage, then the model
+        try:
+            # photo.image.delete() will remove the file from the configured storage
+            photo.image.delete(save=False)
+        except Exception:
+            # ignore storage deletion errors; proceed to delete DB record
+            pass
+        photo.delete()
+        return redirect('profile_view', username=request.user.username)
+    # If GET, show a simple confirmation template
+    return render(request, 'confirm_delete_photo.html', {'photo': photo})
+
+
+@login_required
 def toggle_like(request, photo_id):
     photo = get_object_or_404(Photo, id=photo_id)
     like = photo.likes.filter(user=request.user).first()
