@@ -36,13 +36,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG is explicitly disabled here for production safety. Set to True
 # only for local development by editing this file or setting the
-# DJANGO_DEBUG/DEBUG environment variables (not recommended in prod).
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com', 'heroku.com',
-    '127.0.0.1', 
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'django-project-shutterspace-a676bf7fbd5b.herokuapp.com,heroku.com,127.0.0.1').split(',')
 
 # Site framework: prefer SITE_ID from environment, fallback to localhost site id (2)
 SITE_ID = int(os.environ.get('SITE_ID', '2'))
