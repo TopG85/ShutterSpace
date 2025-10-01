@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import sys
+from decouple import config
+from django.contrib import messages
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
@@ -29,67 +31,54 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# In production set the SECRET_KEY env var. For development (or if missing)
-# fall back to a local dev key so the process can start and surface real
-# errors (only use the fallback locally, it's not secure for production).
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com', 
-    '127.0.0.1',
-    'localhost'
+    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com', 'heroku.com',
+    '127.0.0.1', 
 ]
+
+# Site framework: prefer SITE_ID from environment, fallback to localhost site id (2)
+SITE_ID = int(os.environ.get('SITE_ID', '2'))
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'crispy_bootstrap5',
+    'crispy_forms',
+    'django_summernote',
+    'django_filters',
     'portfolio',
+    'imagekit',
+    'storages',
 ]
 
-# Optional third-party apps: import-safely and conditionally enable them.
-try:
-    import allauth  # type: ignore
-    INSTALLED_APPS += [
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-    ]
-except Exception:
-    # allauth not installed — skip it
-    pass
 
-try:
-    import crispy_forms  # type: ignore
-    INSTALLED_APPS += ['crispy_forms', 'crispy_bootstrap5']
-except Exception:
-    pass
-
-try:
-    import django_summernote  # type: ignore
-    INSTALLED_APPS += ['django_summernote']
-except Exception:
-    pass
-
-# Cloudinary storage optional
-if os.environ.get('CLOUDINARY_URL'):
+# Cloudinary storage optional. Do not enable during tests so the test
+# runner doesn't attempt to contact Cloudinary or require API keys.
+if not DEBUG and not ('test' in sys.argv) and os.environ.get('CLOUDINARY_URL'):
     try:
         import cloudinary  # type: ignore
         import cloudinary_storage  # type: ignore
+        # Add cloudinary apps and use Cloudinary for media storage
         INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
         DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     except Exception:
-        # Cloudinary packages not installed; media will use MEDIA_ROOT
+        # Cloudinary packages not installed or failed to import; media will use MEDIA_ROOT
         pass
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"    
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -98,19 +87,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-]
-
-# Add allauth middleware only if allauth is installed
-try:
-    import allauth  # type: ignore
-    MIDDLEWARE += ['allauth.account.middleware.AccountMiddleware']
-except Exception:
-    pass
-
-MIDDLEWARE += [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'shutterspace.urls'
 
@@ -144,7 +125,7 @@ WSGI_APPLICATION = 'shutterspace.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL") , conn_max_age=600)
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=True)
 }
 
 if 'test' in sys.argv:
@@ -173,6 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -185,58 +167,23 @@ USE_I18N = True
 
 USE_TZ = True
 
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert-success',
+    messages.ERROR: 'alert-danger',
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# Must start with a leading slash so generated static URLs are absolute.
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Use WhiteNoise compressed storage so static files are served correctly
-# in production after `collectstatic` runs.
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Where to redirect after login
-LOGIN_REDIRECT_URL = '/accounts/profile/'
-
-# django-allauth configuration (make optional)
-SITE_ID = int(os.environ.get('SITE_ID', 1))
-
-# Default authentication backends - if allauth is installed we'll append
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
-try:
-    import allauth  # type: ignore
-    # allauth is available; enable its backend and sane defaults
-    AUTHENTICATION_BACKENDS.append('allauth.account.auth_backends.AuthenticationBackend')
-
-    # allauth sensible defaults (adjust as you like)
-    ACCOUNT_AUTHENTICATION_METHOD = 'username'
-    ACCOUNT_EMAIL_REQUIRED = True
-    ACCOUNT_EMAIL_VERIFICATION = 'optional'
-except Exception:
-    # allauth not installed; keep using the default Django backend only
-    pass
-
-# Email: print emails to console in development so account flows work locally
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# Crispy forms
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-# Summernote config (optional rich text editor for admin/forms)
-SUMMERNOTE_CONFIG = {
-    'iframe': True,
-    'summernote': {
-        'width': '100%',
-        'height': '480',
-    },
-}
