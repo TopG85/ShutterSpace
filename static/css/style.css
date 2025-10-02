@@ -413,16 +413,16 @@ p {
 .btn-primary,
 .btn.btn-primary,
 .btn.btn-sm.btn-primary {
-  background: linear-gradient(135deg, var(--coral) 0%, #ff7a6b 100%);
-  color: white !important;
-  box-shadow: 0 2px 4px rgba(255, 105, 87, 0.3);
+  background: linear-gradient(135deg, var(--tertiary) 0%, var(--primary) 100%); /* Using darker coffee brown to rich black */
+  color: var(--accent) !important; /* Using cream white for maximum contrast */
+  box-shadow: 0 2px 4px rgba(139, 111, 71, 0.3);
 }
 
 .btn-primary:hover,
 .btn.btn-primary:hover,
 .btn.btn-sm.btn-primary:hover { 
-  background: linear-gradient(135deg, var(--sand) 0%, #d4c19f 100%);
-  color: var(--primary) !important;
+  background: linear-gradient(135deg, var(--highlight) 0%, var(--coral) 100%); /* Using warm caramel to coral */
+  color: var(--primary) !important; /* Dark text on light background for contrast */
   box-shadow: 0 4px 8px rgba(212, 165, 116, 0.4);
   transform: translateY(-1px);
 }
@@ -814,8 +814,8 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 
 /* Enhanced comment action buttons */
 .btn-sm.btn-outline-secondary {
-  border-color: var(--highlight);
-  color: var(--highlight) !important;
+  border-color: var(--accent);
+  color: var(--accent) !important; /* Using cream white for better contrast */
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.375rem;
@@ -823,9 +823,9 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 }
 
 .btn-sm.btn-outline-secondary:hover {
-  background-color: var(--highlight);
-  border-color: var(--highlight);
-  color: var(--primary) !important;
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--primary) !important; /* Dark text on light background for contrast */
 }
 
 .btn-sm.btn-outline-danger {

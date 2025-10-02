@@ -9,7 +9,11 @@ class PhotoForm(forms.ModelForm):
             'crop': 'limit',
             'width': 2000,
             'height': 2000,
-            'quality': 'auto:good'
+            'quality': 'auto:eco',  # More aggressive compression
+            'format': 'auto',  # Auto-select best format (WebP when supported)
+            'fetch_format': 'auto',  # Enable automatic format delivery
+            'progressive': True,  # Progressive JPEG loading
+            'secure': True  # Use HTTPS URLs
         }
     )
     
@@ -31,7 +35,11 @@ class ProfileForm(forms.ModelForm):
             'crop': 'thumb',
             'width': 300,
             'height': 300,
-            'gravity': 'face'
+            'gravity': 'face',
+            'quality': 'auto:eco',  # Better compression for avatars
+            'format': 'auto',  # Auto WebP format
+            'progressive': True,
+            'secure': True
         }
     )
     hero_image = CloudinaryFileField(
@@ -40,7 +48,11 @@ class ProfileForm(forms.ModelForm):
             'crop': 'fill',
             'width': 1200,
             'height': 400,
-            'gravity': 'auto'
+            'gravity': 'auto',
+            'quality': 'auto:eco',  # Better compression for hero images
+            'format': 'auto',  # Auto WebP format
+            'progressive': True,
+            'secure': True
         }
     )
     

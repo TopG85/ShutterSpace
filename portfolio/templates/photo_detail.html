@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load image_optimization %}
 
 {% block title %}{{ photo.title }} - ShutterSpace{% endblock %}
 
@@ -8,7 +9,14 @@
     <div class="col-md-8">
         <div class="card mb-4">
             <div class="text-center p-3">
-                <img src="{{ photo.image.url }}" class="photo-detail-image" alt="{{ photo.title }}">
+                <img 
+                    src="{% optimized_image_url photo.image 'detail' %}" 
+                    srcset="{% responsive_image_srcset photo.image %}"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    class="photo-detail-image" 
+                    alt="{{ photo.title }}"
+                    {% lazy_image_attrs %}
+                >
             </div>
             <div class="card-body">
                 <h3>{{ photo.title }}</h3>

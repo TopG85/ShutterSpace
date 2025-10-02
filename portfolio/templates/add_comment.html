@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load image_optimization %}
 
 {% block title %}Add Comment - ShutterSpace{% endblock %}
 
@@ -11,7 +12,14 @@
                 <h3>Photo: {{ photo.title }}</h3>
             </div>
             <div class="card-body">
-                <img src="{{ photo.image.url }}" class="img-fluid mb-3" alt="{{ photo.title }}">
+                <img 
+                    src="{% optimized_image_url photo.image 'detail' %}" 
+                    srcset="{% responsive_image_srcset photo.image %}"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    class="img-fluid mb-3" 
+                    alt="{{ photo.title }}"
+                    {% lazy_image_attrs %}
+                >
                 <p>{{ photo.description }}</p>
                 <small class="text-muted">By {{ photo.owner.username }} on {{ photo.created_at|date:"M d, Y" }}</small>
             </div>

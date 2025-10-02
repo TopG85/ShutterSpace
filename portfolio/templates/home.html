@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load image_optimization %}
 
 {% block title %}Home - ShutterSpace{% endblock %}
 
@@ -22,7 +23,14 @@
                         <div class="card photo-card">
                             <div class="card-img-wrapper">
                                 <a href="{% url 'photo_detail' photo.id %}">
-                                    <img src="{{ photo.image.url }}" class="card-img-top" alt="{{ photo.title }}">
+                                    <img 
+                                        src="{% optimized_image_url photo.image 'thumbnail' %}" 
+                                        srcset="{% responsive_image_srcset photo.image %}"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        class="card-img-top" 
+                                        alt="{{ photo.title }}"
+                                        {% lazy_image_attrs %}
+                                    >
                                 </a>
                             </div>
                             <div class="card-body">

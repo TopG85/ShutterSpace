@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load image_optimization %}
 
 {% block title %}Profile - {{ owner.username }}{% endblock %}
 
@@ -8,11 +9,23 @@
 {% if profile.hero_image %}
 <div class="profile-hero-section mb-4">
     <div class="profile-hero-image">
-        <img src="{{ profile.hero_image.url }}" alt="{{ owner.username }}'s hero image" class="hero-image">
+        {% if profile.hero_image %}
+            <img 
+                src="{% optimized_image_url profile.hero_image 'hero' %}" 
+                alt="{{ owner.username }}'s hero image" 
+                class="hero-image"
+                {% lazy_image_attrs %}
+            >
+        {% endif %}
         <div class="hero-overlay">
             <div class="hero-content">
                 {% if profile and profile.avatar %}
-                    <img src="{{ profile.avatar.url }}" class="hero-avatar rounded-circle">
+                    <img 
+                        src="{% optimized_image_url profile.avatar 'avatar' %}" 
+                        class="hero-avatar rounded-circle"
+                        alt="{{ owner.username }}'s avatar"
+                        {% lazy_image_attrs %}
+                    >
                 {% else %}
                     <div class="hero-avatar-initials">{{ initials }}</div>
                 {% endif %}
@@ -31,7 +44,12 @@
             <div class="card-body text-center">
                 {% if not profile.hero_image %}
                     {% if profile and profile.avatar %}
-                        <img src="{{ profile.avatar.url }}" class="rounded-circle mb-2 avatar-sm avatar-circle">
+                        <img 
+                            src="{% optimized_image_url profile.avatar 'avatar' %}" 
+                            class="rounded-circle mb-2 avatar-sm avatar-circle"
+                            alt="{{ owner.username }}'s avatar"
+                            {% lazy_image_attrs %}
+                        >
                     {% else %}
                         <div class="avatar-initials mb-2">{{ initials }}</div>
                     {% endif %}
@@ -89,7 +107,14 @@
                     <div class="card photo-card">
                         <div class="card-img-wrapper">
                             <a href="{% url 'photo_detail' photo.id %}">
-                                <img src="{{ photo.image.url }}" class="card-img-top" alt="{{ photo.title }}">
+                                <img 
+                                    src="{% optimized_image_url photo.image 'thumbnail' %}" 
+                                    srcset="{% responsive_image_srcset photo.image %}"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    class="card-img-top" 
+                                    alt="{{ photo.title }}"
+                                    {% lazy_image_attrs %}
+                                >
                             </a>
                         </div>
                         <div class="card-body">
