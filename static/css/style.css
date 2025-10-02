@@ -79,8 +79,8 @@ main.container {
 
 /* Enhanced navbar styling with glass effect */
 .navbar {
-  backdrop-filter: blur(20px);
-  background: rgba(44, 42, 42, 0.85) !important;
+  /* backdrop-filter removed for W3C validation compliance */
+  background: rgba(44, 42, 42, 0.95) !important;
   border-bottom: 1px solid rgba(212, 165, 116, 0.2);
   padding: 1.5rem 0;
   box-shadow: 0 1px 3px rgba(28, 28, 28, 0.1);
@@ -252,7 +252,7 @@ p {
 
 .card { 
   background: var(--card-bg);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter removed for W3C validation compliance */
   border: 1px solid var(--border-color);
   border-radius: 20px;
   box-shadow: 
@@ -372,7 +372,7 @@ p {
 /* Special styling for photo cards */
 .photo-card .card-body {
   background: linear-gradient(180deg, var(--card-bg) 0%, rgba(242, 242, 242, 0.5) 100%);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter removed for W3C validation compliance */
 }
 
 /* Enhanced button styling with modern effects */
@@ -480,8 +480,8 @@ p {
 .card-minimal {
   box-shadow: none;
   border: 1px solid rgba(211, 188, 152, 0.2);
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+  /* backdrop-filter removed for W3C validation compliance */
 }
 
 .card-minimal:hover {
@@ -566,9 +566,8 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
   position: relative;
   z-index: 2;
   background: linear-gradient(135deg, var(--accent) 0%, var(--highlight) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* W3C compliant gradient text effect removed for validation */
+  color: var(--highlight);
 }
 
 .jumbotron .lead {
@@ -736,7 +735,8 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  filter: brightness(0.7);
+  /* filter removed for W3C validation compliance */
+  opacity: 0.7;
   transition: none;
 }
 
@@ -854,7 +854,7 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   left: 10px;
   opacity: 0;
   transition: opacity 0.3s ease;
-  backdrop-filter: blur(10px);
+  /* backdrop-filter removed for W3C validation compliance */
 }
 
 .card:hover .photo-metadata {
@@ -888,26 +888,31 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  /* gap replaced with margin for W3C validation compliance */
   margin: 2rem 0;
+}
+
+.photo-grid > * {
+  margin: 1rem;
 }
 
 /* Enhanced profile stats with animations */
 .profile-stats { 
   display: flex; 
-  gap: 2rem; 
+  /* gap replaced with margin for W3C validation compliance */
   justify-content: center; 
   margin-top: 2rem; 
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
-  backdrop-filter: blur(15px);
+  /* backdrop-filter removed for W3C validation compliance */
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .profile-stats .stat { 
   text-align: center;
   transition: transform 0.3s ease;
+  margin: 0 1rem;
 }
 
 .profile-stats .stat:hover {
@@ -917,12 +922,9 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 .profile-stats .stat .number {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: var(--coral);
   display: block;
-  background: linear-gradient(135deg, var(--coral) 0%, var(--sand) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* W3C compliant gradient text effect removed for validation */
 }
 
 .profile-stats .stat .label {
@@ -1038,8 +1040,12 @@ footer.site-footer {
   }
   
   .profile-stats {
-    gap: 16px;
+    /* gap replaced with margin for W3C validation compliance */
     padding: 1rem;
+  }
+  
+  .profile-stats .stat {
+    margin: 0 8px;
   }
   
   h1 { font-size: 2rem; }
@@ -1057,7 +1063,11 @@ footer.site-footer {
   .card-meta {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    /* gap replaced with margin for W3C validation compliance */
+  }
+  
+  .card-meta > * {
+    margin-bottom: 0.5rem;
   }
 }
 
