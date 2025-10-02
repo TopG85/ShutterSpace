@@ -150,7 +150,7 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
 .card-img-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 75%; /* 4:3 aspect ratio */
+  padding-top: 66.67%; /* 3:2 aspect ratio - less tall, more room for image */
   overflow: hidden;
   border-radius: 16px 16px 0 0;
   background: linear-gradient(135deg, var(--light) 0%, #f8f8f8 100%);
@@ -158,11 +158,12 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
 
 .card-img-top {
   position: absolute;
-  top: 10%;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 90%;
+  height: 100%;
   object-fit: cover;
+  object-position: center center;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: none;
   display: block;
@@ -172,7 +173,21 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
   transform: scale(1.08);
 }
 
-/* Gradient overlay for better text readability on hover */
+/* Alternative image display that shows full image without cropping */
+.card-img-top.full-image {
+  object-fit: contain;
+  background: var(--light);
+}
+
+/* For landscape images, use a wider aspect ratio */
+.card-img-wrapper.landscape {
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+/* For portrait images, use a taller aspect ratio */
+.card-img-wrapper.portrait {
+  padding-top: 80%; /* 5:4 aspect ratio */
+}
 .card-img-wrapper::after {
   content: '';
   position: absolute;
