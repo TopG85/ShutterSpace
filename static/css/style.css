@@ -293,12 +293,33 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   padding: 1rem 1.5rem;
 }
 
-/* Enhanced image styling */
+/* Enhanced image styling with adaptive sizing */
 .card-img-top {
   width: 100%;
-  max-height: 260px;
-  height: auto;
-  object-fit: cover; /* Changed from contain to cover for better visual appeal */
+  min-height: 200px; /* Minimum height to prevent tiny cards */
+  max-height: 300px; /* Maximum height to prevent oversized cards */
+  height: auto; /* Let height adapt to image aspect ratio */
+  object-fit: cover; /* Crop images to fit the container nicely */
+  background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
+  display: block;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Alternative: Fixed aspect ratio approach */
+.card-img-top--aspect {
+  width: 100%;
+  aspect-ratio: 4/3; /* 4:3 aspect ratio - adapts to any image size */
+  object-fit: cover;
+  background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
+  display: block;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Alternative: Square format */
+.card-img-top--square {
+  width: 100%;
+  aspect-ratio: 1/1; /* Perfect square */
+  object-fit: cover;
   background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
   display: block;
   border-radius: 16px 16px 0 0;
