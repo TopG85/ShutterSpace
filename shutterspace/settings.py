@@ -133,7 +133,15 @@ DATABASES = {
 DATABASES['default']['CONN_MAX_AGE'] = 600
 DATABASES['default']['OPTIONS'] = {
     'sslmode': 'require',
+    'connect_timeout': 10,
 }
+
+# Additional database configuration for Heroku
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default']['OPTIONS'].update({
+        'sslmode': 'require',
+        'options': '-c default_transaction_isolation=read_committed'
+    })
 
 if 'test' in sys.argv:
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
