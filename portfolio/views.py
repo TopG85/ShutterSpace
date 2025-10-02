@@ -5,20 +5,21 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from requests import request
 from .models import Profile, Photo, Comment
 from .forms import ProfileForm, PhotoForm, CommentForm
 
 # Create your views here.
 def portfolio_home(request):
-    photos = Photo.objects.filter(is_public=True).order_by('-created_at')[:6]  # Show latest 6 public photos
-    # annotate liked state for current user (avoid calling .exists() in templates)
+    photos = Photo.objects.filter(is_public=True).order_by('-created_at')[:6]
     if request.user.is_authenticated:
         for p in photos:
             p.liked = p.likes.filter(user=request.user).exists()
     else:
         for p in photos:
             p.liked = False
-    return render(request, 'portfolio/home.html')
+    return render(request, 'portfolio/home.html', {'photos': photos})
+
 
 def register(request):
     if request.method == 'POST':

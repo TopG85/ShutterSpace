@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from portfolio.views import home
+from portfolio.views import portfolio_home
 from portfolio.views import accounts_profile_redirect
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),  # Root URL
-    path('portfolio/', include('portfolio.urls')),  # Include portfolio URLs
+    path('', portfolio_home, name='home'),
+    path('portfolio/', include('portfolio.urls')),
     # Auth URLs (login, logout, password reset)
     # Provide a friendly redirect for /accounts/profile/ to the user's profile
     path('accounts/profile/', accounts_profile_redirect, name='accounts_profile_redirect'),
