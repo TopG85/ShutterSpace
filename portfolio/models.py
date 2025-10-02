@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from cloudinary.models import CloudinaryField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
-    avatar = models.ImageField(upload_to='avatars/', blank=True)
+    avatar = CloudinaryField('avatar', blank=True)
     # Additional user-facing profile fields
     display_name = models.CharField(max_length=150, blank=True)
     website = models.URLField(blank=True)
@@ -19,7 +20,7 @@ class Profile(models.Model):
 
 class Photo(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='photos/')
+    image = CloudinaryField('image')
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

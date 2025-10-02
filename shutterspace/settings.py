@@ -16,11 +16,13 @@ import sys
 from decouple import config
 from django.contrib import messages
 import dj_database_url
-if os.path.isfile('env.py'):
-    import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Import env.py if it exists in the project root
+if os.path.isfile(os.path.join(BASE_DIR, 'env.py')):
+    import env
 
 # Media files settings
 MEDIA_URL = '/media/'
@@ -36,7 +38,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG is explicitly disabled here for production safety. Set to True
 # only for local development by editing this file or setting the
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'django-project-shutterspace-a676bf7fbd5b.herokuapp.com,heroku.com,127.0.0.1').split(',')
 
@@ -124,7 +126,13 @@ WSGI_APPLICATION = 'shutterspace.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=True)
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
+
+# Add connection pooling and SSL settings after parsing
+DATABASES['default']['CONN_MAX_AGE'] = 600
+DATABASES['default']['OPTIONS'] = {
+    'sslmode': 'require',
 }
 
 if 'test' in sys.argv:
