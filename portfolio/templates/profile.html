@@ -44,10 +44,10 @@
                 {% if not profile.hero_image %}
                     {% if profile and profile.avatar %}
                         <img 
-                            src="{% optimized_image_url profile.avatar 'avatar' %}" 
+                            src="{{ profile.avatar.url }}?w_150&h_150&c_thumb&g_face&q_auto:eco&f_auto" 
                             class="rounded-circle mb-2 avatar-sm avatar-circle"
                             alt="{{ owner.username }}'s avatar"
-                            {% lazy_image_attrs %}
+                            loading="lazy"
                         >
                     {% else %}
                         <div class="avatar-initials mb-2">{{ initials }}</div>
