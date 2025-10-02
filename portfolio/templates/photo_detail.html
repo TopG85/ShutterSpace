@@ -14,11 +14,6 @@
                 <h3>{{ photo.title }}</h3>
                 <p>{{ photo.description }}</p>
                 <small class="text-muted">By <a href="{% url 'profile_view' photo.owner.username %}">{{ photo.owner.username }}</a> on {{ photo.created_at|date:"M d, Y" }}</small>
-
-                <div class="mt-3 d-flex align-items-center">
-                    <button data-like-button data-photo-id="{{ photo.id }}" class="btn btn-sm btn-outline-danger">♡ Like</button>
-                    <small class="ms-2" data-likes-count="{{ photo.id }}">{{ photo.likes.count }}</small>
-                </div>
             </div>
         </div>
 
