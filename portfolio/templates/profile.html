@@ -64,10 +64,12 @@
         <div class="row">
             {% for photo in photos %}
                 <div class="col-md-6 mb-3">
-                    <div class="card">
-                        <a href="{% url 'photo_detail' photo.id %}">
-                            <img src="{{ photo.image.url }}" class="card-img-top card-img-top--thumb" alt="{{ photo.title }}">
-                        </a>
+                    <div class="card photo-card">
+                        <div class="card-img-wrapper">
+                            <a href="{% url 'photo_detail' photo.id %}">
+                                <img src="{{ photo.image.url }}" class="card-img-top" alt="{{ photo.title }}">
+                            </a>
+                        </div>
                         <div class="card-body">
                             <h5><a href="{% url 'photo_detail' photo.id %}">{{ photo.title }}</a></h5>
                             <p>{{ photo.description|truncatewords:10 }}</p>

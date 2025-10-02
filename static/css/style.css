@@ -128,53 +128,135 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
   overflow: hidden;
 }
 
-/* Enhanced card styling with better shadows and hover effects */
+/* Enhanced card styling with modern approach */
 .card {
   background: var(--card-bg);
   box-shadow: 
-    0 4px 6px -1px rgba(13, 13, 13, 0.1),
-    0 2px 4px -1px rgba(13, 13, 13, 0.06);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    0 1px 3px rgba(13, 13, 13, 0.12),
+    0 1px 2px rgba(13, 13, 13, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover { 
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-4px);
   box-shadow: 
-    0 20px 25px -5px rgba(13, 13, 13, 0.1),
-    0 10px 10px -5px rgba(13, 13, 13, 0.04);
+    0 14px 28px rgba(13, 13, 13, 0.15),
+    0 10px 10px rgba(13, 13, 13, 0.12);
 }
 
-/* Photo grid improvements - consolidated image styling */
-.card-img-top {
-  width: 100% !important;
-  height: 200px !important; /* Fixed height to prevent overflow */
-  object-fit: cover !important; /* Crop images nicely to fit container */
-  background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
-  display: block;
+/* Modern card image container with proper aspect ratio */
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 aspect ratio */
+  overflow: hidden;
   border-radius: 16px 16px 0 0;
-  transition: transform 0.3s ease;
+  background: linear-gradient(135deg, var(--light) 0%, #f8f8f8 100%);
+}
+
+.card-img-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: none;
+  display: block;
 }
 
 .card:hover .card-img-top {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* Card content spacing */
+/* Gradient overlay for better text readability on hover */
+.card-img-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(13, 13, 13, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card-img-wrapper::after {
+  opacity: 1;
+}
+
+/* Enhanced card content styling */
 .card-body {
-  padding: 1.5rem;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .card-title {
   font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
   color: var(--dark);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .card-text {
   color: var(--muted);
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Card metadata styling */
+.card-meta {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(211, 188, 152, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Card hover interaction states */
+.photo-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.photo-card:hover {
+  transform: translateY(-6px);
+}
+
+.photo-card:active {
+  transform: translateY(-2px);
+}
+
+/* Interactive elements within cards */
+.card .btn {
+  transition: all 0.2s ease;
+}
+
+.card .btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Enhanced focus states for accessibility */
+.card-img-top:focus,
+.card a:focus {
+  outline: 2px solid var(--coral);
+  outline-offset: 2px;
+}
+
+/* Special styling for photo cards */
+.photo-card .card-body {
+  background: linear-gradient(180deg, var(--card-bg) 0%, rgba(242, 242, 242, 0.5) 100%);
+  backdrop-filter: blur(10px);
 }
 
 /* Enhanced button styling */
@@ -256,7 +338,48 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
   border-color: #e9ecef;
 }
 
-/* Utility spacing */
+/* Card grid improvements */
+.row.g-4 .col {
+  margin-bottom: 1.5rem;
+}
+
+/* Alternative card styles */
+.card-minimal {
+  box-shadow: none;
+  border: 1px solid rgba(211, 188, 152, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.card-minimal:hover {
+  border-color: var(--coral);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 105, 87, 0.15);
+}
+
+/* Featured card styling */
+.card-featured {
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(242, 242, 242, 0.9) 100%);
+  border: 2px solid var(--sand);
+}
+
+.card-featured .card-title {
+  color: var(--coral);
+}
+
+/* Loading state for images */
+.card-img-wrapper.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Enhanced utility classes */
 .mb-sm { margin-bottom: 0.5rem !important; }
 .mt-sm { margin-top: 0.5rem !important; }
 
@@ -426,7 +549,7 @@ footer.site-footer {
   transform: translateY(0);
 }
 
-/* Responsive improvements */
+/* Enhanced responsive design for cards */
 @media (max-width: 768px) {
   .jumbotron {
     padding: 2.5rem 1.5rem;
@@ -440,5 +563,31 @@ footer.site-footer {
   
   h1 { font-size: 2rem; }
   h2 { font-size: 1.75rem; }
+  
+  /* Mobile card adjustments */
+  .card-body {
+    padding: 1.25rem 1rem;
+  }
+  
+  .card-img-wrapper {
+    padding-top: 60%; /* Slightly different aspect ratio on mobile */
+  }
+  
+  .card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: rgba(255, 255, 255, 0.95);
+  }
+  
+  .card-minimal {
+    background: rgba(255, 255, 255, 0.9);
+  }
 }
 
