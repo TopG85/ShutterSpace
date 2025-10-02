@@ -572,8 +572,7 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
 .jumbotron .display-4 {
   position: relative;
   z-index: 2;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--highlight) 100%);
-  /* W3C compliant gradient text effect removed for validation */
+  /* Background removed for clean text display */
   color: var(--highlight);
 }
 
