@@ -19,9 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'upload_photo' %}">Upload Photo</a>
-                        </li>
+                        <!-- Upload link removed from navbar -->
                     {% endif %}
                 </ul>
                 <form class="d-flex me-3" action="{% url 'home' %}" method="get">

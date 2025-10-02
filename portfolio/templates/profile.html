@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load image_optimization %}
 
 {% block title %}Profile - {{ owner.username }}{% endblock %}
 
@@ -11,20 +10,20 @@
     <div class="profile-hero-image">
         {% if profile.hero_image %}
             <img 
-                src="{% optimized_image_url profile.hero_image 'hero' %}" 
+                src="{{ profile.hero_image.url }}?w_1200&h_400&c_fill&q_auto:eco&f_auto" 
                 alt="{{ owner.username }}'s hero image" 
                 class="hero-image"
-                {% lazy_image_attrs %}
+                loading="lazy"
             >
         {% endif %}
         <div class="hero-overlay">
             <div class="hero-content">
                 {% if profile and profile.avatar %}
                     <img 
-                        src="{% optimized_image_url profile.avatar 'avatar' %}" 
+                        src="{{ profile.avatar.url }}?w_150&h_150&c_thumb&g_face&q_auto:eco&f_auto" 
                         class="hero-avatar rounded-circle"
                         alt="{{ owner.username }}'s avatar"
-                        {% lazy_image_attrs %}
+                        loading="lazy"
                     >
                 {% else %}
                     <div class="hero-avatar-initials">{{ initials }}</div>
@@ -108,12 +107,10 @@
                         <div class="card-img-wrapper">
                             <a href="{% url 'photo_detail' photo.id %}">
                                 <img 
-                                    src="{% optimized_image_url photo.image 'thumbnail' %}" 
-                                    srcset="{% responsive_image_srcset photo.image %}"
-                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    src="{{ photo.image.url }}?w_400&h_300&c_fill&q_auto:eco&f_auto" 
                                     class="card-img-top" 
                                     alt="{{ photo.title }}"
-                                    {% lazy_image_attrs %}
+                                    loading="lazy"
                                 >
                             </a>
                         </div>
