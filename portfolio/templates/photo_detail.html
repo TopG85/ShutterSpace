@@ -10,12 +10,10 @@
         <div class="card mb-4">
             <div class="text-center p-3">
                 <img 
-                    src="{% optimized_image_url photo.image 'detail' %}" 
-                    srcset="{% responsive_image_srcset photo.image %}"
-                    sizes="(max-width: 768px) 100vw, 800px"
+                    src="{{ photo.image.url }}?w_800&h_600&c_limit&q_auto:good&f_auto" 
                     class="photo-detail-image" 
                     alt="{{ photo.title }}"
-                    {% lazy_image_attrs %}
+                    loading="lazy"
                 >
             </div>
             <div class="card-body">

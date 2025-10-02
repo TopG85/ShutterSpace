@@ -24,12 +24,10 @@
                             <div class="card-img-wrapper">
                                 <a href="{% url 'photo_detail' photo.id %}">
                                     <img 
-                                        src="{% optimized_image_url photo.image 'thumbnail' %}" 
-                                        srcset="{% responsive_image_srcset photo.image %}"
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        src="{{ photo.image.url }}?w_400&h_300&c_fill&q_auto:eco&f_auto" 
                                         class="card-img-top" 
                                         alt="{{ photo.title }}"
-                                        {% lazy_image_attrs %}
+                                        loading="lazy"
                                     >
                                 </a>
                             </div>
