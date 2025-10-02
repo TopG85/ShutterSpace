@@ -7,7 +7,9 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card mb-4">
-            <img src="{{ photo.image.url }}" class="card-img-top photo-detail-image" alt="{{ photo.title }}">
+            <div class="text-center p-3">
+                <img src="{{ photo.image.url }}" class="photo-detail-image" alt="{{ photo.title }}">
+            </div>
             <div class="card-body">
                 <h3>{{ photo.title }}</h3>
                 <p>{{ photo.description }}</p>

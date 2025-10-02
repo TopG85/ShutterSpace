@@ -156,7 +156,8 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
   background: linear-gradient(135deg, var(--light) 0%, #f8f8f8 100%);
 }
 
-.card-img-top {
+/* Card image styling - only for thumbnails in cards */
+.card-img-top:not(.photo-detail-image) {
   position: absolute;
   top: 5%;
   left: 5%;
@@ -444,11 +445,14 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   max-height: 600px;
   height: auto;
   object-fit: contain;
+  object-position: center center;
   display: block;
   border-radius: 12px;
   box-shadow: 
     0 10px 15px -3px rgba(13, 13, 13, 0.1),
     0 4px 6px -2px rgba(13, 13, 13, 0.05);
+  background: var(--light);
+  margin: 0 auto;
 }
 
 /* Image overlay effects for photo cards */
