@@ -25,9 +25,11 @@
 
 /* Basic layout */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background-color: var(--light);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--light) 0%, #fafafa 100%);
   color: var(--dark);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
 }
 
 /* Global link styles: use coral accent instead of browser default blue */
@@ -59,55 +61,150 @@ main.container {
   max-width: var(--container-max-width);
 }
 
-.navbar-brand { font-weight: 700; }
+/* Enhanced navbar styling */
+.navbar {
+  backdrop-filter: blur(20px);
+  background: rgba(242, 242, 242, 0.95) !important;
+  border-bottom: 1px solid rgba(211, 188, 152, 0.2);
+  padding: 1rem 0;
+}
 
-.card { border-radius: 8px; }
+.navbar-brand { 
+  font-weight: 700; 
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--dark) !important;
+}
 
-/* Gentle card elevation */
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: var(--dark) !important;
+  transition: color 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--coral) !important;
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  margin-bottom: 0.8rem;
+}
+
+h1 { font-size: 2.5rem; line-height: 1.2; }
+h2 { font-size: 2rem; line-height: 1.3; }
+h3 { font-size: 1.5rem; line-height: 1.4; }
+
+.display-4 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.lead {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.card { 
+  border-radius: 16px; 
+  border: none;
+  overflow: hidden;
+}
+
+/* Enhanced card styling with better shadows and hover effects */
 .card {
   background: var(--card-bg);
-  box-shadow: 0 6px 18px rgba(13,13,13,0.06);
-  transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow: 
+    0 4px 6px -1px rgba(13, 13, 13, 0.1),
+    0 2px 4px -1px rgba(13, 13, 13, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(13,13,13,0.08); }
+
+.card:hover { 
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 25px -5px rgba(13, 13, 13, 0.1),
+    0 10px 10px -5px rgba(13, 13, 13, 0.04);
+}
+
+/* Photo grid improvements */
+.card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Card content spacing */
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+}
+
+.card-text {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Enhanced button styling */
+.btn {
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.6rem 1.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
 
 .btn-primary,
 .btn.btn-primary,
 .btn.btn-sm.btn-primary {
-  background-color: var(--coral) !important;
-  color: var(--light) !important;
-  border-color: var(--coral) !important;
+  background: linear-gradient(135deg, var(--coral) 0%, #ff7a6b 100%);
+  color: white !important;
+  box-shadow: 0 2px 4px rgba(255, 105, 87, 0.3);
 }
 
 .btn-primary:hover,
 .btn.btn-primary:hover,
 .btn.btn-sm.btn-primary:hover { 
-  background-color: var(--sand) !important;
-  filter: brightness(0.95);
-  /* when primary uses a light hover bg, ensure text is dark for contrast */
+  background: linear-gradient(135deg, var(--sand) 0%, #d4c19f 100%);
   color: var(--dark) !important;
-  border-color: var(--sand) !important;
+  box-shadow: 0 4px 8px rgba(211, 188, 152, 0.4);
+  transform: translateY(-1px);
 }
 
-/* Make Bootstrap danger buttons follow the site's coral accent variable */
+/* Enhanced danger buttons */
 .btn-danger,
 .btn.btn-danger,
 .btn.btn-sm.btn-danger {
-  background-color: var(--coral) !important;
-  border-color: var(--coral) !important;
-  color: var(--light) !important;
+  background: linear-gradient(135deg, var(--coral) 0%, #ff7a6b 100%);
+  color: white !important;
+  box-shadow: 0 2px 4px rgba(255, 105, 87, 0.3);
 }
 
 .btn-danger:hover,
 .btn.btn-sm.btn-danger:hover,
 .btn-danger:focus,
 .btn.btn-danger:focus {
-  color: var(--light) !important;   
-  filter: brightness(0.95);
-}
-
-.btn.btn-danger:hover {
-    background-color: var(--sand) !important;
+  background: linear-gradient(135deg, #e65a48 0%, #d64938 100%);
+  color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(230, 90, 72, 0.4);
 }
 
 /* Outline danger should use coral for text/border while keeping transparent background */
@@ -150,49 +247,109 @@ main.container {
 footer.site-footer { padding: 24px 0; color: var(--muted); }
 
 
-/* Override jumbotron white text for specific element */
+/* Enhanced jumbotron/hero section */
+.jumbotron {
+  background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+  border-radius: 20px;
+  padding: 4rem 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.jumbotron::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 105, 87, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
 div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
-  color: var(--light) !important; /* use --light (#F2F2F2) as text color */
-  background-color: var(--dark) !important; /* use --dark (#0D0D0D) as background */
+  color: var(--light) !important;
+  background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%) !important;
 }
 
+/* Enhanced alert styling */
 .alert-info {
-  color: var(--dark) !important; /* use --dark (#0D0D0D) as text color */
-  background-color: var(--rose) !important; /* use --light (#F2F2F2) as background */
+  color: var(--dark) !important;
+  background: linear-gradient(135deg, var(--rose) 0%, #ede1e1 100%) !important;
+  border: 1px solid rgba(211, 188, 152, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
 }
 
+/* Enhanced image styling */
 .card-img-top {
   width: 100%;
-  /* let CSS control height via utility classes; default to a safe max-height
-     and use contain so the whole image shows inside the card without cropping */
   max-height: 260px;
   height: auto;
-  object-fit: contain;
-  background-color: #f8f8f8; /* light background for images with letterboxing */
+  object-fit: cover; /* Changed from contain to cover for better visual appeal */
+  background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
   display: block;
+  border-radius: 16px 16px 0 0;
 }    
 
-/* Utility for tighter card thumbnails when desired (preserves aspect ratio) */
+/* Utility for tighter card thumbnails when desired */
 .card-img-top--thumb {
   width: 100%;
   height: 200px;
-  object-fit: contain;
+  object-fit: cover; /* Changed from contain to cover */
+  border-radius: 16px 16px 0 0;
 }
 
-/* Large image display on photo detail (limit but don't crop) */
+/* Enhanced photo detail image */
 .photo-detail-image {
   width: 100%;
   max-height: 600px;
   height: auto;
   object-fit: contain;
   display: block;
+  border-radius: 12px;
+  box-shadow: 
+    0 10px 15px -3px rgba(13, 13, 13, 0.1),
+    0 4px 6px -2px rgba(13, 13, 13, 0.05);
 }
 
-/* Avatar sizing */
-.avatar-sm { width: 120px; height: 120px; object-fit: cover; }
-.avatar-circle { border-radius: 50%; }
+/* Image overlay effects for photo cards */
+.photo-card {
+  position: relative;
+  overflow: hidden;
+}
 
-/* Avatar initials fallback */
+.photo-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(13, 13, 13, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-card:hover::after {
+  opacity: 1;
+}
+
+/* Enhanced avatar styling */
+.avatar-sm { 
+  width: 120px; 
+  height: 120px; 
+  object-fit: cover; 
+  border: 3px solid white;
+  box-shadow: 0 4px 8px rgba(13, 13, 13, 0.15);
+}
+
+.avatar-circle { 
+  border-radius: 50%; 
+}
+
+/* Enhanced avatar initials fallback */
 .avatar-initials {
   width: 120px;
   height: 120px;
@@ -201,12 +358,89 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg,#6c5ce7,#a29bfe);
+  color: white;
+  background: linear-gradient(135deg, var(--coral) 0%, var(--sand) 100%);
   font-size: 32px;
+  border: 3px solid white;
+  box-shadow: 0 4px 8px rgba(13, 13, 13, 0.15);
 }
 
-.profile-stats { display:flex; gap:16px; justify-content:center; margin-top:12px; }
-.profile-stats .stat { text-align:center; }
-.profile-meta { color: var(--muted); font-size:0.9rem; }
+/* Enhanced profile sections */
+.profile-stats { 
+  display: flex; 
+  gap: 24px; 
+  justify-content: center; 
+  margin-top: 20px; 
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.profile-stats .stat { 
+  text-align: center;
+}
+
+.profile-stats .stat .number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark);
+  display: block;
+}
+
+.profile-stats .stat .label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile-meta { 
+  color: var(--muted); 
+  font-size: 0.9rem; 
+  line-height: 1.5;
+}
+
+/* Form enhancements */
+.form-control {
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 0.2rem rgba(255, 105, 87, 0.25);
+}
+
+/* Enhanced footer */
+footer.site-footer { 
+  padding: 48px 0; 
+  color: var(--muted);
+  background: linear-gradient(135deg, rgba(242, 242, 242, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border-top: 1px solid rgba(211, 188, 152, 0.2);
+  margin-top: 4rem;
+}
+
+/* Loading states and micro-interactions */
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .jumbotron {
+    padding: 2.5rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-stats {
+    gap: 16px;
+    padding: 1rem;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+}
 
