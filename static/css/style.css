@@ -674,12 +674,12 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 }
 
 .profile-stats .h5 {
-  color: var(--coral);
+  color: var(--highlight);
   font-weight: 700;
 }
 
 .profile-meta {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -927,14 +927,14 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 
 .profile-stats .stat .label {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 500;
 }
 
 .profile-meta { 
-  color: var(--text-secondary); 
+  color: var(--text-primary); 
   font-size: 0.9rem; 
   line-height: 1.5;
 }
