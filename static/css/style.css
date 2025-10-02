@@ -1,19 +1,27 @@
-/* Color palette variables - Dark Theme */
+/* Color palette variables - Warm Sophisticated Theme */
 :root {
-  --sand: #D3BC98;
-  --rose: #E8DBDB;
-  --coral: #FF6957;
-  --light: #F2F2F2;
-  --dark: #0D0D0D;
-  --muted: #6c757d;
+  /* Core sophisticated palette */
+  --primary: #1c1c1c;        /* Rich black */
+  --secondary: #2a2a2a;      /* Warm charcoal */
+  --accent: #f8f8f2;         /* Cream white */
+  --highlight: #d4a574;      /* Warm caramel */
+  --tertiary: #8b6f47;       /* Coffee brown */
   
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --text-primary: #f5f5f5;
-  --text-secondary: #cccccc;
-  --card-bg: #2d2d2d;
-  --border-color: #404040;
+  /* Legacy color support (refined) */
+  --sand: #d4a574;           /* Updated to warm caramel */
+  --rose: #e8d5d0;           /* Warmer rose tone */
+  --coral: #c8956d;          /* Sophisticated coral-brown */
+  --light: #f8f8f2;          /* Cream white */
+  --dark: #1c1c1c;           /* Rich black */
+  --muted: #8b7355;          /* Warm muted brown */
+  
+  /* Dark theme colors - refined */
+  --bg-primary: #1c1c1c;     /* Rich black */
+  --bg-secondary: #2a2a2a;   /* Warm charcoal */
+  --text-primary: #f8f8f2;   /* Cream white */
+  --text-secondary: #d4c19f; /* Warm secondary text */
+  --card-bg: #252525;        /* Slightly warmer card background */
+  --border-color: #3d3529;   /* Warm border color */
   --container-max-width: 1100px;
 }
 
@@ -34,13 +42,13 @@
 /* Basic layout */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, #202020 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: var(--text-primary);
   line-height: 1.6;
   letter-spacing: -0.01em;
 }
 
-/* Global link styles: use coral accent instead of browser default blue */
+/* Global link styles: use sophisticated coral accent */
 a, a:link, a:visited {
   color: var(--coral);
   text-decoration: none;
@@ -48,8 +56,8 @@ a, a:link, a:visited {
 }
 
 a:hover, a:focus {
-  /* Use a slightly darker coral for hover to ensure contrast */
-  color: #e65a48; /* darker than #FF6957 */
+  /* Use the warm caramel for hover to ensure contrast */
+  color: var(--highlight); /* warm caramel */
   text-decoration: underline;
 }
 
@@ -72,16 +80,16 @@ main.container {
 /* Enhanced navbar styling with glass effect */
 .navbar {
   backdrop-filter: blur(20px);
-  background: rgba(242, 242, 242, 0.85) !important;
-  border-bottom: 1px solid rgba(211, 188, 152, 0.2);
+  background: rgba(44, 42, 42, 0.85) !important;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.2);
   padding: 1.5rem 0;
-  box-shadow: 0 1px 3px rgba(13, 13, 13, 0.1);
+  box-shadow: 0 1px 3px rgba(28, 28, 28, 0.1);
   transition: all 0.3s ease;
 }
 
 .navbar.scrolled {
   padding: 0.75rem 0;
-  background: rgba(45, 45, 45, 0.95) !important;
+  background: rgba(42, 42, 42, 0.95) !important;
 }
 
 .navbar-brand { 
@@ -115,7 +123,7 @@ main.container {
 
 .navbar-nav .nav-link:hover {
   color: var(--coral) !important;
-  background: rgba(255, 105, 87, 0.05);
+  background: rgba(200, 149, 109, 0.08);
 }
 
 .navbar-nav .nav-link:hover::after {
@@ -512,17 +520,17 @@ p {
 footer.site-footer { padding: 24px 0; color: var(--muted); }
 
 
-/* Enhanced jumbotron/hero section with parallax effect */
+/* Enhanced jumbotron/hero section with sophisticated colors */
 .jumbotron {
-  background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   border-radius: 24px;
   padding: 5rem 4rem;
   margin-bottom: 4rem;
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 20px 40px rgba(13, 13, 13, 0.2),
-    0 10px 20px rgba(13, 13, 13, 0.1);
+    0 20px 40px rgba(28, 28, 28, 0.3),
+    0 10px 20px rgba(28, 28, 28, 0.2);
 }
 
 .jumbotron::before {
@@ -532,7 +540,7 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 105, 87, 0.15) 0%, transparent 60%);
+  background: radial-gradient(circle at 30% 20%, rgba(212, 165, 116, 0.15) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -557,7 +565,7 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
 .jumbotron .display-4 {
   position: relative;
   z-index: 2;
-  background: linear-gradient(135deg, var(--light) 0%, var(--sand) 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--highlight) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -566,12 +574,12 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
 .jumbotron .lead {
   position: relative;
   z-index: 2;
-  color: rgba(242, 242, 242, 0.9);
+  color: rgba(248, 248, 242, 0.9);
 }
 
 div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
-  color: var(--light) !important;
-  background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%) !important;
+  color: var(--accent) !important;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
 }
 
 /* Enhanced alert styling */
