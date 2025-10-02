@@ -13,4 +13,6 @@ urlpatterns = [
     path('comment/<int:comment_id>/edit/', views.edit_comment, name='edit_comment'),
     path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path('photo/<int:photo_id>/like/', views.toggle_like, name='toggle_like'),
+    path('', views.portfolio_home, name='portfolio_home'),
+    path('portfolio/', include('portfolio.urls')),
 ]

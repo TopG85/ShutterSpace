@@ -9,7 +9,7 @@ from .models import Profile, Photo, Comment
 from .forms import ProfileForm, PhotoForm, CommentForm
 
 # Create your views here.
-def home(request):
+def portfolio_home(request):
     photos = Photo.objects.filter(is_public=True).order_by('-created_at')[:6]  # Show latest 6 public photos
     # annotate liked state for current user (avoid calling .exists() in templates)
     if request.user.is_authenticated:
@@ -18,7 +18,7 @@ def home(request):
     else:
         for p in photos:
             p.liked = False
-    return render(request, 'home.html', {'photos': photos})
+    return render(request, 'portfolio/home.html')
 
 def register(request):
     if request.method == 'POST':
