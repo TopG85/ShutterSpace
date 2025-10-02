@@ -38,7 +38,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG is explicitly disabled here for production safety. Set to True
 # only for local development by editing this file or setting the
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'django-project-shutterspace-a676bf7fbd5b.herokuapp.com,heroku.com,127.0.0.1').split(',')
 
@@ -92,7 +92,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 ROOT_URLCONF = 'shutterspace.urls'
 
@@ -187,6 +187,7 @@ MESSAGE_TAGS = {
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Media URL/root are defined near the top of this file to avoid duplicates
 # MEDIA_URL = '/media/'
