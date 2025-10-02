@@ -146,9 +146,9 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
 
 /* Photo grid improvements - consolidated image styling */
 .card-img-top {
-  width: 100%;
-  height: 200px; /* Fixed height to prevent overflow */
-  object-fit: cover; /* Crop images nicely to fit container */
+  width: 100% !important;
+  height: 200px !important; /* Fixed height to prevent overflow */
+  object-fit: cover !important; /* Crop images nicely to fit container */
   background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
   display: block;
   border-radius: 16px 16px 0 0;
@@ -297,34 +297,6 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   border: 1px solid rgba(211, 188, 152, 0.3);
   border-radius: 12px;
   padding: 1rem 1.5rem;
-}
-
-/* Alternative: Fixed aspect ratio approach */
-.card-img-top--aspect {
-  width: 100%;
-  aspect-ratio: 4/3; /* 4:3 aspect ratio - adapts to any image size */
-  object-fit: contain;
-  background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
-  display: block;
-  border-radius: 16px 16px 0 0;
-}
-
-/* Alternative: Square format */
-.card-img-top--square {
-  width: 100%;
-  aspect-ratio: 1/1; /* Perfect square */
-  object-fit: cover;
-  background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
-  display: block;
-  border-radius: 16px 16px 0 0;
-}    
-
-/* Utility for tighter card thumbnails when desired */
-.card-img-top--thumb {
-  width: 100%;
-  height: 200px;
-  object-fit: cover; /* Changed from contain to cover */
-  border-radius: 16px 16px 0 0;
 }
 
 /* Enhanced photo detail image */
