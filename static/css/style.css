@@ -1,4 +1,4 @@
-/* Color palette variables */
+/* Color palette variables - Dark Theme */
 :root {
   --sand: #D3BC98;
   --rose: #E8DBDB;
@@ -6,7 +6,14 @@
   --light: #F2F2F2;
   --dark: #0D0D0D;
   --muted: #6c757d;
-  --card-bg: #ffffff;
+  
+  /* Dark theme colors */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #f5f5f5;
+  --text-secondary: #cccccc;
+  --card-bg: #2d2d2d;
+  --border-color: #404040;
   --container-max-width: 1100px;
 }
 
@@ -14,20 +21,21 @@
 .bg-sand { background-color: var(--sand) !important; }
 .bg-rose { background-color: var(--rose) !important; }
 .bg-coral { background-color: var(--coral) !important; }
-.bg-light { background-color: var(--light) !important; }
-.bg-dark { background-color: var(--dark) !important; color: #fff; }
+.bg-light { background-color: var(--bg-secondary) !important; }
+.bg-dark { background-color: var(--bg-primary) !important; color: var(--text-primary); }
 
 .text-sand { color: var(--sand) !important; }
 .text-rose { color: var(--rose) !important; }
 .text-coral { color: var(--coral) !important; }
-.text-light { color: var(--light) !important; }
-.text-dark { color: var(--dark) !important; }
+.text-light { color: var(--text-primary) !important; }
+.text-dark { color: var(--text-secondary) !important; }
+.text-muted { color: var(--text-secondary) !important; }
 
 /* Basic layout */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(135deg, var(--light) 0%, #fafafa 100%);
-  color: var(--dark);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #202020 100%);
+  color: var(--text-primary);
   line-height: 1.6;
   letter-spacing: -0.01em;
 }
@@ -73,24 +81,20 @@ main.container {
 
 .navbar.scrolled {
   padding: 0.75rem 0;
-  background: rgba(242, 242, 242, 0.95) !important;
+  background: rgba(45, 45, 45, 0.95) !important;
 }
 
 .navbar-brand { 
   font-weight: 700; 
   font-size: 1.75rem;
   letter-spacing: -0.02em;
-  color: var(--dark) !important;
+  color: var(--text-primary) !important;
   transition: transform 0.2s ease;
-}
-
-.navbar-brand:hover {
-  transform: scale(1.05);
 }
 
 .navbar-nav .nav-link {
   font-weight: 500;
-  color: var(--dark) !important;
+  color: var(--text-primary) !important;
   transition: all 0.3s ease;
   position: relative;
   padding: 0.75rem 1.25rem !important;
@@ -118,11 +122,11 @@ main.container {
   width: 60%;
 }
 
-/* Enhanced typography with better hierarchy */
+/* Enhanced typography with better hierarchy - Dark Theme */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--dark);
+  color: var(--text-primary);
   margin-bottom: 1.2rem;
   position: relative;
 }
@@ -196,13 +200,13 @@ p {
 .jumbotron h4,
 .jumbotron h5,
 .jumbotron h6 {
-  color: var(--light) !important;
+  color: var(--text-primary) !important;
 }
 
 .lead {
   font-size: 1.2rem;
   font-weight: 400;
-  color: var(--muted);
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -212,16 +216,17 @@ p {
   overflow: hidden;
 }
 
-/* Enhanced card styling with modern approach */
+/* Enhanced card styling with modern approach - Dark Theme */
 .card {
   background: var(--card-bg);
   box-shadow: 
-    0 2px 8px rgba(13, 13, 13, 0.08),
-    0 1px 4px rgba(13, 13, 13, 0.06);
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 1px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .card::before {
@@ -231,20 +236,20 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
 .card { 
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(211, 188, 152, 0.2);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   box-shadow: 
-    0 10px 20px rgba(13, 13, 13, 0.08),
-    0 4px 8px rgba(13, 13, 13, 0.05);
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.15);
   transition: none;
 }
 
@@ -255,7 +260,7 @@ p {
   padding-top: 60%; /* 5:3 aspect ratio - more compact for thumbnails */
   overflow: hidden;
   border-radius: 16px 16px 0 0;
-  background: linear-gradient(135deg, var(--light) 0%, #f8f8f8 100%);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #3a3a3a 100%);
 }
 
 /* Card image styling - only for thumbnails in cards */
@@ -276,7 +281,7 @@ p {
 /* Alternative image display that shows full image without cropping */
 .card-img-top.full-image {
   object-fit: contain;
-  background: var(--light);
+  background: var(--bg-secondary);
 }
 
 /* For landscape images, use a wider aspect ratio */
@@ -913,14 +918,14 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 
 .profile-stats .stat .label {
   font-size: 0.9rem;
-  color: var(--muted);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 500;
 }
 
 .profile-meta { 
-  color: var(--muted); 
+  color: var(--text-secondary); 
   font-size: 0.9rem; 
   line-height: 1.5;
 }
@@ -928,22 +933,38 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 /* Form enhancements */
 .form-control {
   border-radius: 8px;
-  border: 2px solid #e9ecef;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   padding: 0.75rem 1rem;
   transition: all 0.2s ease;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .form-control:focus {
   border-color: var(--coral);
   box-shadow: 0 0 0 0.2rem rgba(255, 105, 87, 0.25);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.form-label,
+label {
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 /* Enhanced footer */
 footer.site-footer { 
   padding: 48px 0; 
-  color: var(--muted);
-  background: linear-gradient(135deg, rgba(242, 242, 242, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
-  border-top: 1px solid rgba(211, 188, 152, 0.2);
+  color: var(--text-secondary);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(45, 45, 45, 0.9) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 4rem;
 }
 
