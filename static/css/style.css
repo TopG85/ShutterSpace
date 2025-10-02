@@ -104,6 +104,17 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
   line-height: 1.1;
 }
 
+/* Ensure text is visible in jumbotron */
+.jumbotron .display-4,
+.jumbotron h1,
+.jumbotron h2,
+.jumbotron h3,
+.jumbotron h4,
+.jumbotron h5,
+.jumbotron h6 {
+  color: var(--light) !important;
+}
+
 .lead {
   font-size: 1.2rem;
   font-weight: 400;
