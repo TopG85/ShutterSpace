@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Camera body -->
+  <rect x="15" y="35" width="70" height="45" rx="8" ry="8" fill="#2a2a2a" stroke="#1c1c1c" stroke-width="2"/>
+  
+  <!-- Camera lens -->
+  <circle cx="50" cy="57.5" r="18" fill="#1c1c1c" stroke="#8b6f47" stroke-width="2"/>
+  <circle cx="50" cy="57.5" r="12" fill="#2a2a2a"/>
+  <circle cx="50" cy="57.5" r="8" fill="#1c1c1c"/>
+  
+  <!-- Lens reflection -->
+  <circle cx="46" cy="53.5" r="3" fill="#d4a574" opacity="0.6"/>
+  
+  <!-- Camera viewfinder -->
+  <rect x="40" y="25" width="20" height="12" rx="3" ry="3" fill="#2a2a2a" stroke="#1c1c1c" stroke-width="1"/>
+  
+  <!-- Flash -->
+  <rect x="25" y="28" width="8" height="6" rx="2" ry="2" fill="#f8f8f2"/>
+  
+  <!-- Shutter button -->
+  <circle cx="70" cy="31" r="4" fill="#8b6f47"/>
+  
+  <!-- Camera grip texture -->
+  <rect x="17" y="40" width="3" height="35" fill="#1c1c1c"/>
+  <rect x="21" y="40" width="2" height="35" fill="#1c1c1c"/>
+</svg>
