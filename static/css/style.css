@@ -61,47 +61,131 @@ main.container {
   max-width: var(--container-max-width);
 }
 
-/* Enhanced navbar styling */
+/* Enhanced navbar styling with glass effect */
 .navbar {
   backdrop-filter: blur(20px);
-  background: rgba(242, 242, 242, 0.95) !important;
+  background: rgba(242, 242, 242, 0.85) !important;
   border-bottom: 1px solid rgba(211, 188, 152, 0.2);
-  padding: 1rem 0;
+  padding: 1.5rem 0;
+  box-shadow: 0 1px 3px rgba(13, 13, 13, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  padding: 0.75rem 0;
+  background: rgba(242, 242, 242, 0.95) !important;
 }
 
 .navbar-brand { 
   font-weight: 700; 
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   letter-spacing: -0.02em;
   color: var(--dark) !important;
+  transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
 }
 
 .navbar-nav .nav-link {
   font-weight: 500;
   color: var(--dark) !important;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.75rem 1.25rem !important;
+  border-radius: 8px;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--coral);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 .navbar-nav .nav-link:hover {
   color: var(--coral) !important;
+  background: rgba(255, 105, 87, 0.05);
 }
 
-/* Typography improvements */
+.navbar-nav .nav-link:hover::after {
+  width: 60%;
+}
+
+/* Enhanced typography with better hierarchy */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--dark);
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.2rem;
+  position: relative;
 }
 
-h1 { font-size: 2.5rem; line-height: 1.2; }
-h2 { font-size: 2rem; line-height: 1.3; }
-h3 { font-size: 1.5rem; line-height: 1.4; }
+h1 { 
+  font-size: 3rem; 
+  line-height: 1.1;
+  font-weight: 700;
+}
+h2 { 
+  font-size: 2.25rem; 
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+h3 { 
+  font-size: 1.75rem; 
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
+}
+
+/* Enhanced section headings */
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--coral) 0%, var(--sand) 100%);
+  border-radius: 2px;
+}
 
 .display-4 {
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  font-size: 3.5rem;
+}
+
+/* Enhanced text styles */
+.lead {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Better text hierarchy */
+.text-large {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.text-small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Enhanced paragraph spacing */
+p {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
 }
 
 /* Ensure text is visible in jumbotron */
@@ -132,18 +216,37 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
 .card {
   background: var(--card-bg);
   box-shadow: 
-    0 1px 3px rgba(13, 13, 13, 0.12),
-    0 1px 2px rgba(13, 13, 13, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    0 2px 8px rgba(13, 13, 13, 0.08),
+    0 1px 4px rgba(13, 13, 13, 0.06);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:hover { 
-  transform: translateY(-4px);
+  transform: translateY(-8px) rotateY(2deg);
   box-shadow: 
-    0 14px 28px rgba(13, 13, 13, 0.15),
-    0 10px 10px rgba(13, 13, 13, 0.12);
+    0 25px 50px rgba(13, 13, 13, 0.15),
+    0 15px 25px rgba(13, 13, 13, 0.1);
+  border-color: rgba(255, 105, 87, 0.2);
 }
 
 /* Modern card image container with proper aspect ratio */
@@ -276,15 +379,32 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
   backdrop-filter: blur(10px);
 }
 
-/* Enhanced button styling */
+/* Enhanced button styling with modern effects */
 .btn {
   font-weight: 500;
-  border-radius: 8px;
-  padding: 0.6rem 1.5rem;
-  transition: all 0.2s ease;
+  border-radius: 12px;
+  padding: 0.75rem 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   text-transform: none;
   letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-primary,
@@ -404,14 +524,17 @@ h3 { font-size: 1.5rem; line-height: 1.4; }
 footer.site-footer { padding: 24px 0; color: var(--muted); }
 
 
-/* Enhanced jumbotron/hero section */
+/* Enhanced jumbotron/hero section with parallax effect */
 .jumbotron {
   background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
-  border-radius: 20px;
-  padding: 4rem 3rem;
-  margin-bottom: 3rem;
+  border-radius: 24px;
+  padding: 5rem 4rem;
+  margin-bottom: 4rem;
   position: relative;
   overflow: hidden;
+  box-shadow: 
+    0 20px 40px rgba(13, 13, 13, 0.2),
+    0 10px 20px rgba(13, 13, 13, 0.1);
 }
 
 .jumbotron::before {
@@ -421,8 +544,41 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 105, 87, 0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 30% 20%, rgba(255, 105, 87, 0.15) 0%, transparent 60%);
   pointer-events: none;
+}
+
+.jumbotron::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.02) 2px,
+    rgba(255, 255, 255, 0.02) 4px
+  );
+  animation: shimmer 20s linear infinite;
+  pointer-events: none;
+}
+
+.jumbotron .display-4 {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, var(--light) 0%, var(--sand) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.jumbotron .lead {
+  position: relative;
+  z-index: 2;
+  color: rgba(242, 242, 242, 0.9);
 }
 
 div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
@@ -506,34 +662,95 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   box-shadow: 0 4px 8px rgba(13, 13, 13, 0.15);
 }
 
-/* Enhanced profile sections */
+/* Photography portfolio enhancements */
+.photo-metadata {
+  background: rgba(13, 13, 13, 0.8);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover .photo-metadata {
+  opacity: 1;
+}
+
+/* Enhanced image effects */
+.card-img-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    transparent 30%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    transparent 70%);
+  opacity: 0;
+  transition: all 0.6s ease;
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+.card:hover .card-img-wrapper::before {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+/* Professional gallery grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+/* Enhanced profile stats with animations */
 .profile-stats { 
   display: flex; 
-  gap: 24px; 
+  gap: 2rem; 
   justify-content: center; 
-  margin-top: 20px; 
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+  margin-top: 2rem; 
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .profile-stats .stat { 
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.profile-stats .stat:hover {
+  transform: translateY(-5px);
 }
 
 .profile-stats .stat .number {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 800;
   color: var(--dark);
   display: block;
+  background: linear-gradient(135deg, var(--coral) 0%, var(--sand) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .profile-stats .stat .label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  font-weight: 500;
 }
 
 .profile-meta { 
@@ -564,7 +781,55 @@ footer.site-footer {
   margin-top: 4rem;
 }
 
-/* Loading states and micro-interactions */
+/* Advanced animations and micro-interactions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Page load animations */
+.card {
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+
+.jumbotron {
+  animation: slideInFromLeft 0.8s ease-out;
+}
+
+/* Enhanced loading states and micro-interactions */
 .btn:active {
   transform: translateY(0);
 }
