@@ -4,13 +4,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from cloudinary.models import CloudinaryField
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     avatar = CloudinaryField('avatar', blank=True)
     hero_image = CloudinaryField(
-        'hero_image', 
-        blank=True, 
+        'hero_image',
+        blank=True,
         help_text="Hero image for your profile page"
     )
     # Additional user-facing profile fields
@@ -23,6 +24,7 @@ class Profile(models.Model):
     def __str__(self):
         return f"Profile({self.user.username})"
 
+
 class Photo(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     image = CloudinaryField('image')
@@ -34,8 +36,10 @@ class Photo(models.Model):
     def __str__(self):
         return f"Photo({self.title} by {self.owner.username})"
 
+
 class Comment(models.Model):
-    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='comments')
+    photo = models.ForeignKey(
+        Photo, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -47,7 +51,8 @@ class Comment(models.Model):
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='likes')
+    photo = models.ForeignKey(
+        Photo, on_delete=models.CASCADE, related_name='likes')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

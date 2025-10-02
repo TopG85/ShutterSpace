@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import sys
-from decouple import config
 from django.contrib import messages
 import dj_database_url
 
@@ -22,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Import env.py if it exists in the project root
 if os.path.isfile(os.path.join(BASE_DIR, 'env.py')):
-    import env
+    import env  # noqa: F401
 
 # Media files settings
 MEDIA_URL = '/media/'
@@ -40,9 +39,14 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # only for local development by editing this file or setting the
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'django-project-shutterspace-a676bf7fbd5b.herokuapp.com,heroku.com,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com,'
+    'heroku.com,127.0.0.1'
+).split(',')
 
-# Site framework: prefer SITE_ID from environment, fallback to localhost site id (2)
+# Site framework: prefer SITE_ID from environment,
+# fallback to localhost site id (2)
 SITE_ID = int(os.environ.get('SITE_ID', '2'))
 
 # Application definition
@@ -69,17 +73,20 @@ INSTALLED_APPS = [
 # runner doesn't attempt to contact Cloudinary or require API keys.
 if not DEBUG and not ('test' in sys.argv) and os.environ.get('CLOUDINARY_URL'):
     try:
-        import cloudinary  # type: ignore
-        import cloudinary_storage  # type: ignore
+        import cloudinary  # type: ignore # noqa: F401
+        import cloudinary_storage  # type: ignore # noqa: F401
         # Add cloudinary apps and use Cloudinary for media storage
         INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
-        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        DEFAULT_FILE_STORAGE = (
+            'cloudinary_storage.storage.MediaCloudinaryStorage'
+        )
     except Exception:
-        # Cloudinary packages not installed or failed to import; media will use MEDIA_ROOT
+        # Cloudinary packages not installed or failed to import;
+        # media will use MEDIA_ROOT
         pass
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"    
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -155,16 +162,28 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'NumericPasswordValidator'
+        ),
     },
 ]
 

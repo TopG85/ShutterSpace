@@ -1,7 +1,7 @@
 from django import forms
 from .models import Photo, Comment, Profile
-from django.contrib.auth.models import User
 from cloudinary.forms import CloudinaryFileField
+
 
 class PhotoForm(forms.ModelForm):
     image = CloudinaryFileField(
@@ -17,10 +17,12 @@ class PhotoForm(forms.ModelForm):
         model = Photo
         fields = ['image', 'title', 'description', 'is_public']
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['text']
+
 
 class ProfileForm(forms.ModelForm):
     avatar = CloudinaryFileField(
