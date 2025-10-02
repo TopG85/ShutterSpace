@@ -23,6 +23,20 @@ can choose colour harmony, from Analogous, complementray and many more.
 
 ![website](<docs/readme_images/Screenshot 2025-09-26 at 14.28.44 (3).png>)
 
+## Wireframes
+
+### Homepage Desktop Design
+![Homepage Wireframe](docs/readme_images/New%20Wireframe%201.png)
+![Desktop Create an account Wireframe](docs/readme_images/New%20Wireframe%204.png)
+
+### Tablet Design
+![TabletHomepageWireframe](docs/readme_images/New%20Wireframe%205.png)
+![TabletCreateanaccountWireframe](docs/readme_images/New%20Wireframe%203.png)
+
+### Mobile Design
+![MobileHomepageWireframe](docs/readme_images/New%20Wireframe%202.png)
+![MobileCreateanaccountWireframe](docs/readme_images/New%20Wireframe%206.png)
+
 # Design UI & UX
 
 
