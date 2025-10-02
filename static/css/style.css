@@ -293,12 +293,10 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   padding: 1rem 1.5rem;
 }
 
-/* Enhanced image styling with adaptive sizing */
+/* Enhanced image styling with fixed height for consistent cards */
 .card-img-top {
   width: 100%;
-  min-height: 200px; /* Minimum height to prevent tiny cards */
-  max-height: 300px; /* Maximum height to prevent oversized cards */
-  height: auto; /* Let height adapt to image aspect ratio */
+  height: 250px; /* Fixed height ensures all cards are the same size */
   object-fit: cover; /* Crop images to fit the container nicely */
   background: linear-gradient(135deg, #f8f8f8 0%, #efefef 100%);
   display: block;
