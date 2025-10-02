@@ -10,8 +10,6 @@ class PhotoForm(forms.ModelForm):
             'width': 2000,
             'height': 2000,
             'quality': 'auto:eco',  # More aggressive compression
-            'format': 'auto',  # Auto-select best format (WebP when supported)
-            'fetch_format': 'auto',  # Enable automatic format delivery
             'progressive': True,  # Progressive JPEG loading
             'secure': True  # Use HTTPS URLs
         }
@@ -37,7 +35,6 @@ class ProfileForm(forms.ModelForm):
             'height': 300,
             'gravity': 'face',
             'quality': 'auto:eco',  # Better compression for avatars
-            'format': 'auto',  # Auto WebP format
             'progressive': True,
             'secure': True
         }
@@ -50,7 +47,6 @@ class ProfileForm(forms.ModelForm):
             'height': 400,
             'gravity': 'auto',
             'quality': 'auto:eco',  # Better compression for hero images
-            'format': 'auto',  # Auto WebP format
             'progressive': True,
             'secure': True
         }
