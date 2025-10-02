@@ -140,7 +140,6 @@ DATABASES['default']['OPTIONS'] = {
 if 'DATABASE_URL' in os.environ:
     DATABASES['default']['OPTIONS'].update({
         'sslmode': 'require',
-        'options': '-c default_transaction_isolation=read_committed'
     })
 
 if 'test' in sys.argv:
