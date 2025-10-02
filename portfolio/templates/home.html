@@ -16,9 +16,9 @@
     <div class="col-12">
         <h2>Latest Photos</h2>
         {% if photos %}
-            <div class="row">
+            <div class="photo-gallery-grid">
                 {% for photo in photos %}
-                    <div class="col-md-4 mb-4">
+                    <div class="photo-card-modern">
                         <div class="card photo-card">
                             <div class="card-img-wrapper">
                                 <a href="{% url 'photo_detail' photo.id %}">
