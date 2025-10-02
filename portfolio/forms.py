@@ -15,7 +15,10 @@ class CommentForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['display_name', 'bio', 'avatar', 'website', 'location', 'instagram', 'show_email']
+        fields = [
+            'display_name', 'bio', 'avatar', 'hero_image', 
+            'website', 'location', 'instagram', 'show_email'
+        ]
         widgets = {
             'display_name': forms.TextInput(attrs={'class': 'form-control'}),
             'bio': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),

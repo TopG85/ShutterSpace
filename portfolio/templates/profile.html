@@ -4,17 +4,39 @@
 {% block title %}Profile - {{ owner.username }}{% endblock %}
 
 {% block content %}
+<!-- Hero Image Section -->
+{% if profile.hero_image %}
+<div class="profile-hero-section mb-4">
+    <div class="profile-hero-image">
+        <img src="{{ profile.hero_image.url }}" alt="{{ owner.username }}'s hero image" class="hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                {% if profile and profile.avatar %}
+                    <img src="{{ profile.avatar.url }}" class="hero-avatar rounded-circle">
+                {% else %}
+                    <div class="hero-avatar-initials">{{ initials }}</div>
+                {% endif %}
+                <h1 class="hero-title">{{ profile.display_name|default:owner.username }}</h1>
+                <p class="hero-subtitle">{{ profile.bio|default:"Photography Portfolio" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="row">
     <div class="col-md-4">
         <div class="card mb-3">
             <div class="card-body text-center">
-                {% if profile and profile.avatar %}
-                    <img src="{{ profile.avatar.url }}" class="rounded-circle mb-2 avatar-sm avatar-circle">
-                {% else %}
-                    <div class="avatar-initials mb-2">{{ initials }}</div>
+                {% if not profile.hero_image %}
+                    {% if profile and profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" class="rounded-circle mb-2 avatar-sm avatar-circle">
+                    {% else %}
+                        <div class="avatar-initials mb-2">{{ initials }}</div>
+                    {% endif %}
+                    <h4>{{ profile.display_name|default:owner.username }}</h4>
+                    <p>{{ profile.bio }}</p>
                 {% endif %}
-                <h4>{{ profile.display_name|default:owner.username }}</h4>
-                <p>{{ profile.bio }}</p>
                 <div class="profile-stats">
                     <div class="stat">
                         <div class="h5 mb-0">{{ photos_count }}</div>

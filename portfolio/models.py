@@ -8,6 +8,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     avatar = CloudinaryField('avatar', blank=True)
+    hero_image = CloudinaryField(
+        'hero_image', 
+        blank=True, 
+        help_text="Hero image for your profile page"
+    )
     # Additional user-facing profile fields
     display_name = models.CharField(max_length=150, blank=True)
     website = models.URLField(blank=True)
