@@ -18,7 +18,7 @@ def portfolio_home(request):
     else:
         for p in photos:
             p.liked = False
-    return render(request, 'portfolio/home.html', {'photos': photos})
+    return render(request, 'home.html', {'photos': photos})
 
 
 def register(request):
