@@ -50,17 +50,19 @@
                                 <strong>{{ comment.author.username }}</strong>
                                 <small class="text-muted"> · {{ comment.created_at|date:"M d, Y H:i" }}</small>
                                 <div>{{ comment.text }}</div>
-                                {% if user.is_authenticated and (comment.author == user or user == photo.owner) %}
-                                    <div class="mt-2">
-                                        {% if comment.author == user %}
-                                            <a href="{% url 'edit_comment' comment.id %}" class="btn btn-sm btn-outline-secondary me-2">
-                                                <i class="fas fa-edit"></i> Edit
+                                {% if user.is_authenticated %}
+                                    {% if comment.author == user or user == photo.owner %}
+                                        <div class="mt-2">
+                                            {% if comment.author == user %}
+                                                <a href="{% url 'edit_comment' comment.id %}" class="btn btn-sm btn-outline-secondary me-2">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                            {% endif %}
+                                            <a href="{% url 'delete_comment' comment.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this comment?');">
+                                                <i class="fas fa-trash"></i> Delete{% if user == photo.owner and comment.author != user %} (as photo owner){% endif %}
                                             </a>
-                                        {% endif %}
-                                        <a href="{% url 'delete_comment' comment.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this comment?');">
-                                            <i class="fas fa-trash"></i> Delete{% if user == photo.owner and comment.author != user %} (as photo owner){% endif %}
-                                        </a>
-                                    </div>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                             </li>
                         {% endfor %}
