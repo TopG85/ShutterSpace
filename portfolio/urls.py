@@ -21,4 +21,16 @@ urlpatterns = [
          name='delete_comment'),
     path('photo/<int:photo_id>/like/', views.toggle_like,
          name='toggle_like'),
+    
+    # Notification URLs
+    path('notifications/', views.notifications_list,
+         name='notifications_list'),
+    path('notifications/count/', views.notifications_unread_count,
+         name='notifications_count'),
+    path('notifications/dropdown/', views.notifications_dropdown,
+         name='notifications_dropdown'),
+    path('notifications/<int:notification_id>/read/',
+         views.notifications_mark_read, name='notifications_mark_read'),
+    path('notifications/mark-all-read/', views.notifications_mark_all_read,
+         name='notifications_mark_all_read'),
 ]

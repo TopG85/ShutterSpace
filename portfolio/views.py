@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Profile, Photo, Comment
+from django.db.models import Q
+from django.utils import timezone
+from .models import Profile, Photo, Comment, Notification
 from .forms import ProfileForm, PhotoForm, CommentForm
 
 
@@ -80,6 +82,12 @@ def upload_photo(request):
             photo = form.save(commit=False)
             photo.owner = request.user
             photo.save()
+            
+            # Optional: Create notification for followers
+            # (if follow system exists)
+            # For now, this is a placeholder for future enhancement
+            # create_notification_for_followers(request.user, photo)
+            
             return redirect('home')
     else:
         form = PhotoForm()
@@ -96,6 +104,22 @@ def add_comment(request, photo_id):
             comment.photo = photo
             comment.author = request.user
             comment.save()
+            
+            # Create notification for photo owner
+            comment_preview = (comment.text[:50] + "..."
+                               if len(comment.text) > 50 else comment.text)
+            message_text = (f'{request.user.username} commented: '
+                            f'"{comment_preview}"')
+            create_notification(
+                recipient=photo.owner,
+                sender=request.user,
+                notification_type='comment',
+                title='New comment on your photo',
+                message=message_text,
+                photo=photo,
+                comment=comment
+            )
+            
             return redirect('photo_detail', photo_id=photo.id)
     else:
         form = CommentForm()
@@ -222,6 +246,19 @@ def toggle_like(request, photo_id):
     else:
         photo.likes.create(user=request.user)
         liked = True
+        
+        # Create notification for photo owner when liked (not unliked)
+        like_message = (f'{request.user.username} liked your photo '
+                        f'"{photo.title}"')
+        create_notification(
+            recipient=photo.owner,
+            sender=request.user,
+            notification_type='like',
+            title='Someone liked your photo',
+            message=like_message,
+            photo=photo
+        )
+        
     return JsonResponse({'liked': liked, 'likes_count': photo.likes.count()})
 
 
@@ -230,3 +267,99 @@ def accounts_profile_redirect(request):
     """Redirect /accounts/profile/ to the logged-in user's profile page."""
     username = request.user.username
     return redirect('profile_view', username=username)
+
+
+# ===== NOTIFICATION SYSTEM =====
+
+def create_notification(recipient, sender, notification_type, title, message,
+                        photo=None, comment=None):
+    """
+    Utility function to create notifications
+    """
+    # Don't create notification if sender is same as recipient
+    if sender == recipient:
+        return None
+    
+    # Create the notification
+    notification = Notification.objects.create(
+        recipient=recipient,
+        sender=sender,
+        notification_type=notification_type,
+        title=title,
+        message=message,
+        photo=photo,
+        comment=comment
+    )
+    return notification
+
+
+@login_required
+def notifications_list(request):
+    """Display all notifications for the current user"""
+    # Latest 20 notifications
+    notifications = request.user.notifications.all()[:20]
+    unread_count = request.user.notifications.filter(is_read=False).count()
+    
+    context = {
+        'notifications': notifications,
+        'unread_count': unread_count
+    }
+    return render(request, 'notifications/list.html', context)
+
+
+@login_required
+def notifications_unread_count(request):
+    """AJAX endpoint to get unread notification count"""
+    count = request.user.notifications.filter(is_read=False).count()
+    return JsonResponse({'unread_count': count})
+
+
+@login_required
+def notifications_mark_read(request, notification_id):
+    """AJAX endpoint to mark a specific notification as read"""
+    try:
+        notification = get_object_or_404(
+            Notification,
+            id=notification_id,
+            recipient=request.user
+        )
+        notification.mark_as_read()
+        return JsonResponse({'success': True})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})
+
+
+@login_required
+def notifications_mark_all_read(request):
+    """AJAX endpoint to mark all notifications as read"""
+    if request.method == 'POST':
+        request.user.notifications.filter(is_read=False).update(is_read=True)
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+@login_required
+def notifications_dropdown(request):
+    """AJAX endpoint to get recent notifications for dropdown"""
+    # Latest 5 for dropdown
+    recent_notifications = request.user.notifications.all()[:5]
+    unread_count = request.user.notifications.filter(is_read=False).count()
+    
+    notifications_data = []
+    for notification in recent_notifications:
+        notifications_data.append({
+            'id': notification.id,
+            'title': notification.title,
+            'message': notification.message,
+            'is_read': notification.is_read,
+            'created_at': notification.created_at.strftime('%Y-%m-%d %H:%M'),
+            'url': notification.get_url(),
+            'sender_username': (notification.sender.username
+                                if notification.sender else None),
+            'type': notification.notification_type
+        })
+    
+    return JsonResponse({
+        'notifications': notifications_data,
+        'unread_count': unread_count
+    })

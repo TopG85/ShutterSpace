@@ -62,6 +62,73 @@ class Like(models.Model):
         return f"Like({self.user.username} -> {self.photo.id})"
 
 
+class Notification(models.Model):
+    NOTIFICATION_TYPES = [
+        ('like', 'Like'),
+        ('comment', 'Comment'),
+        ('follow', 'Follow'),
+        ('photo_upload', 'Photo Upload'),
+        ('mention', 'Mention'),
+    ]
+    
+    recipient = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='notifications'
+    )
+    sender = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='sent_notifications',
+        null=True,
+        blank=True
+    )
+    notification_type = models.CharField(
+        max_length=20,
+        choices=NOTIFICATION_TYPES
+    )
+    title = models.CharField(max_length=255)
+    message = models.TextField()
+    photo = models.ForeignKey(
+        Photo,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['recipient', 'is_read']),
+            models.Index(fields=['created_at']),
+        ]
+    
+    def __str__(self):
+        return f"Notification({self.recipient.username}: {self.title})"
+    
+    def get_url(self):
+        """Get the URL that this notification should link to"""
+        if self.photo:
+            return f"/photo/{self.photo.id}/"
+        elif self.sender:
+            return f"/profile/{self.sender.username}/"
+        return "/"
+    
+    def mark_as_read(self):
+        """Mark this notification as read"""
+        if not self.is_read:
+            self.is_read = True
+            self.save(update_fields=['is_read'])
+
+
 # auto-create Profile when a User is created
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
