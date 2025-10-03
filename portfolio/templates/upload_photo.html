@@ -5,48 +5,201 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h3>Upload New Photo</h3>
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="fas fa-camera me-2"></i>Upload New Photo
+                </h3>
             </div>
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
+                <!-- Overall form errors -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Please correct the following:</strong>
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <form method="post" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="{{ form.image.id_for_label }}" class="form-label">Photo</label>
+                    
+                    <!-- Image Upload Field -->
+                    <div class="mb-4">
+                        <label for="{{ form.image.id_for_label }}" class="form-label fw-bold">
+                            {{ form.image.label }}
+                        </label>
                         {{ form.image }}
+                        {% if form.image.help_text %}
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>{{ form.image.help_text }}
+                            </div>
+                        {% endif %}
                         {% if form.image.errors %}
-                            <div class="text-danger">{{ form.image.errors }}</div>
+                            <div class="invalid-feedback d-block">
+                                <i class="fas fa-times-circle me-1"></i>
+                                {% for error in form.image.errors %}
+                                    {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                {% endfor %}
+                            </div>
                         {% endif %}
                     </div>
+                    
+                    <!-- Title Field -->
                     <div class="mb-3">
-                        <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+                        <label for="{{ form.title.id_for_label }}" class="form-label fw-bold">
+                            {{ form.title.label }}
+                        </label>
                         {{ form.title }}
+                        {% if form.title.help_text %}
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>{{ form.title.help_text }}
+                            </div>
+                        {% endif %}
                         {% if form.title.errors %}
-                            <div class="text-danger">{{ form.title.errors }}</div>
+                            <div class="invalid-feedback d-block">
+                                <i class="fas fa-times-circle me-1"></i>
+                                {% for error in form.title.errors %}
+                                    {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                {% endfor %}
+                            </div>
                         {% endif %}
+                        <div class="form-text text-muted">
+                            <span id="titleCounter">0</span>/255 characters
+                        </div>
                     </div>
+                    
+                    <!-- Description Field -->
                     <div class="mb-3">
-                        <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                        <label for="{{ form.description.id_for_label }}" class="form-label">
+                            {{ form.description.label }}
+                        </label>
                         {{ form.description }}
-                        {% if form.description.errors %}
-                            <div class="text-danger">{{ form.description.errors }}</div>
+                        {% if form.description.help_text %}
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>{{ form.description.help_text }}
+                            </div>
                         {% endif %}
+                        {% if form.description.errors %}
+                            <div class="invalid-feedback d-block">
+                                <i class="fas fa-times-circle me-1"></i>
+                                {% for error in form.description.errors %}
+                                    {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="form-text text-muted">
+                            <span id="descriptionCounter">0</span>/1000 characters
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    
+                    <!-- Privacy Setting -->
+                    <div class="mb-4">
                         <div class="form-check">
                             {{ form.is_public }}
                             <label class="form-check-label" for="{{ form.is_public.id_for_label }}">
-                                Make this photo public
+                                {{ form.is_public.label }}
                             </label>
+                            {% if form.is_public.help_text %}
+                                <div class="form-text">
+                                    <i class="fas fa-info-circle me-1"></i>{{ form.is_public.help_text }}
+                                </div>
+                            {% endif %}
                         </div>
+                        {% if form.is_public.errors %}
+                            <div class="invalid-feedback d-block">
+                                <i class="fas fa-times-circle me-1"></i>
+                                {% for error in form.is_public.errors %}
+                                    {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
-                    <button type="submit" class="btn btn-primary">Upload Photo</button>
-                    <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                    
+                    <!-- Submit Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary me-md-2">
+                            <i class="fas fa-times me-1"></i>Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <i class="fas fa-upload me-1"></i>Upload Photo
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Client-side validation and character counters -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const titleField = document.getElementById('{{ form.title.id_for_label }}');
+    const descriptionField = document.getElementById('{{ form.description.id_for_label }}');
+    const titleCounter = document.getElementById('titleCounter');
+    const descriptionCounter = document.getElementById('descriptionCounter');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Character counters
+    function updateTitleCounter() {
+        const count = titleField.value.length;
+        titleCounter.textContent = count;
+        titleCounter.className = count > 255 ? 'text-danger fw-bold' : 'text-muted';
+    }
+    
+    function updateDescriptionCounter() {
+        const count = descriptionField.value.length;
+        descriptionCounter.textContent = count;
+        descriptionCounter.className = count > 1000 ? 'text-danger fw-bold' : 'text-muted';
+    }
+    
+    // Event listeners for real-time feedback
+    titleField.addEventListener('input', updateTitleCounter);
+    descriptionField.addEventListener('input', updateDescriptionCounter);
+    
+    // Initialize counters
+    updateTitleCounter();
+    updateDescriptionCounter();
+    
+    // Form validation on submit
+    const form = titleField.closest('form');
+    form.addEventListener('submit', function(e) {
+        let isValid = true;
+        
+        // Title validation
+        const title = titleField.value.trim();
+        if (title.length < 3) {
+            titleField.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            titleField.classList.remove('is-invalid');
+            titleField.classList.add('is-valid');
+        }
+        
+        // Description validation
+        const description = descriptionField.value.trim();
+        if (description.length > 1000) {
+            descriptionField.classList.add('is-invalid');
+            isValid = false;
+        } else if (description.length > 0) {
+            descriptionField.classList.remove('is-invalid');
+            descriptionField.classList.add('is-valid');
+        }
+        
+        if (!isValid) {
+            e.preventDefault();
+            submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>Please fix errors above';
+            submitBtn.classList.add('btn-danger');
+            submitBtn.classList.remove('btn-primary');
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-upload me-1"></i>Upload Photo';
+                submitBtn.classList.remove('btn-danger');
+                submitBtn.classList.add('btn-primary');
+            }, 3000);
+        }
+    });
+});
+</script>
 {% endblock %}

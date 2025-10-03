@@ -5,29 +5,180 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h3>Edit Profile</h3>
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="fas fa-user-edit me-2"></i>Edit Profile
+                </h3>
             </div>
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
+                <!-- Overall form errors -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Please correct the following:</strong>
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <form method="post" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="{{ form.bio.id_for_label }}" class="form-label">Bio</label>
-                        {{ form.bio }}
-                        {% if form.bio.errors %}
-                            <div class="text-danger">{{ form.bio.errors }}</div>
-                        {% endif %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Display Name -->
+                            <div class="mb-3">
+                                <label for="{{ form.display_name.id_for_label }}" class="form-label fw-bold">
+                                    {{ form.display_name.label }}
+                                </label>
+                                {{ form.display_name }}
+                                {% if form.display_name.help_text %}
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.display_name.help_text }}
+                                    </div>
+                                {% endif %}
+                                {% if form.display_name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.display_name.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text text-muted">
+                                    <span id="displayNameCounter">0</span>/150 characters
+                                </div>
+                            </div>
+                            
+                            <!-- Location -->
+                            <div class="mb-3">
+                                <label for="{{ form.location.id_for_label }}" class="form-label">
+                                    {{ form.location.label }}
+                                </label>
+                                {{ form.location }}
+                                {% if form.location.help_text %}
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.location.help_text }}
+                                    </div>
+                                {% endif %}
+                                {% if form.location.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.location.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Website -->
+                            <div class="mb-3">
+                                <label for="{{ form.website.id_for_label }}" class="form-label">
+                                    {{ form.website.label }}
+                                </label>
+                                {{ form.website }}
+                                {% if form.website.help_text %}
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.website.help_text }}
+                                    </div>
+                                {% endif %}
+                                {% if form.website.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.website.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Instagram -->
+                            <div class="mb-3">
+                                <label for="{{ form.instagram.id_for_label }}" class="form-label">
+                                    {{ form.instagram.label }}
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">@</span>
+                                    {{ form.instagram }}
+                                </div>
+                                {% if form.instagram.help_text %}
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.instagram.help_text }}
+                                    </div>
+                                {% endif %}
+                                {% if form.instagram.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.instagram.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <!-- Bio -->
+                            <div class="mb-3">
+                                <label for="{{ form.bio.id_for_label }}" class="form-label fw-bold">
+                                    {{ form.bio.label }}
+                                </label>
+                                {{ form.bio }}
+                                {% if form.bio.help_text %}
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.bio.help_text }}
+                                    </div>
+                                {% endif %}
+                                {% if form.bio.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.bio.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text text-muted">
+                                    <span id="bioCounter">0</span>/500 characters
+                                </div>
+                            </div>
+                            
+                            <!-- Email Visibility -->
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    {{ form.show_email }}
+                                    <label class="form-check-label" for="{{ form.show_email.id_for_label }}">
+                                        {{ form.show_email.label }}
+                                    </label>
+                                    {% if form.show_email.help_text %}
+                                        <div class="form-text">
+                                            <i class="fas fa-info-circle me-1"></i>{{ form.show_email.help_text }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if form.show_email.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.show_email.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="{{ form.display_name.id_for_label }}" class="form-label">Display name</label>
-                        {{ form.display_name }}
-                        <div class="form-text">This name will be shown on your profile and next to your photos.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="{{ form.avatar.id_for_label }}" class="form-label">Avatar</label>
-                        {% if form.instance and form.instance.avatar %}
+                    
+                    <hr class="my-4">
+                    
+                    <!-- Image Uploads -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Avatar -->
+                            <div class="mb-3">
+                                <label for="{{ form.avatar.id_for_label }}" class="form-label fw-bold">
+                                    {{ form.avatar.label }}
+                                </label>
+                                {% if form.instance and form.instance.avatar %}
                             <div class="mb-2">
                                 <img src="{{ form.instance.avatar.url }}" alt="avatar" class="avatar-sm avatar-circle">
                             </div>

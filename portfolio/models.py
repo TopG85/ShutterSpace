@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 from cloudinary.models import CloudinaryField
 
 
@@ -116,11 +117,17 @@ class Notification(models.Model):
     
     def get_url(self):
         """Get the URL that this notification should link to"""
-        if self.photo:
-            return f"/photo/{self.photo.id}/"
-        elif self.sender:
-            return f"/profile/{self.sender.username}/"
-        return "/"
+        try:
+            if self.photo:
+                return reverse('photo_detail',
+                               kwargs={'photo_id': self.photo.id})
+            elif self.sender:
+                return reverse('profile_view',
+                               kwargs={'username': self.sender.username})
+            return reverse('home')
+        except Exception:
+            # Fallback in case of any URL resolution issues
+            return "/"
     
     def mark_as_read(self):
         """Mark this notification as read"""
