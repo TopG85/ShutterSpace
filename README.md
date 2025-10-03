@@ -225,17 +225,17 @@ class Notification(models.Model):
 - **OneToOneField**: Profile ↔ User (automatic profile creation)
 - **ForeignKey**: Photo → User, Comment → Photo/User, Notification → User/Photo
 - **ManyToMany (through Like)**: User ↔ Photo with timestamp tracking
-- **Related Names**: Optimized reverse relationship queries
+- **Related Names**: Optimised reverse relationship queries
 
 **Database Constraints:**
 - **Unique Together**: Prevents duplicate likes (user, photo)
-- **Database Indexes**: Performance optimization for notifications
+- **Database Indexes**: Performance optimisation for notifications
 - **CASCADE Deletion**: Proper cleanup when users/photos are deleted
 - **Field Validation**: CharField limits, URLField validation, Boolean defaults
 
 ### Django ORM Usage - Efficient & Secure Operations
 
-**Query Optimization Examples:**
+**Query Optimisation Examples:**
 ```python
 # Efficient filtering with ordering and limits
 photos = Photo.objects.filter(is_public=True).order_by('-created_at')[:6]
@@ -253,9 +253,9 @@ comments = Comment.objects.filter(photo=photo).select_related('author')
 
 **Security Features:**
 - **SQL Injection Prevention**: Exclusive use of Django ORM
-- **Parameterized Queries**: All database operations use Django's built-in protection
+- **Parameterised Queries**: All database operations use Django's built-in protection
 - **Proper Error Handling**: get_object_or_404 for safe object retrieval
-- **Relationship Security**: Owner-based filtering for authorization
+- **Relationship Security**: Owner-based filtering for authorisation
 
 ### Database Migrations
 
@@ -268,7 +268,7 @@ comments = Comment.objects.filter(photo=photo).select_related('author')
 - `0006_profile_hero_image.py` - Hero image functionality
 - `0007_notification.py` - Advanced notification system
 
-### Performance Optimizations
+### Performance Optimisations
 
 **Database Performance Features:**
 - **Connection Pooling**: CONN_MAX_AGE configuration for persistent connections
@@ -404,8 +404,8 @@ class Notification(models.Model):
 ```
 
 **Advanced Features:**
-- **Type System**: Extensible notification categorization
-- **Performance Optimization**: Database indexes for common queries
+- **Type System**: Extensible notification categorisation
+- **Performance Optimisation**: Database indexes for common queries
 - **Smart URL Generation**: Context-aware notification linking
 
 ### Custom Model Methods
@@ -463,11 +463,11 @@ class PhotoAdmin(admin.ModelAdmin):
 **Administrative Features:**
 - **Content Moderation**: Easy filtering by public/private status
 - **Search Capabilities**: Multi-field search across titles, descriptions, and usernames
-- **Temporal Organization**: Date hierarchy for content management
+- **Temporal Organisation**: Date hierarchy for content management
 
 ### Model Design Benefits
 
-#### **Photography Platform Optimization**
+#### **Photography Platform Optimisation**
 - **Performance**: Database indexes on high-query fields
 - **Scalability**: Efficient relationship design with related_names
 - **User Experience**: Automatic profile creation and smart notifications
@@ -488,7 +488,7 @@ This project exemplifies agile methodology through careful planning, thorough do
 
 **Initial Planning Phase**: The project began with comprehensive planning for a booking system concept. This involved:
 - Creating detailed models and database structure
-- Developing comprehensive ERD diagrams to visualize data relationships
+- Developing comprehensive ERD diagrams to visualise data relationships
 - Writing detailed user stories to define functionality requirements
 - Spending a full week on thorough documentation and system design
 
@@ -514,7 +514,7 @@ This project exemplifies agile methodology through careful planning, thorough do
 
 ## Key Agile Practices Implemented
 
-- **MVP-First Development** prioritizing core functionality before feature expansion
+- **MVP-First Development** prioritising core functionality before feature expansion
 - **User story development** defining essential user workflows first
 - **Strategic feature prioritization** focusing on portfolio basics before booking complexity
 - **Iterative enhancement planning** with booking system ready for future implementation
@@ -523,7 +523,7 @@ This project exemplifies agile methodology through careful planning, thorough do
 - **Phased development approach** with distinct core and enhancement phases
 - **Future-ready architecture** designed to accommodate booking system integration
 
-This organized agile approach demonstrates excellent project management - focusing on delivering a fully functional core product before expanding features. The initial booking system planning was valuable groundwork that will now be implemented as a natural next phase, showing how good agile planning creates sustainable development pathways.
+This organised agile approach demonstrates excellent project management - focusing on delivering a fully functional core product before expanding features. The initial booking system planning was valuable groundwork that will now be implemented as a natural next phase, showing how good agile planning creates sustainable development pathways.
 
 ## CRUD 
 
@@ -547,7 +547,7 @@ Photo Metadata: Can be updated through forms
 User Preferences: Profile settings and privacy controls
 🗑️ DELETE Operations ✅
 Photo Deletion: delete_photo() with file cleanup
-Comment Deletion: delete_comment() with dual authorization
+Comment Deletion: delete_comment() with dual authorisation
 Secure Confirmation: POST-only deletion with CSRF protection
 🔒 Security Controls ✅ (Excellent Implementation!)
 
@@ -682,7 +682,7 @@ chmod +x bin/heroku_prepare.sh
 ### Static Files & Media
 
 - **Static Files**: Collected to `/staticfiles/` during deployment
-- **Media Files**: Cloudinary CDN for optimized image delivery
+- **Media Files**: Cloudinary CDN for optimised image delivery
 - **CSS/JS**: Minified and compressed for production
 
 ### Security Configuration
@@ -771,7 +771,7 @@ heroku logs --source app
 ### Performance Optimization
 
 - **Database**: Use connection pooling for high traffic
-- **Images**: Cloudinary automatic optimization enabled
+- **Images**: Cloudinary automatic optimisation enabled
 - **Caching**: Django cache framework configured
 - **Monitoring**: Heroku metrics for performance tracking
 
@@ -872,9 +872,9 @@ class SecurityTests(TestCase):
 
 ✅ **Best Practices:** Automatic adherence to Django testing conventions and PEP 8 standards
 
-✅ **Consistent Structure:** Maintained uniform test organization and documentation patterns
+✅ **Consistent Structure:** Maintained uniform test organisation and documentation patterns
 
-✅ **Security Focus:** AI emphasized security testing, ensuring proper authentication and authorization validation
+✅ **Security Focus:** AI emphasised security testing, ensuring proper authentication and authorisation validation
 
 #### **Strategic Implementation Process:**
 
@@ -889,7 +889,7 @@ class SecurityTests(TestCase):
 - **View Security:** Authentication requirements, permission-based access control
 - **Workflow Testing:** Complete user journeys from comment creation to notification delivery
 - **API Endpoints:** REST API authentication and response validation
-- **Form Validation:** Input sanitization and error handling
+- **Form Validation:** Input sanitisation and error handling
 
 This demonstrates professional use of AI tools to enhance development productivity while maintaining code quality and security standards. The AI-generated tests provide comprehensive coverage that would typically require hours of manual development.
 
@@ -905,7 +905,7 @@ The integration of AI tools fundamentally transformed the ShutterSpace developme
 #### **Key Outcomes:**
 - **Enhanced Security:** AI proactively suggested security patterns and edge cases, resulting in more robust authentication and authorization systems
 - **Consistent Architecture:** AI maintained coding standards and Django best practices across all components without manual enforcement
-- **Reduced Technical Debt:** AI-generated code followed established patterns, minimizing future refactoring needs
+- **Reduced Technical Debt:** AI-generated code followed established patterns, minimising future refactoring needs
 
 #### **Strategic Value:**
 The AI tools acted as a force multiplier, enabling focus on high-level architecture and user experience rather than syntax and boilerplate code. This shift allowed for more thoughtful feature design and comprehensive testing, ultimately delivering a more polished and secure photography portfolio platform.
@@ -978,7 +978,7 @@ Throughout the ShutterSpace project, AI tools were strategically employed to enh
 **5. Database Architecture & Relationships**
 - **Challenge**: Designing efficient model relationships for photos, comments, likes, and notifications
 - **AI Contribution**: Suggested optimal foreign key relationships, database indexing strategies, and cascade behaviors
-- **Outcome**: Created scalable database architecture with proper normalization and performance optimization
+- **Outcome**: Created scalable database architecture with proper normalization and performance optimisation
 
 ### Strategic Decision-Making Process
 
@@ -1045,7 +1045,7 @@ Throughout the development process, AI tools proved invaluable for identifying a
 
 **5. Database Migration Conflicts**
 - **Issue**: Complex model relationship changes causing migration conflicts
-- **AI Intervention**: Analyzed migration dependencies and suggested optimal migration strategy
+- **AI Intervention**: Analysed migration dependencies and suggested optimal migration strategy
 - **Resolution Strategy**: AI recommended specific migration commands and field relationship adjustments
 - **Outcome**: Smooth database schema evolution without data loss
 
@@ -1053,7 +1053,7 @@ Throughout the development process, AI tools proved invaluable for identifying a
 
 **Systematic Error Analysis**: AI helped establish a consistent approach to debugging:
 1. **Error Identification**: AI quickly parsed error messages and identified root causes
-2. **Context Analysis**: AI analyzed surrounding code to understand the broader impact
+2. **Context Analysis**: AI analysed surrounding code to understand the broader impact
 3. **Solution Strategy**: AI suggested multiple resolution approaches with trade-offs
 4. **Implementation Guidance**: AI provided step-by-step implementation instructions
 5. **Validation Support**: AI helped create test cases to ensure fixes were complete
@@ -1076,7 +1076,127 @@ Throughout the development process, AI tools proved invaluable for identifying a
 
 The debugging partnership with AI tools transformed potentially project-blocking issues into manageable learning experiences, ensuring continuous development momentum while maintaining high code quality standards.
 
-# User stories
+# User Stories
+
+### 📸 **Create Profile**
+**As a Photographer, I can create a profile so that I can showcase my portfolio to potential clients.**
+
+**Acceptance Criteria:**
+- ✅ The user can upload a profile picture
+- ✅ The user can add a bio and contact information
+- ✅ The user can link to their social media accounts
+
+**Implementation Status:** ✅ **COMPLETED**
+- Avatar upload with Cloudinary integration
+- Comprehensive bio, website, location, and Instagram fields
+- Professional display name and email visibility controls
+
+---
+
+### 🖼️ **Upload Photos**
+**As a Photographer, I can upload photos to my portfolio so that I can display my work to others.**
+
+**Acceptance Criteria:**
+- ✅ The user can upload multiple photos at once
+- ✅ The user can add titles and descriptions to each photo
+
+
+**Implementation Status:** ✅ **COMPLETED**
+- Individual photo upload with Cloudinary optimization
+- Title and description metadata for each photo
+- Public/private visibility controls
+- *Note: Album organization planned for future release*
+
+---
+
+### 🔍 **Browse and Search Photographers**
+**As a User, I can browse and search for photographers so that I can find inspiration or hire a photographer.**
+
+**Acceptance Criteria:**
+- ⚠️ The user can search by keywords, location, and categories
+- ✅ The user can view photographer profiles and portfolios
+- ⚠️ The user can follow photographers to receive updates on their new work
+
+**Implementation Status:** ⚠️ **PARTIALLY COMPLETED**
+- Complete profile and portfolio viewing functionality
+- Public photo browsing and discovery
+- *Note: Advanced search and follow features planned for future release*
+
+---
+
+### 💬 **Receive Feedback**
+**As a Photographer, I can receive feedback on my photos so that I can improve my skills.**
+
+**Acceptance Criteria:**
+- ✅ The user can enable comments on their photos
+- ✅ The user can receive notifications for new comments
+- ✅ The user can respond to comments
+
+**Implementation Status:** ✅ **COMPLETED**
+- Full commenting system with threaded discussions
+- Real-time notification system for comment events
+- Photo owner moderation capabilities
+- Comment editing and deletion functionality
+
+---
+
+### ❤️ **Like and Share Photos**
+**As a User, I can like and share photos so that I can show appreciation for the work and share it with others.**
+
+**Acceptance Criteria:**
+- ✅ The user can like photos
+- ✅ The user can view the number of likes and shares on each photo
+
+**Implementation Status:** ✅ **MOSTLY COMPLETED**
+- Complete like/unlike functionality with duplicate prevention
+- Like count display and real-time updates
+- Notification system for like events
+- *Note: Social media sharing integration planned for future release*
+
+---
+
+### 👤 **Create Account**
+**As a User, I can create an account so that I can access and use the platform's features.**
+
+**Acceptance Criteria:**
+- ✅ The user can sign up using an email address and password
+- ✅ The user can log in using their email address and password
+
+**Implementation Status:** ✅ **MOSTLY COMPLETED**
+- Complete Django authentication system
+- User registration and login functionality
+- Automatic profile creation on registration
+- *Note: Email verification integration planned for production release*
+
+---
+
+### ✏️ **Manage Comments**
+**As a User, I can edit, update, and delete comments so that I can manage my feedback and interactions effectively.**
+
+**Acceptance Criteria:**
+- ✅ The user can edit their comments on photos
+- ✅ The user can update their comments and see the changes reflected immediately
+- ✅ The user can delete their comments, and the comments will be removed from the photo
+
+**Implementation Status:** ✅ **COMPLETED WITH ENHANCEMENTS**
+- Full comment CRUD operations
+- Real-time comment updates without page refresh
+- Dual authorization system (comment authors + photo owners can delete)
+- Edit timestamp tracking for transparency
+- Proper permission controls and security validation
+
+---
+
+## Implementation Summary
+
+### ✅ **Fully Implemented Features:**
+- User authentication and profile management
+- Photo upload and management
+- Complete commenting system with moderation
+- Like/unlike functionality with notifications
+- Real-time notification system
+- Professional portfolio display
+
 
 ## Testing
 
