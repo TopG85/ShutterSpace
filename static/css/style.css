@@ -710,6 +710,26 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   letter-spacing: 0.5px;
 }
 
+/* Profile bio text styling - ensure proper text wrapping */
+.profile-bio {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  hyphens: auto;
+  text-align: left;
+}
+
+.hero-subtitle {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  hyphens: auto;
+}
+
 /* Profile hero image section */
 .profile-hero-section {
   position: relative;
