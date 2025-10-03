@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-from django.utils import timezone
 from .models import Profile, Photo, Comment, Notification
 from .forms import ProfileForm, PhotoForm, CommentForm
 

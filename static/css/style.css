@@ -704,30 +704,87 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 
 .profile-meta {
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Profile bio text styling - ensure proper text wrapping */
-.profile-bio {
+  letter-spacing: 0.3px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  word-break: break-word;
-  white-space: normal;
+  hyphens: auto;
+  line-height: 1.2;
   max-width: 100%;
+}
+
+/* Profile bio text styling - ensure proper text wrapping AND readable width */
+.card-body .profile-bio {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  max-width: 100% !important;
   hyphens: auto;
   text-align: left;
+  box-sizing: border-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  /* Limit text width for better readability */
+  line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
+/* Ensure card body doesn't overflow and has reasonable text width */
+.card-body {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  padding: 2rem; /* Increased from 1.5rem for more generous spacing */
+}
+
+/* Ensure the entire card container prevents overflow and has max width */
+.col-md-4 .card {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Additional protection for any paragraph in profile cards */
+.card p {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+/* Hero subtitle with contained width for readability */
 .hero-subtitle {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  white-space: normal;
-  max-width: 100%;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  max-width: 1000px !important; /* Increased from 800px for much more breathing room */
   hyphens: auto;
+  margin: 0 auto; /* Center the text */
+  line-height: 1.4;
+}
+
+/* Container for main content to prevent full-width text */
+.profile-content {
+  max-width: 1600px; /* Increased from 1400px for maximum space utilization */
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Ensure profile card bio doesn't get too wide even in larger containers */
+.profile-bio-container {
+  max-width: 450px; /* Increased from 350px for even better readability */
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Profile hero image section */
@@ -947,17 +1004,21 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   /* gap replaced with margin for W3C validation compliance */
   justify-content: center; 
   margin-top: 2rem; 
-  padding: 2rem;
+  padding: 1.5rem;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
   /* backdrop-filter removed for W3C validation compliance */
   border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
 }
 
 .profile-stats .stat { 
   text-align: center;
   transition: transform 0.3s ease;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
+  min-width: 60px;
+  max-width: 80px;
+  flex: 1;
 }
 
 .profile-stats .stat:hover {
@@ -973,11 +1034,17 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 }
 
 .profile-stats .stat .label {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   color: var(--text-primary);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   font-weight: 500;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
+  max-width: 80px;
+  margin: 0 auto;
 }
 
 .profile-meta { 
@@ -1310,6 +1377,24 @@ footer.site-footer {
     padding-top: 75%; /* Better aspect ratio for desktop */
   }
   
+  /* Profile stats improvements for desktop */
+  .profile-stats {
+    padding: 2rem;
+    justify-content: space-around;
+  }
+  
+  .profile-stats .stat {
+    min-width: 80px;
+    max-width: 120px;
+    margin: 0 1rem;
+  }
+  
+  .profile-stats .stat .label {
+    font-size: 0.8rem;
+    max-width: 100px;
+    letter-spacing: 0.08em;
+  }
+  
   /* Better spacing for content */
   .jumbotron {
     padding: 4rem 2rem;
@@ -1361,6 +1446,36 @@ footer.site-footer {
   /* Enhanced card presentation */
   .card {
     transition: all 0.3s ease;
+  }
+  
+  /* Profile stats for extra large screens */
+  .profile-stats {
+    padding: 2.5rem;
+  }
+  
+  .profile-stats .stat {
+    min-width: 100px;
+    max-width: 140px;
+    margin: 0 1.5rem;
+  }
+  
+  .profile-stats .stat .label {
+    font-size: 0.85rem;
+    max-width: 120px;
+    letter-spacing: 0.1em;
+  }
+  
+  .profile-meta {
+    font-size: 0.85rem;
+  }
+  
+  /* Even more generous bio width on large screens */
+  .profile-bio-container {
+    max-width: 550px;
+  }
+  
+  .hero-subtitle {
+    max-width: 1200px !important;
   }
   
   .card:hover {
