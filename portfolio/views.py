@@ -191,6 +191,7 @@ def photo_detail(request, photo_id):
 
 @login_required
 def edit_comment(request, comment_id):
+    # Only comment authors can edit their own comments
     comment = get_object_or_404(Comment, id=comment_id, author=request.user)
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)
@@ -208,9 +209,20 @@ def edit_comment(request, comment_id):
 
 @login_required
 def delete_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id, author=request.user)
+    # Allow both comment authors and photo owners to delete comments
+    comment = get_object_or_404(Comment, id=comment_id)
+    
+    # Check if user is either the comment author or the photo owner
+    if comment.author != request.user and comment.photo.owner != request.user:
+        # User is neither the comment author nor the photo owner
+        from django.http import HttpResponseForbidden
+        return HttpResponseForbidden(
+            "You don't have permission to delete this comment."
+        )
+    
+    photo_id = comment.photo.id
     comment.delete()
-    return redirect('photo_detail', photo_id=comment.photo.id)
+    return redirect('photo_detail', photo_id=photo_id)
 
 
 @login_required
