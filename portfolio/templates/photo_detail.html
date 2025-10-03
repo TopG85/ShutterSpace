@@ -50,7 +50,7 @@
                                 <strong>{{ comment.author.username }}</strong>
                                 <small class="text-muted"> · {{ comment.created_at|date:"M d, Y H:i" }}</small>
                                 <div>{{ comment.text }}</div>
-                                {% if user.is_authenticated and comment.author == user or user == photo.owner %}
+                                {% if user.is_authenticated and (comment.author == user or user == photo.owner) %}
                                     <div class="mt-2">
                                         {% if comment.author == user %}
                                             <a href="{% url 'edit_comment' comment.id %}" class="btn btn-sm btn-outline-secondary me-2">
