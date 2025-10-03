@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Photo, Comment, Like
+from .models import Profile, Photo, Comment, Like, Notification
 
 
 @admin.register(Profile)
@@ -28,3 +28,18 @@ class CommentAdmin(admin.ModelAdmin):
 class LikeAdmin(admin.ModelAdmin):
     list_display = ['user', 'photo', 'created_at']
     search_fields = ['user__username', 'photo__title']
+
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ['recipient', 'sender', 'notification_type', 'title',
+                    'is_read', 'created_at']
+    list_filter = ['notification_type', 'is_read', 'created_at']
+    search_fields = ['recipient__username', 'sender__username', 'title',
+                     'message']
+    date_hierarchy = 'created_at'
+    readonly_fields = ['created_at']
+    
+    def get_queryset(self, request):
+        return (super().get_queryset(request)
+                .select_related('recipient', 'sender', 'photo'))
