@@ -133,7 +133,7 @@ WSGI_APPLICATION = 'shutterspace.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL", ""))
 }
 
 # Add connection pooling and SSL settings after parsing
