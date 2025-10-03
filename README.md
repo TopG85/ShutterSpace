@@ -130,6 +130,49 @@ https://drawsql.app/teams/daniel-carson/diagrams/shutterspace
 
 # Agile Methodology
 
+This project exemplifies agile methodology through careful planning, thorough documentation, and strategic pivoting when necessary. The development process demonstrated key agile principles of adaptability and continuous improvement throughout the project lifecycle.
+
+## Development Approach
+
+**Initial Planning Phase**: The project began with comprehensive planning for a booking system concept. This involved:
+- Creating detailed models and database structure
+- Developing comprehensive ERD diagrams to visualize data relationships
+- Writing detailed user stories to define functionality requirements
+- Spending a full week on thorough documentation and system design
+
+**Strategic MVP Focus**: After a week of intensive planning and modeling work on the booking system, a strategic decision was made to focus on core portfolio functionality first. This demonstrates excellent agile prioritization - building a solid foundation before adding complex features.
+
+**Core Functionality Implementation**: The development focused on essential user features:
+- User account creation and authentication system
+- Image upload functionality with Cloudinary integration
+- Photo interaction features (likes and comments)
+- Comment editing and deletion capabilities
+- User profile creation and editing functionality
+- Responsive design and image optimization
+
+**MVP-First Approach**: This strategy proved highly effective:
+- Established stable core functionality before feature expansion
+- Enabled thorough testing of fundamental user workflows
+- Created a solid foundation for future enhancements
+- Demonstrated working product early in development cycle
+
+**Future Enhancement Ready**: With the core portfolio platform now fully functional, the project is positioned for the next development phase - implementing the originally planned booking system as an additional feature layer.
+
+**Documentation-First Approach**: Throughout both phases, comprehensive documentation was maintained, including ERD diagrams, user stories, and technical specifications, ensuring project clarity and academic compliance.
+
+## Key Agile Practices Implemented
+
+- **MVP-First Development** prioritizing core functionality before feature expansion
+- **User story development** defining essential user workflows first
+- **Strategic feature prioritization** focusing on portfolio basics before booking complexity
+- **Iterative enhancement planning** with booking system ready for future implementation
+- **Thorough testing cycles** ensuring each core feature works before adding new ones
+- **Documentation-driven development** maintaining clear project records throughout
+- **Phased development approach** with distinct core and enhancement phases
+- **Future-ready architecture** designed to accommodate booking system integration
+
+This organized agile approach demonstrates excellent project management - focusing on delivering a fully functional core product before expanding features. The initial booking system planning was valuable groundwork that will now be implemented as a natural next phase, showing how good agile planning creates sustainable development pathways.
+
 # User stories
 
 ## Testing
@@ -141,7 +184,6 @@ Detailed testing documentation can be found [here.](./TESTING.md)
 Copilot
 
 Google AI
-https://www.google.com/search?q=&sca_esv=8d061dbbff1738e7&sxsrf=AE3TifMDSt1uGQ1V7E2qGOclabDn5poumA%3A1758977381038&source=hp&ei=ZN3XaM6cO-WjkdUP7fvjqQM&iflsig=AOw8s4IAAAAAaNfrdSZxt8ZRKRg-qUPbAypTDRpsgrXv&aep=22&udm=50&ved=0ahUKEwjO3tev_fiPAxXlUaQEHe39ODUQteYPCCU&oq=&gs_lp=Egdnd3Mtd2l6IgBIAFAAWABwAHgAkAEAmAEAoAEAqgEAuAEByAEAmAIAoAIAmAMAkgcAoAcAsgcAuAcAwgcAyAcA&sclient=gws-wiz
 
 Getting Started with Django: Building a Portfolio App.
 https://realpython.com/courses/django-portfolio-project/

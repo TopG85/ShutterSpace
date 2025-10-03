@@ -1088,3 +1088,327 @@ footer.site-footer {
   }
 }
 
+/* =================================
+   COMPREHENSIVE RESPONSIVE DESIGN
+   ================================= */
+
+/* Extra Small Devices (phones, 576px and down) */
+@media (max-width: 575.98px) {
+  :root {
+    --container-max-width: 100%;
+  }
+  
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Navigation adjustments */
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Typography for very small screens */
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  h4 { font-size: 1.1rem; }
+  
+  /* Card grid - single column */
+  .row .col-md-4,
+  .row .col-lg-4,
+  .row .col-sm-6 {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Profile section */
+  .profile-stats {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .profile-stats .stat {
+    margin: 0.5rem 0;
+  }
+  
+  /* Button adjustments */
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Form adjustments */
+  .form-control {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Search bar */
+  .search-container {
+    margin-bottom: 1rem;
+  }
+  
+  .search-container .input-group {
+    width: 100%;
+  }
+}
+
+/* Small Devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  :root {
+    --container-max-width: 540px;
+  }
+  
+  /* Two-column layout for small tablets */
+  .row .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  /* Adjust card spacing */
+  .card {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Profile hero adjustments */
+  .profile-hero-image {
+    height: 350px;
+  }
+  
+  .hero-title {
+    font-size: 2.25rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* Medium Devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  :root {
+    --container-max-width: 720px;
+  }
+  
+  /* Three-column layout on tablets */
+  .row .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  /* Navigation improvements */
+  .navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Profile section optimizations */
+  .profile-hero-image {
+    height: 450px;
+  }
+  
+  .profile-stats {
+    padding: 1.5rem;
+    justify-content: space-around;
+  }
+  
+  /* Card hover effects work better on tablets */
+  .card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  /* Better typography spacing */
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  
+  /* Form layout improvements */
+  .form-row .col-md-6 {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Large Devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  :root {
+    --container-max-width: 960px;
+  }
+  
+  /* Optimal four-column layout */
+  .row .col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  
+  /* Enhanced navigation */
+  .navbar {
+    padding: 1rem 0;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  /* Profile hero full potential */
+  .profile-hero-image {
+    height: 500px;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  /* Enhanced card layouts */
+  .card-img-wrapper {
+    padding-top: 75%; /* Better aspect ratio for desktop */
+  }
+  
+  /* Better spacing for content */
+  .jumbotron {
+    padding: 4rem 2rem;
+  }
+  
+  /* Search improvements */
+  .search-container {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+}
+
+/* Extra Large Devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  :root {
+    --container-max-width: 1140px;
+  }
+  
+  /* Maximum layout potential */
+  .container {
+    max-width: var(--container-max-width);
+  }
+  
+  /* Five-column layout for very wide screens */
+  @media (min-width: 1400px) {
+    .row .col-xl-2-4 {
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+  }
+  
+  /* Enhanced typography for large screens */
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.75rem; }
+  
+  /* Profile hero maximum impact */
+  .profile-hero-image {
+    height: 600px;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  /* Enhanced card presentation */
+  .card {
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Better spacing for large screens */
+  .jumbotron {
+    padding: 5rem 2rem;
+  }
+  
+  /* Enhanced navigation spacing */
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1.25rem;
+    margin: 0 0.25rem;
+  }
+}
+
+/* Ultra Wide Screens (1600px and up) */
+@media (min-width: 1600px) {
+  :root {
+    --container-max-width: 1400px;
+  }
+  
+  /* Maximum content width to maintain readability */
+  .container {
+    max-width: var(--container-max-width);
+  }
+  
+  /* Enhanced grid for ultra-wide */
+  .row .col-xxl-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+  
+  /* Ultra-wide specific adjustments */
+  .profile-hero-image {
+    height: 700px;
+  }
+  
+  .card-img-wrapper {
+    padding-top: 80%; /* Maintain good proportions */
+  }
+}
+
+/* Landscape Orientation Specific */
+@media (orientation: landscape) and (max-height: 500px) {
+  .profile-hero-image {
+    height: 300px;
+  }
+  
+  .navbar {
+    padding: 0.5rem 0;
+  }
+  
+  .jumbotron {
+    padding: 2rem 1rem;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Enhanced image quality for retina displays */
+  .card-img-wrapper img,
+  .profile-hero-image img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .btn,
+  .search-container {
+    display: none !important;
+  }
+  
+  .card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
