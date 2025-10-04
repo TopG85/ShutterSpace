@@ -829,7 +829,7 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   max-width: 100% !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
-  padding: 2rem; /* Increased from 1.5rem for more generous spacing */
+  /* Removed padding override to use base padding (1.75rem 1.5rem) like home page */
 }
 
 /* Ensure the entire card container prevents overflow and has max width */
@@ -1295,10 +1295,7 @@ footer.site-footer {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.75rem; }
   
-  /* Mobile card adjustments */
-  .card-body {
-    padding: 1.25rem 1rem;
-  }
+  /* Mobile card adjustments - removed padding override to match home page */
   
   .card-img-wrapper {
     padding-top: 60%; /* Slightly different aspect ratio on mobile */
@@ -1488,9 +1485,7 @@ footer.site-footer {
     padding: 1.25rem;
   }
   
-  .card-body {
-    padding: 1.5rem;
-  }
+  /* Card body padding removed to match home page */
   
   /* Jumbotron adjustments */
   .jumbotron {
@@ -1509,9 +1504,7 @@ footer.site-footer {
     overflow: hidden;
   }
   
-  .card-body {
-    padding: 1.25rem;
-  }
+  /* Card body padding removed to match home page */
   
   .card-title {
     font-size: 1.1rem;
@@ -1614,9 +1607,7 @@ footer.site-footer {
     min-height: 40px;
   }
   
-  .card-body {
-    padding: 1.25rem;
-  }
+  /* Card body padding removed to match home page */
   
   /* Profile photos responsive layout */
   .photo-grid .col-sm-6 {
@@ -1669,9 +1660,7 @@ footer.site-footer {
     margin-bottom: 2rem;
   }
   
-  .card-body {
-    padding: 1.5rem;
-  }
+  /* Card body padding removed - using base padding to match home page */
   
   /* Touch-friendly buttons */
   .btn {
@@ -1682,81 +1671,6 @@ footer.site-footer {
   .btn-sm {
     min-height: 36px;
     padding: 0.5rem 1rem;
-  }
-}
-
-/* Medium Devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  :root {
-    --container-max-width: 720px;
-  }
-  
-  /* Three-column layout for tablets */
-  .row .col-md-4 {
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-  }
-  
-  /* Navigation improvements */
-  .search-form {
-    min-width: 280px;
-  }
-  
-  /* Profile hero adjustments */
-  .profile-hero-image {
-    height: 450px;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.2rem;
-  }
-  
-  /* Profile stats for tablets */
-  .profile-stats-container .col-3 {
-    padding: 0 0.75rem;
-  }
-  
-  .stat-item {
-    padding: 1.5rem 1rem !important;
-  }
-  
-  /* Card improvements */
-  .card {
-    margin-bottom: 2rem;
-  }
-  
-  .card-body {
-    padding: 1.5rem;
-  }
-  
-  /* Touch-friendly buttons */
-  .btn {
-    min-height: 42px;
-    padding: 0.625rem 1.25rem;
-  }
-  
-  .btn-sm {
-    min-height: 36px;
-    padding: 0.5rem 1rem;
-  }
-  
-  /* Card hover effects work better on tablets */
-  .card:hover {
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
-  }
-  
-  /* Better typography spacing */
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  
-  /* Form layout improvements */
-  .form-row .col-md-6 {
-    margin-bottom: 1rem;
   }
 }
 
@@ -1797,9 +1711,7 @@ footer.site-footer {
     box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
   }
   
-  .card-body {
-    padding: 2rem 1.75rem !important;
-  }
+  /* Removed card-body padding override to match home page card sizing */
   
   .card-img-wrapper {
     padding-top: 70% !important; /* Better aspect ratio for desktop */
@@ -1914,9 +1826,7 @@ footer.site-footer {
     box-shadow: 0 16px 32px rgba(0,0,0,0.2) !important;
   }
   
-  .card-body {
-    padding: 2.25rem 2rem !important;
-  }
+  /* Removed card-body padding override to match home page card sizing */
   
   .card-img-wrapper {
     padding-top: 65% !important; /* Good aspect ratio for large screens */
