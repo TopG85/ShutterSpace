@@ -64,7 +64,7 @@
                         <div class="col-3">
                             <div class="stat-item text-center py-3" title="Photos">
                                 <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ photos_count }}</div>
-                                <div class="stat-label text-muted small fw-medium">
+                                <div class="stat-label text-muted small fw-medium d-flex justify-content-center">
                                     <i class="fas fa-camera"></i>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                             <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none" title="Followers">
                                 <div class="stat-item text-center py-3 stat-clickable">
                                     <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ followers_count }}</div>
-                                    <div class="stat-label text-muted small fw-medium">
+                                    <div class="stat-label text-muted small fw-medium d-flex justify-content-center">
                                         <i class="fas fa-users"></i>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                             <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none" title="Following">
                                 <div class="stat-item text-center py-3 stat-clickable">
                                     <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ following_count }}</div>
-                                    <div class="stat-label text-muted small fw-medium">
+                                    <div class="stat-label text-muted small fw-medium d-flex justify-content-center">
                                         <i class="fas fa-user-plus"></i>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                         <div class="col-3">
                             <div class="stat-item text-center py-3" title="Total Likes">
                                 <div class="stat-number h4 mb-1 fw-bold" style="color: var(--coral);">{{ total_likes }}</div>
-                                <div class="stat-label text-muted small fw-medium">
+                                <div class="stat-label text-muted small fw-medium d-flex justify-content-center">
                                     <i class="fas fa-heart" style="color: var(--coral);"></i>
                                 </div>
                             </div>
@@ -260,10 +260,7 @@
                         <i class="fas fa-camera fa-3x text-muted mb-3"></i>
                         <h4 class="text-muted">No photos yet</h4>
                         {% if user.is_authenticated and user == owner %}
-                            <p class="text-muted">Upload your first photo to get started!</p>
-                            <a href="{% url 'upload_photo' %}" class="btn btn-primary">
-                                <i class="fas fa-plus me-1"></i>Upload Photo
-                            </a>
+                            <p class="text-muted">Upload your first photo using the button above!</p>
                         {% else %}
                             <p class="text-muted">{{ owner.username }} hasn't shared any photos yet.</p>
                         {% endif %}

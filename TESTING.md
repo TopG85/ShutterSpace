@@ -47,8 +47,6 @@
 ## notification.py
 ![portfolio](docs/readme_images/portfolio-notifications.png)
 
-
-
 # HTML & CSS Validation
 
 ## test HTML Markup Validation 
