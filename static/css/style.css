@@ -839,6 +839,26 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   box-sizing: border-box !important;
 }
 
+/* Profile cards specific sizing for desktop */
+.col-md-4 .card .card-body {
+  padding: 2.5rem 2rem !important;
+  min-height: 300px;
+}
+
+@media (min-width: 992px) {
+  .col-md-4 .card .card-body {
+    padding: 3rem 2.5rem !important;
+    min-height: 350px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-md-4 .card .card-body {
+    padding: 3.5rem 3rem !important;
+    min-height: 400px;
+  }
+}
+
 /* Additional protection for any paragraph in profile cards */
 .card p {
   word-wrap: break-word !important;
