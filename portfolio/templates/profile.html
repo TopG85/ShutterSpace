@@ -57,36 +57,94 @@
                         <p class="profile-bio text-break" style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; max-width: 100%; white-space: normal;">{{ profile.bio }}</p>
                     </div>
                 {% endif %}
-                <div class="profile-stats">
-                    <div class="stat">
-                        <div class="h5 mb-0">{{ photos_count }}</div>
-                        <div class="profile-meta">
-                            <span class="d-none d-md-inline">Photos</span>
-                            <span class="d-md-none">Pics</span>
+                
+                <!-- Enhanced Profile Stats -->
+                <div class="profile-stats-container mb-4">
+                    <div class="row g-0">
+                        <div class="col-3">
+                            <div class="stat-item text-center py-3">
+                                <div class="stat-number h4 mb-1 fw-bold text-primary">{{ photos_count }}</div>
+                                <div class="stat-label text-muted small text-uppercase fw-medium">
+                                    <span class="d-none d-md-inline">Photos</span>
+                                    <span class="d-md-none">Pics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none">
+                                <div class="stat-item text-center py-3 stat-clickable">
+                                    <div class="stat-number h4 mb-1 fw-bold text-primary">{{ followers_count }}</div>
+                                    <div class="stat-label text-muted small text-uppercase fw-medium">Followers</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none">
+                                <div class="stat-item text-center py-3 stat-clickable">
+                                    <div class="stat-number h4 mb-1 fw-bold text-primary">{{ following_count }}</div>
+                                    <div class="stat-label text-muted small text-uppercase fw-medium">Following</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <div class="stat-item text-center py-3">
+                                <div class="stat-number h4 mb-1 fw-bold text-danger">{{ total_likes }}</div>
+                                <div class="stat-label text-muted small text-uppercase fw-medium">
+                                    <i class="fas fa-heart me-1"></i>Likes
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="stat">
-                        <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none text-dark">
-                            <div class="h5 mb-0">{{ followers_count }}</div>
-                            <div class="profile-meta">Followers</div>
-                        </a>
-                    </div>
-                    <div class="stat">
-                        <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none text-dark">
-                            <div class="h5 mb-0">{{ following_count }}</div>
-                            <div class="profile-meta">Following</div>
-                        </a>
-                    </div>
-                    <div class="stat">
-                        <div class="h5 mb-0">{{ total_likes }}</div>
-                        <div class="profile-meta">Likes</div>
-                    </div>
                 </div>
-                <div class="mt-3 profile-meta">Joined {{ joined|date:"M d, Y" }}</div>
+                
+                <!-- Profile Info -->
+                <div class="profile-info">
+                    <div class="d-flex align-items-center text-muted mb-2">
+                        <i class="fas fa-calendar-alt me-2"></i>
+                        <span>Joined {{ joined|date:"M d, Y" }}</span>
+                    </div>
+                    
+                    {% if profile.location %}
+                        <div class="d-flex align-items-center text-muted mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>{{ profile.location }}</span>
+                        </div>
+                    {% endif %}
+                    
+                    {% if profile.website %}
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-link me-2 text-muted"></i>
+                            <a href="{{ profile.website }}" target="_blank" rel="noopener" class="text-decoration-none">
+                                Website
+                            </a>
+                        </div>
+                    {% endif %}
+                    
+                    {% if profile.instagram %}
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fab fa-instagram me-2 text-muted"></i>
+                            {% if profile.instagram|slice:":4" == 'http' %}
+                                <a href="{{ profile.instagram }}" target="_blank" rel="noopener" class="text-decoration-none">
+                                    Instagram
+                                </a>
+                            {% else %}
+                                <a href="https://instagram.com/{{ profile.instagram }}" target="_blank" rel="noopener" class="text-decoration-none">
+                                    @{{ profile.instagram }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Action Buttons -->
                 <div class="mt-3">
                     {% if user.is_authenticated and user == owner %}
-                        <a href="{% url 'profile_edit_user' owner.username %}" class="btn btn-sm btn-primary me-2">Edit profile</a>
-                        <a href="{% url 'upload_photo' %}" class="btn btn-sm btn-outline-secondary">Upload photo</a>
+                        <a href="{% url 'profile_edit_user' owner.username %}" class="btn btn-sm btn-primary me-2">
+                            <i class="fas fa-edit me-1"></i>Edit profile
+                        </a>
+                        <a href="{% url 'upload_photo' %}" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-plus me-1"></i>Upload photo
+                        </a>
                     {% elif user.is_authenticated %}
                         <button class="btn btn-sm btn-primary follow-btn" 
                                 data-username="{{ owner.username }}"
@@ -97,30 +155,22 @@
                                 <i class="fas fa-user-plus me-1"></i>Follow
                             {% endif %}
                         </button>
-                        <a href="mailto:{{ owner.email }}" class="btn btn-sm btn-outline-secondary">Contact</a>
+                        {% if owner.profile.show_email %}
+                            <a href="mailto:{{ owner.email }}" class="btn btn-sm btn-outline-secondary ms-2">
+                                <i class="fas fa-envelope me-1"></i>Contact
+                            </a>
+                        {% endif %}
                     {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Follow</a>
-                        <a href="mailto:{{ owner.email }}" class="btn btn-sm btn-outline-secondary">Contact</a>
+                        <a href="{% url 'login' %}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-user-plus me-1"></i>Follow
+                        </a>
+                        {% if owner.profile.show_email %}
+                            <a href="mailto:{{ owner.email }}" class="btn btn-sm btn-outline-secondary ms-2">
+                                <i class="fas fa-envelope me-1"></i>Contact
+                            </a>
+                        {% endif %}
                     {% endif %}
                 </div>
-                {% if profile.location %}
-                    <div><small class="text-muted">{{ profile.location }}</small></div>
-                {% endif %}
-                {% if profile.website %}
-                    <div><a href="{{ profile.website }}" target="_blank" rel="noopener">Website</a></div>
-                {% endif %}
-                {% if profile.instagram %}
-                    <div>
-                        {% if profile.instagram|slice:":4" == 'http' %}
-                            <a href="{{ profile.instagram }}" target="_blank" rel="noopener">@{{ profile.instagram }}</a>
-                        {% else %}
-                            <a href="https://instagram.com/{{ profile.instagram }}" target="_blank" rel="noopener">@{{ profile.instagram }}</a>
-                        {% endif %}
-                    </div>
-                {% endif %}
-                {% if profile.show_email %}
-                    <div class="mt-2"><small>{{ owner.email }}</small></div>
-                {% endif %}
             </div>
         </div>
     </div>
@@ -255,4 +305,67 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<style>
+/* Enhanced Profile Stats Styling */
+.profile-stats-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stat-item {
+    position: relative;
+    transition: all 0.3s ease;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.stat-item:last-child {
+    border-right: none;
+}
+
+.stat-clickable:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+    transform: translateY(-2px);
+}
+
+.stat-clickable:hover .stat-number {
+    transform: scale(1.1);
+}
+
+.stat-number {
+    transition: transform 0.2s ease;
+    font-size: 1.5rem;
+}
+
+.stat-label {
+    letter-spacing: 0.5px;
+    font-size: 0.75rem;
+}
+
+.profile-info {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .stat-number {
+        font-size: 1.25rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .stat-item {
+        padding: 0.75rem 0.25rem !important;
+    }
+}
+</style>
 {% endblock %}

@@ -143,6 +143,38 @@
                                 </div>
                             </div>
                             
+                            <!-- Avatar -->
+                            <div class="mb-3">
+                                <label for="{{ form.avatar.id_for_label }}" class="form-label fw-bold">
+                                    {{ form.avatar.label }}
+                                </label>
+                                {% if form.instance and form.instance.avatar %}
+                                    <div class="mb-2 text-center">
+                                        <img src="{{ form.instance.avatar.url }}?w_150&h_150&c_thumb&g_face&q_auto:eco&f_auto" 
+                                             alt="Current avatar" 
+                                             class="rounded-circle" 
+                                             style="width: 100px; height: 100px; object-fit: cover;">
+                                    </div>
+                                {% endif %}
+                                {{ form.avatar }}
+                                {% if form.avatar.help_text %}
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.avatar.help_text }}
+                                    </div>
+                                {% endif %}
+                                {% if form.avatar.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.avatar.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text text-muted">
+                                    Recommended: square image, at least 300x300px
+                                </div>
+                            </div>
+                            
                             <!-- Email Visibility -->
                             <div class="mb-3">
                                 <div class="form-check">
@@ -166,61 +198,52 @@
                                 {% endif %}
                             </div>
                         </div>
-                    </div>
-                    
-                    <hr class="my-4">
-                    
-                    <!-- Image Uploads -->
-                    <div class="row">
+                        
                         <div class="col-md-6">
-                            <!-- Avatar -->
+                            <!-- Hero Image -->
                             <div class="mb-3">
-                                <label for="{{ form.avatar.id_for_label }}" class="form-label fw-bold">
-                                    {{ form.avatar.label }}
+                                <label for="{{ form.hero_image.id_for_label }}" class="form-label fw-bold">
+                                    {{ form.hero_image.label }}
                                 </label>
-                                {% if form.instance and form.instance.avatar %}
-                            <div class="mb-2">
-                                <img src="{{ form.instance.avatar.url }}" alt="avatar" class="avatar-sm avatar-circle">
+                                {% if form.instance and form.instance.hero_image %}
+                                    <div class="mb-2">
+                                        <img src="{{ form.instance.hero_image.url }}?w_400&h_150&c_fill&q_auto:eco&f_auto" 
+                                             alt="hero image" 
+                                             class="img-thumbnail d-block" 
+                                             style="max-height: 150px; width: 100%; object-fit: cover;">
+                                    </div>
+                                {% endif %}
+                                {{ form.hero_image }}
+                                {% if form.hero_image.help_text %}
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.hero_image.help_text }}
+                                    </div>
+                                {% endif %}
+                                {% if form.hero_image.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {% for error in form.hero_image.errors %}
+                                            {{ error }}{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text text-muted">
+                                    Recommended: landscape image, at least 1200x400px
+                                </div>
                             </div>
-                        {% endif %}
-                        {{ form.avatar }}
-                        <div class="form-text">Recommended: square image, at least 300x300px.</div>
-                        {% if form.avatar.errors %}
-                            <div class="text-danger">{{ form.avatar.errors }}</div>
-                        {% endif %}
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="{{ form.hero_image.id_for_label }}" class="form-label">Hero Image</label>
-                        {% if form.instance and form.instance.hero_image %}
-                            <div class="mb-2">
-                                <img src="{{ form.instance.hero_image.url }}" alt="hero image" class="img-thumbnail" style="max-height: 200px;">
-                            </div>
-                        {% endif %}
-                        {{ form.hero_image }}
-                        <div class="form-text">Hero image for your profile page. Recommended: landscape image, at least 1200x400px.</div>
-                        {% if form.hero_image.errors %}
-                            <div class="text-danger">{{ form.hero_image.errors }}</div>
-                        {% endif %}
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i>Save Changes
+                            </button>
+                            <a href="{% url 'profile_view' username=user.username %}" class="btn btn-secondary ms-2">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="{{ form.website.id_for_label }}" class="form-label">Website</label>
-                        {{ form.website }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="{{ form.location.id_for_label }}" class="form-label">Location</label>
-                        {{ form.location }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="{{ form.instagram.id_for_label }}" class="form-label">Instagram</label>
-                        {{ form.instagram }}
-                        <div class="form-text">Enter just your handle (no @) or a full URL.</div>
-                    </div>
-                    <div class="form-check mb-3">
-                        {{ form.show_email }}
-                        <label class="form-check-label" for="{{ form.show_email.id_for_label }}">Show my email on my profile</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>
