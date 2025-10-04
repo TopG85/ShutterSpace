@@ -63,7 +63,6 @@ img {
 /* Overflow handling for long text */
 .text-break {
   word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
   overflow-wrap: anywhere !important;
 }
 
