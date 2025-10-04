@@ -11,6 +11,7 @@ from .forms import ProfileForm, PhotoForm, CommentForm
 # Create your views here.
 
 
+@login_required
 def portfolio_home(request):
     # Handle search functionality
     search_query = request.GET.get('q', '').strip()
@@ -161,6 +162,7 @@ def add_comment(request, photo_id):
     return render(request, 'add_comment.html', {'form': form, 'photo': photo})
 
 
+@login_required
 def profile_view(request, username):
     user = get_object_or_404(User, username=username)
     profile = Profile.objects.filter(user=user).first()
@@ -212,6 +214,7 @@ def profile_view(request, username):
     return render(request, 'profile.html', context)
 
 
+@login_required
 def photo_detail(request, photo_id):
     photo = get_object_or_404(Photo, id=photo_id)
     comments = photo.comments.order_by('created_at')
