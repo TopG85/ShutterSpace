@@ -924,10 +924,12 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   font-weight: 500;
   letter-spacing: 0.5px;
   font-size: 1.1rem !important;
+  text-align: center !important;
 }
 
 .stat-label i {
   transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .stat-item:hover .stat-label i {
