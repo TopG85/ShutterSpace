@@ -2282,3 +2282,156 @@ footer.site-footer {
     margin: 0.25rem 0;
   }
 }
+
+/* ================================
+   DELETE COMMENT MODAL STYLING
+   ================================ */
+
+/* Comment delete modal inherits base modal styling but with warning theme */
+#deleteCommentModal .modal-dialog {
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+#deleteCommentModal .modal-content {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* Modal header with warning styling */
+#deleteCommentModal .modal-header {
+  background: linear-gradient(135deg, var(--highlight) 0%, #b8956b 100%);
+  border-bottom: 1px solid rgba(212, 165, 116, 0.3);
+  color: var(--primary);
+  padding: 1.25rem 1.5rem;
+}
+
+#deleteCommentModal .modal-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+#deleteCommentModal .btn-close {
+  filter: brightness(0) saturate(100%);
+  opacity: 0.8;
+}
+
+#deleteCommentModal .btn-close:hover {
+  opacity: 1;
+}
+
+/* Modal body styling */
+#deleteCommentModal .modal-body {
+  padding: 2rem 1.5rem;
+  background: var(--card-bg);
+}
+
+/* Comment preview styling */
+#deleteCommentModal .border {
+  border-color: var(--border-color) !important;
+  border-radius: 12px !important;
+  padding: 1rem !important;
+}
+
+#deleteCommentModal #deleteCommentAuthor {
+  color: var(--highlight);
+  font-weight: 600;
+}
+
+#deleteCommentModal #deleteCommentText {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+#deleteCommentModal #deleteCommentPhotoTitle {
+  color: var(--highlight);
+  font-weight: 600;
+}
+
+/* Warning alert matching your theme */
+#deleteCommentModal .alert-warning {
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, rgba(139, 111, 71, 0.1) 100%);
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 12px;
+  color: var(--text-primary);
+  padding: 1rem 1.25rem;
+}
+
+#deleteCommentModal .alert-warning i {
+  color: var(--highlight);
+}
+
+/* Modal footer */
+#deleteCommentModal .modal-footer {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 1.25rem 1.5rem;
+  gap: 0.75rem;
+}
+
+/* Button styling */
+#deleteCommentModal .btn-secondary {
+  background: var(--secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#deleteCommentModal .btn-secondary:hover {
+  background: var(--border-color);
+  border-color: var(--highlight);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#deleteCommentModal .btn-warning {
+  background: linear-gradient(135deg, var(--highlight) 0%, #b8956b 100%);
+  border: 1px solid var(--highlight);
+  color: var(--primary);
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(212, 165, 116, 0.3);
+}
+
+#deleteCommentModal .btn-warning:hover {
+  background: linear-gradient(135deg, #e6c48a 0%, var(--highlight) 100%);
+  border-color: #e6c48a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(212, 165, 116, 0.4);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+  #deleteCommentModal .modal-dialog {
+    margin: 1rem;
+    max-width: none;
+  }
+  
+  #deleteCommentModal .modal-body {
+    padding: 1.5rem 1rem;
+  }
+  
+  #deleteCommentModal .modal-footer {
+    padding: 1rem;
+    flex-direction: column;
+  }
+  
+  #deleteCommentModal .modal-footer .btn {
+    width: 100%;
+    margin: 0.25rem 0;
+  }
+}
