@@ -207,6 +207,16 @@
                                 </div>
                                 <div>
                                     <a href="{% url 'add_comment' photo.id %}" class="btn btn-sm btn-secondary">Comment</a>
+                                    {% if user.is_authenticated and user == owner %}
+                                        <button type="button" class="btn btn-sm btn-outline-danger ms-1" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#deletePhotoModal"
+                                                data-photo-id="{{ photo.id }}"
+                                                data-photo-title="{{ photo.title }}"
+                                                data-photo-image="{{ photo.image.url }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    {% endif %}
                                 </div>
                             </div>
                             <!-- Comments -->
@@ -265,6 +275,42 @@
     </div>
 </div>
 
+<!-- Delete Photo Modal -->
+<div class="modal fade" id="deletePhotoModal" tabindex="-1" aria-labelledby="deletePhotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deletePhotoModalLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Delete Photo
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <img id="deletePhotoImage" src="" class="img-fluid rounded" alt="" style="max-height: 200px;">
+                </div>
+                <h5 class="text-center mb-3" id="deletePhotoTitle"></h5>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Warning:</strong> This action cannot be undone. The photo and all its comments and likes will be permanently deleted.
+                </div>
+                <p class="text-center">Are you sure you want to permanently delete this photo?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Cancel
+                </button>
+                <form id="deletePhotoForm" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>Yes, Delete Photo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 // Follow/Unfollow functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -315,6 +361,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again.');
             });
+        });
+    }
+    
+    // Delete Photo Modal functionality
+    const deletePhotoModal = document.getElementById('deletePhotoModal');
+    if (deletePhotoModal) {
+        deletePhotoModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            const button = event.relatedTarget;
+            
+            // Extract info from data-* attributes
+            const photoId = button.getAttribute('data-photo-id');
+            const photoTitle = button.getAttribute('data-photo-title');
+            const photoImage = button.getAttribute('data-photo-image');
+            
+            // Update the modal's content
+            const modalTitle = deletePhotoModal.querySelector('#deletePhotoTitle');
+            const modalImage = deletePhotoModal.querySelector('#deletePhotoImage');
+            const deleteForm = deletePhotoModal.querySelector('#deletePhotoForm');
+            
+            modalTitle.textContent = `"${photoTitle}"`;
+            modalImage.src = photoImage + '?w_300&h_200&c_fill&q_auto:eco&f_auto';
+            modalImage.alt = photoTitle;
+            deleteForm.action = `/portfolio/photo/${photoId}/delete/`;
         });
     }
 });
