@@ -2435,3 +2435,26 @@ footer.site-footer {
     margin: 0.25rem 0;
   }
 }
+
+/* ================================
+   EDIT PROFILE HEADER STYLING
+   ================================ */
+
+/* Edit profile header to match website theme */
+.edit-profile-header {
+  background: linear-gradient(135deg, var(--highlight) 0%, #b8956b 100%) !important;
+  color: var(--primary) !important;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.3);
+  padding: 1.25rem 1.5rem;
+  border-radius: 20px 20px 0 0;
+}
+
+.edit-profile-header h3 {
+  color: var(--primary) !important;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-header i {
+  color: var(--primary) !important;
+}
