@@ -63,7 +63,7 @@
                     <div class="row g-0">
                         <div class="col-3">
                             <div class="stat-item text-center py-3">
-                                <div class="stat-number h4 mb-1 fw-bold text-primary">{{ photos_count }}</div>
+                                <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ photos_count }}</div>
                                 <div class="stat-label text-muted small text-uppercase fw-medium">
                                     <span class="d-none d-md-inline">Photos</span>
                                     <span class="d-md-none">Pics</span>
@@ -73,7 +73,7 @@
                         <div class="col-3">
                             <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none">
                                 <div class="stat-item text-center py-3 stat-clickable">
-                                    <div class="stat-number h4 mb-1 fw-bold text-primary">{{ followers_count }}</div>
+                                    <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ followers_count }}</div>
                                     <div class="stat-label text-muted small text-uppercase fw-medium">Followers</div>
                                 </div>
                             </a>
@@ -81,16 +81,16 @@
                         <div class="col-3">
                             <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none">
                                 <div class="stat-item text-center py-3 stat-clickable">
-                                    <div class="stat-number h4 mb-1 fw-bold text-primary">{{ following_count }}</div>
+                                    <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ following_count }}</div>
                                     <div class="stat-label text-muted small text-uppercase fw-medium">Following</div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-3">
                             <div class="stat-item text-center py-3">
-                                <div class="stat-number h4 mb-1 fw-bold text-danger">{{ total_likes }}</div>
+                                <div class="stat-number h4 mb-1 fw-bold" style="color: var(--coral);">{{ total_likes }}</div>
                                 <div class="stat-label text-muted small text-uppercase fw-medium">
-                                    <i class="fas fa-heart me-1"></i>Likes
+                                    <i class="fas fa-heart me-1" style="color: var(--coral);"></i>Likes
                                 </div>
                             </div>
                         </div>
@@ -141,9 +141,6 @@
                     {% if user.is_authenticated and user == owner %}
                         <a href="{% url 'profile_edit_user' owner.username %}" class="btn btn-sm btn-primary me-2">
                             <i class="fas fa-edit me-1"></i>Edit profile
-                        </a>
-                        <a href="{% url 'upload_photo' %}" class="btn btn-sm btn-outline-secondary">
-                            <i class="fas fa-plus me-1"></i>Upload photo
                         </a>
                     {% elif user.is_authenticated %}
                         <button class="btn btn-sm btn-primary follow-btn" 

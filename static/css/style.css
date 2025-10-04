@@ -889,6 +889,42 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   overflow: hidden;
 }
 
+/* Enhanced profile stats styling */
+.profile-stats-container {
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(42, 42, 42, 0.8) 100%);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-item {
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.stat-item:hover {
+  background: rgba(212, 165, 116, 0.1);
+  transform: translateY(-2px);
+}
+
+.stat-clickable:hover .stat-number {
+  color: var(--highlight) !important;
+  transform: scale(1.05);
+}
+
+.stat-number {
+  transition: all 0.3s ease;
+}
+
+.stat-label {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
 .profile-hero-image {
   position: relative;
   width: 100%;
