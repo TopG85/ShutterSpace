@@ -2078,4 +2078,41 @@ footer.site-footer {
     width: 80px !important;
     height: 80px !important;
   }
+  
+  /* Ultra-narrow sidebar (col-lg-1) optimizations */
+  .col-lg-1 .profile-stats-container {
+    padding: 0.5rem 0.25rem !important;
+  }
+  
+  .col-lg-1 .profile-stats-container .col-3 {
+    padding: 0 0.1rem !important;
+  }
+  
+  .col-lg-1 .stat-item {
+    padding: 0.5rem 0.1rem !important;
+    font-size: 0.75rem;
+  }
+  
+  .col-lg-1 .stat-number {
+    font-size: 0.9rem !important;
+  }
+  
+  .col-lg-1 .stat-label {
+    font-size: 0.6rem !important;
+    line-height: 1.1;
+  }
+  
+  .col-lg-1 .profile-info {
+    padding: 0.5rem !important;
+    font-size: 0.8rem;
+  }
+  
+  .col-lg-1 .card-body {
+    padding: 0.75rem 0.5rem !important;
+  }
+  
+  .col-lg-1 .avatar-sm {
+    width: 60px !important;
+    height: 60px !important;
+  }
 }
