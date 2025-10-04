@@ -362,7 +362,7 @@ p {
 .card-img-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 60%; /* 5:3 aspect ratio - more compact for thumbnails */
+  padding-top: 75%; /* Increased from 60% for taller image areas */
   overflow: hidden;
   border-radius: 16px 16px 0 0;
   background: linear-gradient(135deg, var(--bg-secondary) 0%, #3a3a3a 100%);
@@ -371,11 +371,11 @@ p {
 /* Card image styling - only for thumbnails in cards */
 .card-img-top:not(.photo-detail-image) {
   position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   object-position: center center;
   transition: none;
   border: none;
@@ -837,26 +837,6 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   max-width: 100% !important;
   overflow: hidden !important;
   box-sizing: border-box !important;
-}
-
-/* Profile cards specific sizing for desktop */
-.col-md-4 .card .card-body {
-  padding: 2.5rem 2rem !important;
-  min-height: 300px;
-}
-
-@media (min-width: 992px) {
-  .col-md-4 .card .card-body {
-    padding: 3rem 2.5rem !important;
-    min-height: 350px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .col-md-4 .card .card-body {
-    padding: 3.5rem 3rem !important;
-    min-height: 400px;
-  }
 }
 
 /* Additional protection for any paragraph in profile cards */
@@ -1838,7 +1818,7 @@ footer.site-footer {
   }
   
   .card-img-wrapper {
-    padding-top: 60% !important; /* Better aspect ratio for desktop */
+    padding-top: 70% !important; /* Better aspect ratio for desktop */
   }
   
   /* Profile photos responsive layout reset */
@@ -1955,7 +1935,7 @@ footer.site-footer {
   }
   
   .card-img-wrapper {
-    padding-top: 56.25% !important; /* 16:9 aspect ratio for large screens */
+    padding-top: 65% !important; /* Good aspect ratio for large screens */
   }
   
   /* Column layout improvements */
