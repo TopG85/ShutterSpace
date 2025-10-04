@@ -71,4 +71,53 @@
         </div>
     </div>
 </div>
+
+<script>
+// Follow/Unfollow functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const followBtns = document.querySelectorAll('.follow-btn');
+    
+    followBtns.forEach(function(followBtn) {
+        followBtn.addEventListener('click', function() {
+            const username = this.dataset.username;
+            const isFollowing = this.dataset.following === 'True';
+            const action = isFollowing ? 'unfollow' : 'follow';
+            
+            const url = `/portfolio/user/${username}/${action}/`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Update button
+                    if (data.action === 'followed') {
+                        this.innerHTML = 'Unfollow';
+                        this.dataset.following = 'True';
+                    } else {
+                        this.innerHTML = 'Follow';
+                        this.dataset.following = 'False';
+                    }
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+    });
+});
+</script>
 {% endblock %}

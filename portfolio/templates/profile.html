@@ -212,14 +212,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const isFollowing = this.dataset.following === 'True';
             const action = isFollowing ? 'unfollow' : 'follow';
             
-            fetch(`/user/${username}/${action}/`, {
+            const url = `/portfolio/user/${username}/${action}/`;
+            
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'X-CSRFToken': '{{ csrf_token }}',
-                    'Content-Type': 'application/json',
                 },
+                credentials: 'same-origin'
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     // Update button

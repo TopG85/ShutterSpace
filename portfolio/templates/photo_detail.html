@@ -31,10 +31,9 @@
                         <small class="ms-2" data-likes-count="{{ photo.id }}">{{ photo.likes.count }}</small>
                     </div>
                     {% if user.is_authenticated and user == photo.owner %}
-                        <form method="post" action="{% url 'delete_photo' photo.id %}" onsubmit="return confirm('Delete this photo? This cannot be undone.');" class="mb-0">
-                            {% csrf_token %}
-                            <button class="btn btn-danger btn-sm">Delete Photo</button>
-                        </form>
+                        <a href="{% url 'delete_photo' photo.id %}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> Delete Photo
+                        </a>
                     {% endif %}
                 </div>
             </div>
