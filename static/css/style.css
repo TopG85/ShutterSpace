@@ -1993,8 +1993,7 @@ footer.site-footer {
   .profile-hero-image {
     height: 700px;
   }
-  
-  /* Card image wrapper aspect ratio removed - using base 75% for consistency */
+}
 
 /* Landscape Orientation Specific */
 @media (orientation: landscape) and (max-height: 500px) {
