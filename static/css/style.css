@@ -27,18 +27,18 @@
 }
 
 /* Utility classes */
-.bg-sand { background-color: var(--sand) !important; }
-.bg-rose { background-color: var(--rose) !important; }
-.bg-coral { background-color: var(--coral) !important; }
-.bg-light { background-color: var(--bg-secondary) !important; }
-.bg-dark { background-color: var(--bg-primary) !important; color: var(--text-primary); }
+.bg-sand { background-color: #d4a574 !important; background-color: var(--sand) !important; }
+.bg-rose { background-color: #e8d5d0 !important; background-color: var(--rose) !important; }
+.bg-coral { background-color: #c8956d !important; background-color: var(--coral) !important; }
+.bg-light { background-color: #2a2a2a !important; background-color: var(--bg-secondary) !important; }
+.bg-dark { background-color: #1c1c1c !important; background-color: var(--bg-primary) !important; color: #f8f8f2; color: var(--text-primary); }
 
-.text-sand { color: var(--sand) !important; }
-.text-rose { color: var(--rose) !important; }
-.text-coral { color: var(--coral) !important; }
-.text-light { color: var(--text-primary) !important; }
-.text-dark { color: var(--text-secondary) !important; }
-.text-muted { color: var(--text-secondary) !important; }
+.text-sand { color: #d4a574 !important; color: var(--sand) !important; }
+.text-rose { color: #e8d5d0 !important; color: var(--rose) !important; }
+.text-coral { color: #c8956d !important; color: var(--coral) !important; }
+.text-light { color: #f8f8f2 !important; color: var(--text-primary) !important; }
+.text-dark { color: #d4c19f !important; color: var(--text-secondary) !important; }
+.text-muted { color: #d4c19f !important; color: var(--text-secondary) !important; }
 
 /* General responsive improvements */
 img {
@@ -121,7 +121,7 @@ img {
 
 /* Dropdown improvements */
 .notification-dropdown {
-  width: min(350px, calc(100vw - 2rem)) !important;
+  width: 350px !important;
   max-height: 400px;
   overflow-y: auto;
 }
@@ -133,7 +133,10 @@ img {
 /* Basic layout */
 body {
   font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #1c1c1c;
+  background: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 100%);
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #f8f8f2;
   color: var(--text-primary);
   line-height: 1.6;
   letter-spacing: -0.01em;
@@ -148,6 +151,7 @@ body {
 
 /* Global link styles: use sophisticated coral accent */
 a, a:link, a:visited {
+  color: #c8956d;
   color: var(--coral);
   text-decoration: none;
   font-weight: 500;
@@ -155,12 +159,14 @@ a, a:link, a:visited {
 
 a:hover, a:focus {
   /* Use the warm caramel for hover to ensure contrast */
+  color: #d4a574; /* warm caramel */
   color: var(--highlight); /* warm caramel */
   text-decoration: underline;
 }
 
 /* Smaller text links (e.g., captions or metadata) should be slightly lighter weight */
 .small a {
+  color: #c8956d;
   color: var(--coral);
   font-weight: 400;
   text-decoration: none;
@@ -172,6 +178,7 @@ a:hover, a:focus {
 
 /* Constrain main content for better reading rhythm */
 main.container {
+  max-width: 1100px;
   max-width: var(--container-max-width);
 }
 
@@ -232,6 +239,7 @@ main.container {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
+  color: #f8f8f2;
   color: var(--text-primary);
   margin-bottom: 1.2rem;
   position: relative;
@@ -324,6 +332,7 @@ p {
 
 /* Enhanced card styling with modern approach - Dark Theme */
 .card {
+  background: #252525;
   background: var(--card-bg);
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.3),
@@ -331,7 +340,9 @@ p {
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
+  border: 1px solid #3d3529;
   border: 1px solid var(--border-color);
+  color: #f8f8f2;
   color: var(--text-primary);
 }
 
@@ -504,7 +515,10 @@ p {
 .btn-primary,
 .btn.btn-primary,
 .btn.btn-sm.btn-primary {
+  background: #8b6f47; /* Coffee brown fallback */
+  background: linear-gradient(135deg, #8b6f47 0%, #1c1c1c 100%); /* Using darker coffee brown to rich black */
   background: linear-gradient(135deg, var(--tertiary) 0%, var(--primary) 100%); /* Using darker coffee brown to rich black */
+  color: #f8f8f2 !important; /* Using cream white for maximum contrast */
   color: var(--accent) !important; /* Using cream white for maximum contrast */
   box-shadow: 0 2px 4px rgba(139, 111, 71, 0.3);
   text-align: center;
@@ -516,7 +530,10 @@ p {
 .btn-primary:hover,
 .btn.btn-primary:hover,
 .btn.btn-sm.btn-primary:hover { 
+  background: #d4a574; /* Warm caramel fallback */
+  background: linear-gradient(135deg, #d4a574 0%, #c8956d 100%); /* Using warm caramel to coral */
   background: linear-gradient(135deg, var(--highlight) 0%, var(--coral) 100%); /* Using warm caramel to coral */
+  color: #1c1c1c !important; /* Dark text on light background for contrast */
   color: var(--primary) !important; /* Dark text on light background for contrast */
   box-shadow: 0 4px 8px rgba(212, 165, 116, 0.4);
   transform: translateY(-1px);
@@ -541,6 +558,8 @@ p {
 .btn-danger,
 .btn.btn-danger,
 .btn.btn-sm.btn-danger {
+  background: #c8956d; /* Coral fallback */
+  background: linear-gradient(135deg, #c8956d 0%, #ff7a6b 100%);
   background: linear-gradient(135deg, var(--coral) 0%, #ff7a6b 100%);
   color: white !important;
   box-shadow: 0 2px 4px rgba(255, 105, 87, 0.3);
@@ -2376,22 +2395,27 @@ footer.site-footer {
 
 /* Profile stat styling classes */
 .stat-number {
+  color: #d4a574;
   color: var(--highlight);
 }
 
 .stat-number-coral {
+  color: #c8956d;
   color: var(--coral);
 }
 
 .stat-icon {
+  color: #d4c19f;
   color: var(--text-secondary);
 }
 
 .stat-icon-coral {
+  color: #c8956d;
   color: var(--coral);
 }
 
 .profile-link {
+  color: #d4a574;
   color: var(--highlight);
 }
 
