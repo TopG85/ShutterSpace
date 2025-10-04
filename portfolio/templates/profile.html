@@ -58,101 +58,77 @@
                     </div>
                 {% endif %}
                 
-                <!-- Enhanced Profile Stats -->
+                <!-- Profile Stats -->
                 <div class="profile-stats-container mb-4">
-                    <div class="d-flex">
-                        <div class="flex-fill text-center">
-                            <div class="stat-item py-3" title="Photos">
-                                <div class="stat-number h3 mb-2 fw-bold" style="color: var(--highlight);">{{ photos_count }}</div>
-                                <div class="stat-label">
-                                    <i class="fas fa-camera" style="color: var(--text-secondary); font-size: 1.2rem;"></i>
-                                    <div class="small text-muted mt-1">Photos</div>
+                    <div class="row text-center">
+                        <div class="col-3">
+                            <div class="py-2">
+                                <div class="h5 mb-1 fw-bold" style="color: var(--highlight);">{{ photos_count }}</div>
+                                <div class="small text-muted">
+                                    <i class="fas fa-camera me-1"></i>Photos
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-fill text-center">
-                            <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none" title="Followers">
-                                <div class="stat-item py-3 stat-clickable">
-                                    <div class="stat-number h3 mb-2 fw-bold" style="color: var(--highlight);">{{ followers_count }}</div>
-                                    <div class="stat-label">
-                                        <i class="fas fa-users" style="color: var(--text-secondary); font-size: 1.2rem;"></i>
-                                        <div class="small text-muted mt-1">Followers</div>
+                        <div class="col-3">
+                            <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none">
+                                <div class="py-2">
+                                    <div class="h5 mb-1 fw-bold" style="color: var(--highlight);">{{ followers_count }}</div>
+                                    <div class="small text-muted">
+                                        <i class="fas fa-users me-1"></i>Followers
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="flex-fill text-center">
-                            <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none" title="Following">
-                                <div class="stat-item py-3 stat-clickable">
-                                    <div class="stat-number h3 mb-2 fw-bold" style="color: var(--highlight);">{{ following_count }}</div>
-                                    <div class="stat-label">
-                                        <i class="fas fa-user-plus" style="color: var(--text-secondary); font-size: 1.2rem;"></i>
-                                        <div class="small text-muted mt-1">Following</div>
+                        <div class="col-3">
+                            <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none">
+                                <div class="py-2">
+                                    <div class="h5 mb-1 fw-bold" style="color: var(--highlight);">{{ following_count }}</div>
+                                    <div class="small text-muted">
+                                        <i class="fas fa-user-plus me-1"></i>Following
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="flex-fill text-center">
-                            <div class="stat-item py-3" title="Total Likes">
-                                <div class="stat-number h3 mb-2 fw-bold" style="color: var(--coral);">{{ total_likes }}</div>
-                                <div class="stat-label">
-                                    <i class="fas fa-heart" style="color: var(--coral); font-size: 1.2rem;"></i>
-                                    <div class="small text-muted mt-1">Likes</div>
+                        <div class="col-3">
+                            <div class="py-2">
+                                <div class="h5 mb-1 fw-bold" style="color: var(--coral);">{{ total_likes }}</div>
+                                <div class="small text-muted">
+                                    <i class="fas fa-heart me-1"></i>Likes
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Enhanced Profile Info -->
-                <div class="profile-info-container">
-                    <div class="profile-info-item">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-calendar-alt me-3"></i>
-                            <div>
-                                <div class="fw-medium" style="color: var(--text-color);">Joined {{ joined|date:"M d, Y" }}</div>
-                                <div class="small text-muted">Member since</div>
-                            </div>
-                        </div>
+                <!-- Profile Info -->
+                <div class="profile-info mb-4">
+                    <div class="d-flex align-items-center text-muted mb-2">
+                        <i class="fas fa-calendar-alt me-2"></i>
+                        <span>Joined {{ joined|date:"M d, Y" }}</span>
                     </div>
                     
                     {% if profile.location %}
-                        <div class="profile-info-item">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-map-marker-alt me-3"></i>
-                                <div>
-                                    <div class="fw-medium" style="color: var(--text-color);">{{ profile.location }}</div>
-                                    <div class="small text-muted">Location</div>
-                                </div>
-                            </div>
+                        <div class="d-flex align-items-center text-muted mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>{{ profile.location }}</span>
                         </div>
                     {% endif %}
                     
                     {% if profile.website %}
-                        <div class="profile-info-item">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-link me-3"></i>
-                                <div>
-                                    <a href="{{ profile.website }}" target="_blank" rel="noopener" class="fw-medium text-decoration-none">
-                                        {{ profile.website|slice:":50" }}{% if profile.website|length > 50 %}...{% endif %}
-                                    </a>
-                                    <div class="small text-muted">Website</div>
-                                </div>
-                            </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-link me-2 text-muted"></i>
+                            <a href="{{ profile.website }}" target="_blank" rel="noopener" class="text-decoration-none" style="color: var(--highlight);">
+                                {{ profile.website|slice:":50" }}{% if profile.website|length > 50 %}...{% endif %}
+                            </a>
                         </div>
                     {% endif %}
                     
                     {% if profile.instagram %}
-                        <div class="profile-info-item">
-                            <div class="d-flex align-items-center">
-                                <i class="fab fa-instagram me-3"></i>
-                                <div>
-                                    <a href="https://instagram.com/{{ profile.instagram }}" target="_blank" rel="noopener" class="fw-medium text-decoration-none">
-                                        @{{ profile.instagram }}
-                                    </a>
-                                    <div class="small text-muted">Instagram</div>
-                                </div>
-                            </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fab fa-instagram me-2 text-muted"></i>
+                            <a href="https://instagram.com/{{ profile.instagram }}" target="_blank" rel="noopener" class="text-decoration-none" style="color: var(--highlight);">
+                                @{{ profile.instagram }}
+                            </a>
                         </div>
                     {% endif %}
                 </div>
