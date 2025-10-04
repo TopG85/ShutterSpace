@@ -1124,16 +1124,10 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   transform: translateX(100%);
 }
 
-/* Professional gallery grid */
+/* Professional gallery grid - use Bootstrap grid like home page */
 .photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  /* gap replaced with margin for W3C validation compliance */
+  /* Removed CSS grid to use Bootstrap flexbox grid system like home page */
   margin: 2rem 0;
-}
-
-.photo-grid > * {
-  margin: 1rem;
 }
 
 /* Enhanced profile stats with animations */
