@@ -891,7 +891,7 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 
 /* Simple profile stats styling */
 .profile-stats-container {
-  background: var(--primary);
+  background: var(--primary) !important;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   padding: 1rem;
@@ -1143,10 +1143,10 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   justify-content: center; 
   margin-top: 2rem; 
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--primary);
   border-radius: 16px;
   /* backdrop-filter removed for W3C validation compliance */
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 
