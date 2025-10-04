@@ -14,7 +14,42 @@
 
 <div class="row">
     <div class="col-12">
-        <h2>Latest Photos</h2>
+        {% if search_query %}
+            <h2>Search Results for "{{ search_query }}"</h2>
+            
+            {% if users %}
+                <h3>Users</h3>
+                <div class="row g-4 mb-4">
+                    {% for user in users %}
+                        <div class="col-sm-6 col-lg-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    {% if user.profile.avatar %}
+                                        <img src="{{ user.profile.avatar.url }}" class="rounded-circle mb-3" style="width: 80px; height: 80px; object-fit: cover;" alt="{{ user.username }}">
+                                    {% else %}
+                                        <div class="rounded-circle mb-3 mx-auto bg-secondary d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; color: white; font-size: 24px;">
+                                            {{ user.username|first|upper }}
+                                        </div>
+                                    {% endif %}
+                                    <h5 class="card-title">{{ user.username }}</h5>
+                                    {% if user.first_name or user.last_name %}
+                                        <p class="card-text">{{ user.first_name }} {{ user.last_name }}</p>
+                                    {% endif %}
+                                    <a href="{% url 'profile_view' user.username %}" class="btn btn-primary btn-sm">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% if photos %}
+                <h3>{% if users %}Photos{% else %}Photos{% endif %}</h3>
+            {% endif %}
+        {% else %}
+            <h2>Latest Photos</h2>
+        {% endif %}
+        
         {% if photos %}
             <div class="row g-4">
                 {% for photo in photos %}
@@ -97,12 +132,18 @@
             </div>
         {% else %}
             <div class="alert alert-info">
-                <h4>No photos yet!</h4>
-                <p>Be the first to share a photo with the community.</p>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'upload_photo' %}" class="btn btn-primary">Upload Your First Photo</a>
+                {% if query %}
+                    <h4>No results found</h4>
+                    <p>Your search for "{{ query }}" didn't return any results.</p>
+                    <a href="{% url 'portfolio_home' %}" class="btn btn-primary">View All Photos</a>
                 {% else %}
-                    <a href="{% url 'register' %}" class="btn btn-primary">Register to Upload Photos</a>
+                    <h4>No photos yet!</h4>
+                    <p>Be the first to share a photo with the community.</p>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'upload_photo' %}" class="btn btn-primary">Upload Your First Photo</a>
+                    {% else %}
+                        <a href="{% url 'register' %}" class="btn btn-primary">Register to Upload Photos</a>
+                    {% endif %}
                 {% endif %}
             </div>
         {% endif %}

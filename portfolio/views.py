@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .models import Profile, Photo, Comment, Notification, Follow
 from .forms import ProfileForm, PhotoForm, CommentForm
 
@@ -12,14 +12,51 @@ from .forms import ProfileForm, PhotoForm, CommentForm
 
 
 def portfolio_home(request):
-    photos = Photo.objects.filter(is_public=True).order_by('-created_at')[:6]
+    # Handle search functionality
+    search_query = request.GET.get('q', '').strip()
+    
+    if search_query:
+        # Search for photos by title or description
+        photos = Photo.objects.filter(
+            Q(title__icontains=search_query) |
+            Q(description__icontains=search_query),
+            is_public=True
+        ).order_by('-created_at')
+        
+        # Also search for users
+        users = User.objects.filter(
+            Q(username__icontains=search_query) |
+            Q(first_name__icontains=search_query) |
+            Q(last_name__icontains=search_query)
+        ).distinct()
+        
+        # If only one photo matches, redirect to it
+        if photos.count() == 1 and users.count() == 0:
+            return redirect('photo_detail', pk=photos.first().id)
+        
+        # If only one user matches, redirect to their profile
+        if users.count() == 1 and photos.count() == 0:
+            return redirect('profile_view', username=users.first().username)
+    else:
+        # Default: show latest photos
+        photos = Photo.objects.filter(is_public=True).order_by(
+            '-created_at')[:6]
+        users = User.objects.none()  # Empty queryset
+    
+    # Add liked status for authenticated users
     if request.user.is_authenticated:
         for p in photos:
             p.liked = p.likes.filter(user=request.user).exists()
     else:
         for p in photos:
             p.liked = False
-    return render(request, 'home.html', {'photos': photos})
+    
+    context = {
+        'photos': photos,
+        'users': users,
+        'search_query': search_query,
+    }
+    return render(request, 'home.html', context)
 
 
 def register(request):
@@ -28,8 +65,8 @@ def register(request):
         if form.is_valid():
             user = form.save()
             Profile.objects.create(user=user)  # auto-create profile
-            login(request, user)
-            return redirect('home')
+            # Don't auto-login, redirect to login page instead
+            return redirect('login')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
