@@ -891,7 +891,7 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 
 /* Simple profile stats styling */
 .profile-stats-container {
-  background: var(--card-bg);
+  background: var(--primary);
   border-radius: 12px;
   border: 1px solid var(--border-color);
   padding: 1rem;
