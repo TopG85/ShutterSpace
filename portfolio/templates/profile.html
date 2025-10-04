@@ -38,8 +38,8 @@
 
 <div class="container profile-content">
 <div class="row">
-    <div class="col-md-4">
-        <div class="card mb-3">
+    <div class="col-lg-4 mb-4">
+        <div class="card profile-sidebar">
             <div class="card-body text-center">
                 {% if not profile.hero_image %}
                     {% if profile and profile.avatar %}
@@ -174,10 +174,21 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8">
-        <div class="row">
+    <div class="col-lg-8">
+        <div class="profile-photos-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Photos</h2>
+                {% if user.is_authenticated and user == owner %}
+                    <a href="{% url 'upload_photo' %}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus me-1 d-none d-md-inline"></i>
+                        <span class="d-none d-md-inline">Upload Photo</span>
+                        <i class="fas fa-plus d-md-none"></i>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="row photo-grid">
             {% for photo in photos %}
-                <div class="col-md-6 mb-3">
+                <div class="col-sm-6 col-lg-4 mb-4">
                     <div class="card photo-card">
                         <div class="card-img-wrapper">
                             <a href="{% url 'photo_detail' photo.id %}">
@@ -190,8 +201,8 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <h5><a href="{% url 'photo_detail' photo.id %}">{{ photo.title }}</a></h5>
-                            <p>{{ photo.description|truncatewords:10 }}</p>
+                            <h5 class="card-title"><a href="{% url 'photo_detail' photo.id %}">{{ photo.title }}</a></h5>
+                            <p class="card-text">{{ photo.description|truncatewords:10 }}</p>
                             <div class="d-flex justify-content-between align-items-center mt-2">
                                 <div>
                                     {% if photo.liked %}
@@ -244,8 +255,22 @@
                     </div>
                 </div>
             {% empty %}
-                <p>No photos yet.</p>
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <i class="fas fa-camera fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No photos yet</h4>
+                        {% if user.is_authenticated and user == owner %}
+                            <p class="text-muted">Upload your first photo to get started!</p>
+                            <a href="{% url 'upload_photo' %}" class="btn btn-primary">
+                                <i class="fas fa-plus me-1"></i>Upload Photo
+                            </a>
+                        {% else %}
+                            <p class="text-muted">{{ owner.username }} hasn't shared any photos yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
+            </div>
         </div>
     </div>
 </div>

@@ -27,9 +27,12 @@
                         <!-- Upload link removed from navbar -->
                     {% endif %}
                 </ul>
-                <form class="d-flex me-4" action="{% url 'home' %}" method="get">
+                <form class="d-flex me-4 search-form" action="{% url 'home' %}" method="get">
                     <input class="form-control form-control-sm me-2" type="search" placeholder="Search photos, users..." aria-label="Search" name="q">
-                    <button class="btn btn-sm btn-primary px-3" type="submit">Search</button>
+                    <button class="btn btn-sm btn-primary px-3" type="submit">
+                        <i class="fas fa-search d-md-none"></i>
+                        <span class="d-none d-md-inline">Search</span>
+                    </button>
                 </form>
 
                 <ul class="navbar-nav">
@@ -44,10 +47,13 @@
                                     0
                                 </span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" style="width: 350px;">
+                            <ul class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="notificationDropdown">
                                 <li class="dropdown-header d-flex justify-content-between align-items-center">
                                     <span>Notifications</span>
-                                    <a href="{% url 'notifications_list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                                    <a href="{% url 'notifications_list' %}" class="btn btn-sm btn-outline-primary">
+                                        <span class="d-none d-md-inline">View All</span>
+                                        <i class="fas fa-list d-md-none"></i>
+                                    </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <div id="notificationDropdownContent">
@@ -63,14 +69,16 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ user.username }}
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="{% url 'profile_view' user.username %}">My profile</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end user-dropdown" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="{% url 'profile_view' user.username %}">
+                                    <i class="fas fa-user me-2"></i>My profile
+                                </a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="post" action="{% url 'logout' %}" style="display: inline;">
                                         {% csrf_token %}
                                         <button type="submit" class="dropdown-item btn btn-link p-0 border-0" style="background: none; width: 100%; text-align: left;">
-                                            Logout
+                                            <i class="fas fa-sign-out-alt me-2"></i>Logout
                                         </button>
                                     </form>
                                 </li>

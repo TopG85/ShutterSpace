@@ -39,6 +39,73 @@
 .text-dark { color: var(--text-secondary) !important; }
 .text-muted { color: var(--text-secondary) !important; }
 
+/* General responsive improvements */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Ensure proper spacing on all screen sizes */
+.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Overflow handling for long text */
+.text-break {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+/* Responsive tables */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Navigation and header improvements */
+.navbar {
+  padding: 0.5rem 0;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Search form responsive improvements */
+.search-form {
+  min-width: 200px;
+}
+
+/* Dropdown improvements */
+.notification-dropdown {
+  width: min(350px, calc(100vw - 2rem)) !important;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.user-dropdown {
+  min-width: 160px;
+}
+
 /* Basic layout */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -1209,14 +1276,49 @@ footer.site-footer {
     padding-right: 15px;
   }
   
-  /* Navigation adjustments */
+  /* Navigation adjustments for mobile */
+  .navbar {
+    padding: 0.25rem 0;
+  }
+  
   .navbar-brand {
     font-size: 1.1rem;
   }
   
   .navbar-nav .nav-link {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .navbar-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+  
+  /* Search form on mobile */
+  .search-form {
+    width: 100%;
+    margin: 1rem 0;
+    min-width: auto;
+  }
+  
+  .search-form .form-control {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Dropdown positioning on mobile */
+  .dropdown-menu {
+    position: fixed !important;
+    top: auto !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+  }
+  
+  .notification-dropdown {
+    width: auto !important;
   }
   
   /* Typography for very small screens */
@@ -1232,35 +1334,174 @@ footer.site-footer {
     margin-bottom: 1.5rem;
   }
   
-  /* Profile section */
-  .profile-stats {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+  /* Profile section mobile adjustments */
+  .profile-stats-container {
+    margin-bottom: 2rem !important;
   }
   
-  .profile-stats .stat {
-    margin: 0.5rem 0;
+  .profile-stats-container .row {
+    margin: 0;
   }
   
-  /* Button adjustments */
+  .profile-stats-container .col-3 {
+    padding: 0 0.25rem;
+  }
+  
+  .stat-item {
+    padding: 1rem 0.5rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.25rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem !important;
+  }
+  
+  /* Button adjustments - larger touch targets */
   .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-height: 44px; /* iOS minimum touch target */
+  }
+  
+  .btn-sm {
     padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+    min-height: 38px;
   }
   
   /* Form adjustments */
   .form-control {
     font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.75rem;
+    min-height: 44px;
   }
   
-  /* Search bar */
-  .search-container {
+  .form-control:focus {
+    border-color: var(--highlight);
+    box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
+  }
+  
+  /* Form labels and text */
+  .form-label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-text {
+    font-size: 0.875rem;
+  }
+  
+  /* File input improvements */
+  .form-control[type="file"] {
+    padding: 0.5rem;
+  }
+  
+  /* Textarea improvements */
+  textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  /* Form layout on mobile */
+  .row .col-md-6 {
     margin-bottom: 1rem;
   }
   
-  .search-container .input-group {
+  /* Card forms mobile optimization */
+  .card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  
+  .card-header {
+    border-radius: 12px 12px 0 0;
+    border-bottom: none;
+    padding: 1.25rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  /* Jumbotron adjustments */
+  .jumbotron {
+    padding: 2rem 1.5rem !important;
+    text-align: center;
+  }
+  
+  .display-4 {
+    font-size: 2rem !important;
+  }
+  
+  /* Card improvements for mobile */
+  .card {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Photo card specific adjustments */
+  .photo-card .card-img-wrapper {
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .photo-card .card-img-top {
+    height: 100%;
     width: 100%;
+    object-fit: cover;
+  }
+  
+  /* Profile page mobile optimizations */
+  .profile-sidebar {
+    margin-bottom: 2rem;
+  }
+  
+  .profile-photos-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .photo-grid .col-sm-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  /* Hero section mobile adjustments */
+  .profile-hero-image {
+    height: 300px !important;
+  }
+  
+  .hero-content {
+    padding: 1rem;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-avatar,
+  .hero-avatar-initials {
+    width: 70px !important;
+    height: 70px !important;
+    font-size: 20px !important;
   }
 }
 
@@ -1268,6 +1509,11 @@ footer.site-footer {
 @media (min-width: 576px) and (max-width: 767.98px) {
   :root {
     --container-max-width: 540px;
+  }
+  
+  /* Navigation improvements */
+  .search-form {
+    min-width: 250px;
   }
   
   /* Two-column layout for small tablets */
@@ -1293,6 +1539,35 @@ footer.site-footer {
   .hero-subtitle {
     font-size: 1.1rem;
   }
+  
+  /* Profile stats responsive */
+  .profile-stats-container .col-3 {
+    padding: 0 0.5rem;
+  }
+  
+  .stat-item {
+    padding: 1.25rem 0.75rem !important;
+  }
+  
+  /* Button improvements */
+  .btn {
+    min-height: 40px;
+  }
+  
+  /* Form improvements */
+  .form-control {
+    min-height: 40px;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  /* Profile photos responsive layout */
+  .photo-grid .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
 
 /* Medium Devices (tablets, 768px and up) */
@@ -1301,25 +1576,117 @@ footer.site-footer {
     --container-max-width: 720px;
   }
   
-  /* Three-column layout on tablets */
+  /* Three-column layout for tablets */
   .row .col-md-4 {
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
   }
   
   /* Navigation improvements */
-  .navbar-nav .nav-link {
-    padding: 0.5rem 1rem;
+  .search-form {
+    min-width: 280px;
   }
   
-  /* Profile section optimizations */
+  /* Profile hero adjustments */
   .profile-hero-image {
     height: 450px;
   }
   
-  .profile-stats {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  /* Profile stats for tablets */
+  .profile-stats-container .col-3 {
+    padding: 0 0.75rem;
+  }
+  
+  .stat-item {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  /* Card improvements */
+  .card {
+    margin-bottom: 2rem;
+  }
+  
+  .card-body {
     padding: 1.5rem;
-    justify-content: space-around;
+  }
+  
+  /* Touch-friendly buttons */
+  .btn {
+    min-height: 42px;
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .btn-sm {
+    min-height: 36px;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Medium Devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  :root {
+    --container-max-width: 720px;
+  }
+  
+  /* Three-column layout for tablets */
+  .row .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  /* Navigation improvements */
+  .search-form {
+    min-width: 280px;
+  }
+  
+  /* Profile hero adjustments */
+  .profile-hero-image {
+    height: 450px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  /* Profile stats for tablets */
+  .profile-stats-container .col-3 {
+    padding: 0 0.75rem;
+  }
+  
+  .stat-item {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  /* Card improvements */
+  .card {
+    margin-bottom: 2rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  /* Touch-friendly buttons */
+  .btn {
+    min-height: 42px;
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .btn-sm {
+    min-height: 36px;
+    padding: 0.5rem 1rem;
   }
   
   /* Card hover effects work better on tablets */
