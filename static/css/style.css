@@ -896,19 +896,6 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   border: 1px solid var(--border-color);
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  margin: 0 auto;
-}
-
-.profile-stats-container .row {
-  margin: 0;
-  width: 100%;
-}
-
-.profile-stats-container .col-3 {
-  padding: 0;
-  flex: 0 0 25%;
-  max-width: 25%;
 }
 
 .stat-item {
