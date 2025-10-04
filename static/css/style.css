@@ -1518,17 +1518,7 @@ footer.site-footer {
     margin-bottom: 0.75rem;
   }
   
-  /* Photo card specific adjustments */
-  .photo-card .card-img-wrapper {
-    height: 250px;
-    overflow: hidden;
-  }
-  
-  .photo-card .card-img-top {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
+  /* Photo card specific adjustments - removed to match home page cards */
   
   /* Profile page mobile optimizations */
   .profile-sidebar {
