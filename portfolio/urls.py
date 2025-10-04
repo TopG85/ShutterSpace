@@ -21,7 +21,7 @@ urlpatterns = [
          name='delete_comment'),
     path('photo/<int:photo_id>/like/', views.toggle_like,
          name='toggle_like'),
-    
+
     # Notification URLs
     path('notifications/', views.notifications_list,
          name='notifications_list'),

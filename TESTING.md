@@ -2,26 +2,57 @@
 
 # Lighthouse 
 
-## Device
+
 ## Mobile
 ## Performance
-## Accessibility
+
 ## Desktop
 ## Performance
 
 
-# ShutterSpace
-# test_settings.py
-# test_urls
-# style.css
-# base.html
 
-# Portfolio
-## test_views.py
-## test_models.py
-## test_apps.py
-## test_admin.py
-# test HTML Markup Validation 
-https://validator.w3.org/nu/?doc=https%3A%2F%2Fdjango-project-shutterspace-a676bf7fbd5b.herokuapp.com%2Fportfolio%2Fprofile%2Fdanielcarson%2F
-# test CSS Vailidation
-https://jigsaw.w3.org/css-validator/validator
+# ShutterSpace Python Testing
+## settings.py
+![shutterspace](docs/readme_images/shutterspace-settings.png)
+## urls.py
+![shutterspace](docs/readme_images/shutterspace-urls.png)
+
+
+
+# Portfolio Python Testing
+## views.py
+![portfolio](docs/readme_images/portfolio-views.png)
+## models.py
+![portfolio](docs/readme_images/portfolio-models.png)
+## apps.py
+![portfolio](docs/readme_images/portfolio-apps.png)
+## forms.py
+![portfolio](docs/readme_images/portfolio-forms.png)
+## admin.py
+![portfolio](docs/readme_images/portfolio-admin.png)
+
+
+
+# Migrations
+## initial.py
+![portfolio](docs/readme_images/portfolio-initial-migration.png)
+## like.py
+![portfolio](docs/readme_images/portfolio-like.png)
+## profile_display_name_profile_instagram_and_more.py 
+![portfolio](docs/readme_images/portfolio-profile-displayname.png)
+## alter_photo_image_alter_profile_avatar.py
+![portfolio](docs/readme_images/portfolio-avatar.png)
+## profile_hero_image.py
+![portfolio](docs/readme_images/portfolio-hero-image.png)
+## notification.py
+![portfolio](docs/readme_images/portfolio-notifications.png)
+
+
+
+# HTML & CSS Validation
+
+## test HTML Markup Validation 
+![testing](docs/readme_images/testing-validationHTML.png)
+
+## test CSS Vailidation
+![testing](docs/readme_images/testing-CSSvalidation.png)

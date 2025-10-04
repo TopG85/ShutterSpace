@@ -14,6 +14,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='profile',
             name='hero_image',
-            field=cloudinary.models.CloudinaryField(blank=True, help_text='Hero image for your profile page', max_length=255, verbose_name='hero_image'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True,
+                help_text='Hero image for your profile page',
+                max_length=255,
+                verbose_name='hero_image'),
         ),
     ]

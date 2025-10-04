@@ -71,7 +71,7 @@ class Notification(models.Model):
         ('photo_upload', 'Photo Upload'),
         ('mention', 'Mention'),
     ]
-    
+
     recipient = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -104,17 +104,17 @@ class Notification(models.Model):
     )
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         ordering = ['-created_at']
         indexes = [
             models.Index(fields=['recipient', 'is_read']),
             models.Index(fields=['created_at']),
         ]
-    
+
     def __str__(self):
         return f"Notification({self.recipient.username}: {self.title})"
-    
+
     def get_url(self):
         """Get the URL that this notification should link to"""
         try:
@@ -128,7 +128,7 @@ class Notification(models.Model):
         except Exception:
             # Fallback in case of any URL resolution issues
             return "/"
-    
+
     def mark_as_read(self):
         """Mark this notification as read"""
         if not self.is_read:

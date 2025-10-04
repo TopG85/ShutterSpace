@@ -8,20 +8,16 @@ register = template.Library()
 def optimized_image_url(cloudinary_field, transform_type='thumbnail'):
     """
     Generate optimized Cloudinary URLs for different contexts.
-    
     Args:
         cloudinary_field: Cloudinary field from model
         transform_type: Type of transformation (thumbnail, detail, hero)
-    
     Returns:
         Optimized image URL string
     """
     if not cloudinary_field:
         return ''
-    
     # Extract public_id from the field
     public_id = str(cloudinary_field)
-    
     # Define optimized transformations for different contexts
     transformations = {
         'thumbnail': {
@@ -66,12 +62,10 @@ def optimized_image_url(cloudinary_field, transform_type='thumbnail'):
             'secure': True
         }
     }
-    
     # Get the transformation settings
     transform = transformations.get(
         transform_type, transformations['thumbnail']
     )
-    
     # Create CloudinaryImage and apply transformations
     try:
         image = CloudinaryImage(public_id)
@@ -87,18 +81,14 @@ def optimized_image_url(cloudinary_field, transform_type='thumbnail'):
 def responsive_image_srcset(cloudinary_field):
     """
     Generate responsive srcset for different screen sizes.
-    
     Args:
         cloudinary_field: Cloudinary field from model
-    
     Returns:
         srcset attribute string for responsive images
     """
     if not cloudinary_field:
         return ''
-    
     public_id = str(cloudinary_field)
-    
     # Define different sizes for responsive images
     sizes = [
         {'width': 400, 'descriptor': '400w'},
@@ -106,12 +96,9 @@ def responsive_image_srcset(cloudinary_field):
         {'width': 1200, 'descriptor': '1200w'},
         {'width': 1600, 'descriptor': '1600w'},
     ]
-    
     srcset_urls = []
-    
     try:
         image = CloudinaryImage(public_id)
-        
         for size in sizes:
             url = image.build_url(
                 width=size['width'],
@@ -123,9 +110,7 @@ def responsive_image_srcset(cloudinary_field):
                 secure=True
             )
             srcset_urls.append(f"{url} {size['descriptor']}")
-        
         return ', '.join(srcset_urls)
-    
     except Exception:
         return ''
 
@@ -134,7 +119,6 @@ def responsive_image_srcset(cloudinary_field):
 def lazy_image_attrs():
     """
     Return attributes for lazy loading images.
-    
     Returns:
         String of HTML attributes for lazy loading
     """

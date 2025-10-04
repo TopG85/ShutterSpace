@@ -80,12 +80,12 @@ def upload_photo(request):
             photo = form.save(commit=False)
             photo.owner = request.user
             photo.save()
-            
+
             # Optional: Create notification for followers
             # (if follow system exists)
             # For now, this is a placeholder for future enhancement
             # create_notification_for_followers(request.user, photo)
-            
+
             return redirect('home')
     else:
         form = PhotoForm()
@@ -102,7 +102,7 @@ def add_comment(request, photo_id):
             comment.photo = photo
             comment.author = request.user
             comment.save()
-            
+
             # Create notification for photo owner
             comment_preview = (comment.text[:50] + "..."
                                if len(comment.text) > 50 else comment.text)
@@ -117,7 +117,7 @@ def add_comment(request, photo_id):
                 photo=photo,
                 comment=comment
             )
-            
+
             return redirect('photo_detail', photo_id=photo.id)
     else:
         form = CommentForm()
@@ -209,7 +209,7 @@ def edit_comment(request, comment_id):
 def delete_comment(request, comment_id):
     # Allow both comment authors and photo owners to delete comments
     comment = get_object_or_404(Comment, id=comment_id)
-    
+
     # Check if user is either the comment author or the photo owner
     if comment.author != request.user and comment.photo.owner != request.user:
         # User is neither the comment author nor the photo owner
@@ -217,7 +217,7 @@ def delete_comment(request, comment_id):
         return HttpResponseForbidden(
             "You don't have permission to delete this comment."
         )
-    
+
     photo_id = comment.photo.id
     comment.delete()
     return redirect('photo_detail', photo_id=photo_id)
@@ -256,7 +256,7 @@ def toggle_like(request, photo_id):
     else:
         photo.likes.create(user=request.user)
         liked = True
-        
+
         # Create notification for photo owner when liked (not unliked)
         like_message = (f'{request.user.username} liked your photo '
                         f'"{photo.title}"')
@@ -268,7 +268,7 @@ def toggle_like(request, photo_id):
             message=like_message,
             photo=photo
         )
-        
+
     return JsonResponse({'liked': liked, 'likes_count': photo.likes.count()})
 
 
@@ -289,7 +289,7 @@ def create_notification(recipient, sender, notification_type, title, message,
     # Don't create notification if sender is same as recipient
     if sender == recipient:
         return None
-    
+
     # Create the notification
     notification = Notification.objects.create(
         recipient=recipient,
@@ -309,7 +309,7 @@ def notifications_list(request):
     # Latest 20 notifications
     notifications = request.user.notifications.all()[:20]
     unread_count = request.user.notifications.filter(is_read=False).count()
-    
+
     context = {
         'notifications': notifications,
         'unread_count': unread_count
@@ -354,7 +354,7 @@ def notifications_dropdown(request):
     # Latest 5 for dropdown
     recent_notifications = request.user.notifications.all()[:5]
     unread_count = request.user.notifications.filter(is_read=False).count()
-    
+
     notifications_data = []
     for notification in recent_notifications:
         notifications_data.append({
@@ -368,7 +368,7 @@ def notifications_dropdown(request):
                                 if notification.sender else None),
             'type': notification.notification_type
         })
-    
+
     return JsonResponse({
         'notifications': notifications_data,
         'unread_count': unread_count

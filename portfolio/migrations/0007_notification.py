@@ -16,20 +16,47 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Notification',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('notification_type', models.CharField(choices=[('like', 'Like'), ('comment', 'Comment'), ('follow', 'Follow'), ('photo_upload', 'Photo Upload'), ('mention', 'Mention')], max_length=20)),
+                ('id', models.BigAutoField(
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
+                ('notification_type', models.CharField(
+                    choices=[
+                        ('like', 'Like'), ('comment', 'Comment'),
+                        ('follow', 'Follow'), ('photo_upload', 'Photo Upload'),
+                        ('mention', 'Mention')
+                    ], max_length=20)),
                 ('title', models.CharField(max_length=255)),
                 ('message', models.TextField()),
                 ('is_read', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('comment', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='portfolio.comment')),
-                ('photo', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='portfolio.photo')),
-                ('recipient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notifications', to=settings.AUTH_USER_MODEL)),
-                ('sender', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='sent_notifications', to=settings.AUTH_USER_MODEL)),
+                ('comment', models.ForeignKey(
+                    blank=True, null=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='portfolio.comment')),
+                ('photo', models.ForeignKey(
+                    blank=True, null=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='portfolio.photo')),
+                ('recipient', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='notifications',
+                    to=settings.AUTH_USER_MODEL)),
+                ('sender', models.ForeignKey(
+                    blank=True, null=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='sent_notifications',
+                    to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ['-created_at'],
-                'indexes': [models.Index(fields=['recipient', 'is_read'], name='portfolio_n_recipie_1524d4_idx'), models.Index(fields=['created_at'], name='portfolio_n_created_f19bea_idx')],
+                'indexes': [
+                    models.Index(
+                        fields=['recipient', 'is_read'],
+                        name='portfolio_n_recipie_1524d4_idx'),
+                    models.Index(
+                        fields=['created_at'],
+                        name='portfolio_n_created_f19bea_idx')
+                ],
             },
         ),
     ]

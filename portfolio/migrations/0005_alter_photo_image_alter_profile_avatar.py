@@ -14,11 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='photo',
             name='image',
-            field=cloudinary.models.CloudinaryField(max_length=255, verbose_name='image'),
+            field=cloudinary.models.CloudinaryField(
+                max_length=255, verbose_name='image'),
         ),
         migrations.AlterField(
             model_name='profile',
             name='avatar',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='avatar'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True, max_length=255, verbose_name='avatar'),
         ),
     ]
