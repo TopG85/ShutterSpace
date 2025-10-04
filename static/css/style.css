@@ -71,6 +71,29 @@ img {
   overflow-x: auto;
 }
 
+/* Desktop-specific Bootstrap column fixes */
+@media (min-width: 992px) {
+  .col-lg-4 {
+    flex: 0 0 33.333333% !important;
+    max-width: 33.333333% !important;
+  }
+  
+  .col-lg-3 {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+  }
+  
+  .col-lg-6 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  
+  .col-lg-8 {
+    flex: 0 0 66.666667% !important;
+    max-width: 66.666667% !important;
+  }
+}
+
 /* Navigation and header improvements */
 .navbar {
   padding: 0.5rem 0;
@@ -1711,10 +1734,60 @@ footer.site-footer {
     --container-max-width: 960px;
   }
   
+  /* Reset mobile-specific overrides for desktop */
+  .btn {
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    min-height: auto !important;
+  }
+  
+  .btn-sm {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    min-height: auto !important;
+  }
+  
+  .form-control {
+    font-size: 0.875rem !important;
+    padding: 0.375rem 0.75rem !important;
+    min-height: auto !important;
+  }
+  
+  /* Card improvements for desktop */
+  .card {
+    margin-bottom: 1.5rem !important;
+    border-radius: 12px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+  }
+  
+  .card-body {
+    padding: 1.25rem !important;
+  }
+  
+  .card-img-wrapper {
+    padding-top: 60% !important; /* Better aspect ratio for desktop */
+  }
+  
+  /* Profile photos responsive layout reset */
+  .photo-grid .col-sm-6 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  
   /* Optimal four-column layout */
   .row .col-lg-3 {
     flex: 0 0 25%;
     max-width: 25%;
+  }
+  
+  .row .col-lg-4 {
+    flex: 0 0 33.333333% !important;
+    max-width: 33.333333% !important;
   }
   
   /* Enhanced navigation */
@@ -1728,49 +1801,42 @@ footer.site-footer {
   
   /* Profile hero full potential */
   .profile-hero-image {
-    height: 500px;
+    height: 500px !important;
   }
   
   .hero-title {
-    font-size: 3rem;
+    font-size: 3rem !important;
   }
   
   .hero-subtitle {
-    font-size: 1.25rem;
-  }
-  
-  /* Enhanced card layouts */
-  .card-img-wrapper {
-    padding-top: 75%; /* Better aspect ratio for desktop */
+    font-size: 1.25rem !important;
   }
   
   /* Profile stats improvements for desktop */
-  .profile-stats {
-    padding: 2rem;
-    justify-content: space-around;
+  .profile-stats-container .col-3 {
+    padding: 0 1rem !important;
   }
   
-  .profile-stats .stat {
-    min-width: 80px;
-    max-width: 120px;
-    margin: 0 1rem;
+  .stat-item {
+    padding: 1.5rem 1rem !important;
   }
   
-  .profile-stats .stat .label {
-    font-size: 0.8rem;
-    max-width: 100px;
-    letter-spacing: 0.08em;
+  .stat-number {
+    font-size: 1.5rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.875rem !important;
   }
   
   /* Better spacing for content */
   .jumbotron {
-    padding: 4rem 2rem;
+    padding: 4rem 2rem !important;
   }
   
   /* Search improvements */
-  .search-container {
-    max-width: 500px;
-    margin: 0 auto 2rem;
+  .search-form {
+    min-width: 300px !important;
   }
 }
 
@@ -1780,9 +1846,59 @@ footer.site-footer {
     --container-max-width: 1140px;
   }
   
+  /* Reset mobile overrides for large desktop */
+  .btn {
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    min-height: auto !important;
+  }
+  
+  .btn-sm {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    min-height: auto !important;
+  }
+  
+  .form-control {
+    font-size: 0.875rem !important;
+    padding: 0.375rem 0.75rem !important;
+    min-height: auto !important;
+  }
+  
   /* Maximum layout potential */
   .container {
     max-width: var(--container-max-width);
+  }
+  
+  /* Enhanced card behavior for large desktop */
+  .card {
+    margin-bottom: 2rem !important;
+    border-radius: 16px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+  
+  .card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.2) !important;
+  }
+  
+  .card-body {
+    padding: 1.5rem !important;
+  }
+  
+  .card-img-wrapper {
+    padding-top: 56.25% !important; /* 16:9 aspect ratio for large screens */
+  }
+  
+  /* Column layout improvements */
+  .row .col-lg-4 {
+    flex: 0 0 33.333333% !important;
+    max-width: 33.333333% !important;
+  }
+  
+  .photo-grid .col-sm-6 {
+    flex: 0 0 33.333333% !important;
+    max-width: 33.333333% !important;
   }
   
   /* Five-column layout for very wide screens */
@@ -1791,13 +1907,70 @@ footer.site-footer {
       flex: 0 0 20%;
       max-width: 20%;
     }
+    
+    .photo-grid .col-lg-4 {
+      flex: 0 0 25% !important;
+      max-width: 25% !important;
+    }
   }
   
   /* Enhanced typography for large screens */
-  h1 { font-size: 3.5rem; }
-  h2 { font-size: 2.75rem; }
+  h1 { font-size: 3.5rem !important; }
+  h2 { font-size: 2.75rem !important; }
   
   /* Profile hero maximum impact */
+  .profile-hero-image {
+    height: 600px !important;
+  }
+  
+  .hero-title {
+    font-size: 4rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Profile stats for large desktop */
+  .profile-stats-container .col-3 {
+    padding: 0 1.5rem !important;
+  }
+  
+  .stat-item {
+    padding: 2rem 1.5rem !important;
+  }
+  
+  .stat-number {
+    font-size: 2rem !important;
+  }
+  
+  .stat-label {
+    font-size: 1rem !important;
+  }
+  
+  /* Enhanced navigation */
+  .navbar {
+    padding: 1.5rem 0 !important;
+  }
+  
+  .navbar-brand {
+    font-size: 1.75rem !important;
+  }
+  
+  /* Better spacing for large screens */
+  .jumbotron {
+    padding: 5rem 3rem !important;
+  }
+  
+  .display-4 {
+    font-size: 3.5rem !important;
+  }
+  
+  /* Search improvements */
+  .search-form {
+    min-width: 400px !important;
+  }
+}
   .profile-hero-image {
     height: 600px;
   }
