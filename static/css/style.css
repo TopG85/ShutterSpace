@@ -2040,3 +2040,42 @@ footer.site-footer {
     color: black !important;
   }
 }
+
+/* Optimizations for narrower sidebar (col-lg-2) layout */
+@media (min-width: 992px) {
+  .col-lg-2 .profile-stats-container {
+    padding: 0.75rem 0.5rem !important;
+  }
+  
+  .col-lg-2 .profile-stats-container .col-3 {
+    padding: 0 0.25rem !important;
+  }
+  
+  .col-lg-2 .stat-item {
+    padding: 0.75rem 0.25rem !important;
+    font-size: 0.85rem;
+  }
+  
+  .col-lg-2 .stat-number {
+    font-size: 1.1rem !important;
+  }
+  
+  .col-lg-2 .stat-label {
+    font-size: 0.7rem !important;
+    line-height: 1.2;
+  }
+  
+  .col-lg-2 .profile-info {
+    padding: 0.75rem !important;
+    font-size: 0.9rem;
+  }
+  
+  .col-lg-2 .card-body {
+    padding: 1rem 0.75rem !important;
+  }
+  
+  .col-lg-2 .avatar-sm {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
