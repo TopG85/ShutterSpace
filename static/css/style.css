@@ -1297,9 +1297,7 @@ footer.site-footer {
   
   /* Mobile card adjustments - removed padding override to match home page */
   
-  .card-img-wrapper {
-    padding-top: 60%; /* Slightly different aspect ratio on mobile */
-  }
+  /* Card image wrapper aspect ratio removed - using base 75% for consistency */
   
   .card-meta {
     flex-direction: column;
@@ -1713,9 +1711,7 @@ footer.site-footer {
   
   /* Removed card-body padding override to match home page card sizing */
   
-  .card-img-wrapper {
-    padding-top: 70% !important; /* Better aspect ratio for desktop */
-  }
+  /* Card image wrapper aspect ratio removed - using base 75% for consistency */
   
   /* Profile photos responsive layout reset */
   .photo-grid .col-sm-6 {
@@ -1828,9 +1824,7 @@ footer.site-footer {
   
   /* Removed card-body padding override to match home page card sizing */
   
-  .card-img-wrapper {
-    padding-top: 65% !important; /* Good aspect ratio for large screens */
-  }
+  /* Card image wrapper aspect ratio removed - using base 75% for consistency */
   
   /* Column layout improvements */
   .row .col-lg-4 {
@@ -1999,9 +1993,7 @@ footer.site-footer {
     height: 700px;
   }
   
-  .card-img-wrapper {
-    padding-top: 80%; /* Maintain good proportions */
-  }
+  /* Card image wrapper aspect ratio removed - using base 75% for consistency */
 }
 
 /* Landscape Orientation Specific */
