@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Profile, Photo, Comment, Notification
+from .models import Profile, Photo, Comment, Notification, Follow
 from .forms import ProfileForm, PhotoForm, CommentForm
 
 
@@ -134,11 +134,24 @@ def profile_view(request, username):
     else:
         for p in photos:
             p.liked = False
+    
     # compute simple stats
     photos_count = photos.count()
     total_likes = sum(p.likes.count() for p in photos)
     total_comments = sum(p.comments.count() for p in photos)
     joined = user.date_joined
+    
+    # Follow stats and status
+    followers_count = user.followers.count()
+    following_count = user.following.count()
+    is_following = False
+    
+    if request.user.is_authenticated and request.user != user:
+        is_following = Follow.objects.filter(
+            follower=request.user,
+            following=user
+        ).exists()
+    
     # initials fallback for avatar
     if profile:
         display_name = profile.display_name or user.username
@@ -155,6 +168,9 @@ def profile_view(request, username):
         'total_comments': total_comments,
         'joined': joined,
         'initials': initials,
+        'followers_count': followers_count,
+        'following_count': following_count,
+        'is_following': is_following,
     }
     return render(request, 'profile.html', context)
 
@@ -372,4 +388,101 @@ def notifications_dropdown(request):
     return JsonResponse({
         'notifications': notifications_data,
         'unread_count': unread_count
+    })
+
+
+@login_required
+def follow_user(request, username):
+    """Follow a user"""
+    if request.method == 'POST':
+        user_to_follow = get_object_or_404(User, username=username)
+        
+        # Can't follow yourself
+        if user_to_follow == request.user:
+            return JsonResponse({
+                'success': False,
+                'error': 'Cannot follow yourself'
+            })
+        
+        # Create or get the follow relationship
+        follow, created = Follow.objects.get_or_create(
+            follower=request.user,
+            following=user_to_follow
+        )
+        
+        if created:
+            # Create notification for the followed user
+            create_notification(
+                recipient=user_to_follow,
+                sender=request.user,
+                notification_type='follow',
+                title='New Follower',
+                message=f'{request.user.username} started following you!'
+            )
+            
+            return JsonResponse({
+                'success': True,
+                'action': 'followed',
+                'followers_count': user_to_follow.followers.count()
+            })
+        else:
+            return JsonResponse({
+                'success': False,
+                'error': 'Already following this user'
+            })
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+@login_required
+def unfollow_user(request, username):
+    """Unfollow a user"""
+    if request.method == 'POST':
+        user_to_unfollow = get_object_or_404(User, username=username)
+        
+        # Try to find and delete the follow relationship
+        try:
+            follow = Follow.objects.get(
+                follower=request.user,
+                following=user_to_unfollow
+            )
+            follow.delete()
+            
+            return JsonResponse({
+                'success': True,
+                'action': 'unfollowed',
+                'followers_count': user_to_unfollow.followers.count()
+            })
+        except Follow.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'error': 'Not following this user'
+            })
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+@login_required
+def followers_list(request, username):
+    """Display a user's followers"""
+    user = get_object_or_404(User, username=username)
+    followers = user.followers.select_related('follower__profile').all()
+    
+    return render(request, 'followers_list.html', {
+        'user': user,
+        'followers': followers,
+        'title': f"{user.username}'s Followers"
+    })
+
+
+@login_required
+def following_list(request, username):
+    """Display users that this user is following"""
+    user = get_object_or_404(User, username=username)
+    following = user.following.select_related('following__profile').all()
+    
+    return render(request, 'following_list.html', {
+        'user': user,
+        'following': following,
+        'title': f"Users {user.username} is Following"
     })

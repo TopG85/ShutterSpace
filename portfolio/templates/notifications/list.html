@@ -40,10 +40,24 @@
                                 <div class="notification-content flex-grow-1">
                                     <h6 class="mb-1">{{ notification.title }}</h6>
                                     <p class="mb-2 text-muted">{{ notification.message }}</p>
-                                    <small class="text-muted">
-                                        <i class="fas fa-clock me-1"></i>
-                                        {{ notification.created_at|timesince }} ago
-                                    </small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i>
+                                            {{ notification.created_at|timesince }} ago
+                                        </small>
+                                        {% if notification.sender %}
+                                            <small class="text-muted">
+                                                <i class="fas fa-user me-1"></i>
+                                                from <a href="{% url 'profile_view' username=notification.sender.username %}" class="text-decoration-none">
+                                                    {% if notification.sender.profile.display_name %}
+                                                        {{ notification.sender.profile.display_name }}
+                                                    {% else %}
+                                                        {{ notification.sender.username }}
+                                                    {% endif %}
+                                                </a>
+                                            </small>
+                                        {% endif %}
+                                    </div>
                                 </div>
                                 
                                 <div class="notification-actions">

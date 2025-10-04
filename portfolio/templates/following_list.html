@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} - ShutterSpace{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="d-flex align-items-center mb-4">
+                <a href="{% url 'profile_view' username=user.username %}" class="btn btn-outline-secondary me-3">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h2>{{ title }}</h2>
+            </div>
+
+            {% if following %}
+                <div class="list-group">
+                    {% for follow in following %}
+                    <div class="list-group-item d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            {% if follow.following.profile.avatar %}
+                                <img src="{{ follow.following.profile.avatar.url }}?w_50&h_50&c_thumb&g_face&q_auto:eco&f_auto" 
+                                     class="rounded-circle me-3" 
+                                     alt="{{ follow.following.username }}'s avatar"
+                                     width="50" height="50">
+                            {% else %}
+                                <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-3" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="text-white fw-bold">
+                                        {{ follow.following.username|slice:":2"|upper }}
+                                    </span>
+                                </div>
+                            {% endif %}
+                            
+                            <div>
+                                <h6 class="mb-0">
+                                    <a href="{% url 'profile_view' username=follow.following.username %}" 
+                                       class="text-decoration-none">
+                                        {% if follow.following.profile.display_name %}
+                                            {{ follow.following.profile.display_name }}
+                                        {% else %}
+                                            {{ follow.following.username }}
+                                        {% endif %}
+                                    </a>
+                                </h6>
+                                <small class="text-muted">@{{ follow.following.username }}</small>
+                                {% if follow.following.profile.bio %}
+                                    <p class="mb-0 text-muted small">{{ follow.following.profile.bio|truncatechars:60 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        {% if user.is_authenticated and user != follow.following %}
+                            <button class="btn btn-sm btn-outline-primary follow-btn" 
+                                    data-username="{{ follow.following.username }}"
+                                    data-following="True">
+                                Unfollow
+                            </button>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-user-plus text-muted" style="font-size: 3rem;"></i>
+                    <h4 class="text-muted mt-3">Not following anyone yet</h4>
+                    <p class="text-muted">When {{ user.username }} follows people, they'll appear here.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

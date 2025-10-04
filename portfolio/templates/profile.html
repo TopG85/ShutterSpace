@@ -66,15 +66,20 @@
                         </div>
                     </div>
                     <div class="stat">
-                        <div class="h5 mb-0">{{ total_likes }}</div>
-                        <div class="profile-meta">Likes</div>
+                        <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none text-dark">
+                            <div class="h5 mb-0">{{ followers_count }}</div>
+                            <div class="profile-meta">Followers</div>
+                        </a>
                     </div>
                     <div class="stat">
-                        <div class="h5 mb-0">{{ total_comments }}</div>
-                        <div class="profile-meta">
-                            <span class="d-none d-lg-inline">Comments</span>
-                            <span class="d-lg-none">Notes</span>
-                        </div>
+                        <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none text-dark">
+                            <div class="h5 mb-0">{{ following_count }}</div>
+                            <div class="profile-meta">Following</div>
+                        </a>
+                    </div>
+                    <div class="stat">
+                        <div class="h5 mb-0">{{ total_likes }}</div>
+                        <div class="profile-meta">Likes</div>
                     </div>
                 </div>
                 <div class="mt-3 profile-meta">Joined {{ joined|date:"M d, Y" }}</div>
@@ -82,7 +87,19 @@
                     {% if user.is_authenticated and user == owner %}
                         <a href="{% url 'profile_edit_user' owner.username %}" class="btn btn-sm btn-primary me-2">Edit profile</a>
                         <a href="{% url 'upload_photo' %}" class="btn btn-sm btn-outline-secondary">Upload photo</a>
+                    {% elif user.is_authenticated %}
+                        <button class="btn btn-sm btn-primary follow-btn" 
+                                data-username="{{ owner.username }}"
+                                data-following="{{ is_following }}">
+                            {% if is_following %}
+                                <i class="fas fa-user-minus me-1"></i>Unfollow
+                            {% else %}
+                                <i class="fas fa-user-plus me-1"></i>Follow
+                            {% endif %}
+                        </button>
+                        <a href="mailto:{{ owner.email }}" class="btn btn-sm btn-outline-secondary">Contact</a>
                     {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Follow</a>
                         <a href="mailto:{{ owner.email }}" class="btn btn-sm btn-outline-secondary">Contact</a>
                     {% endif %}
                 </div>
@@ -183,4 +200,52 @@
     </div>
 </div>
 </div>
+
+<script>
+// Follow/Unfollow functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const followBtn = document.querySelector('.follow-btn');
+    
+    if (followBtn) {
+        followBtn.addEventListener('click', function() {
+            const username = this.dataset.username;
+            const isFollowing = this.dataset.following === 'True';
+            const action = isFollowing ? 'unfollow' : 'follow';
+            
+            fetch(`/user/${username}/${action}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update button
+                    if (data.action === 'followed') {
+                        this.innerHTML = '<i class="fas fa-user-minus me-1"></i>Unfollow';
+                        this.dataset.following = 'True';
+                    } else {
+                        this.innerHTML = '<i class="fas fa-user-plus me-1"></i>Follow';
+                        this.dataset.following = 'False';
+                    }
+                    
+                    // Update followers count
+                    const followersCountEl = document.querySelector('.profile-stats .stat:nth-child(2) .h5');
+                    if (followersCountEl) {
+                        followersCountEl.textContent = data.followers_count;
+                    }
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+    }
+});
+</script>
 {% endblock %}

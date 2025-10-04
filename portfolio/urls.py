@@ -22,6 +22,16 @@ urlpatterns = [
     path('photo/<int:photo_id>/like/', views.toggle_like,
          name='toggle_like'),
 
+    # Follow URLs
+    path('user/<str:username>/follow/', views.follow_user,
+         name='follow_user'),
+    path('user/<str:username>/unfollow/', views.unfollow_user,
+         name='unfollow_user'),
+    path('user/<str:username>/followers/', views.followers_list,
+         name='followers_list'),
+    path('user/<str:username>/following/', views.following_list,
+         name='following_list'),
+
     # Notification URLs
     path('notifications/', views.notifications_list,
          name='notifications_list'),

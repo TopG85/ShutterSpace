@@ -51,16 +51,43 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     photo = models.ForeignKey(
         Photo, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('user', 'photo')
+        unique_together = ('photo', 'user')
 
     def __str__(self):
-        return f"Like({self.user.username} -> {self.photo.id})"
+        return f"Like({self.user.username} likes {self.photo.id})"
+
+
+class Follow(models.Model):
+    """User following relationships"""
+    follower = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='following'
+    )
+    following = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='followers'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('follower', 'following')
+        constraints = [
+            models.CheckConstraint(
+                check=~models.Q(follower=models.F('following')),
+                name='prevent_self_follow'
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.follower.username} follows {self.following.username}"
 
 
 class Notification(models.Model):
