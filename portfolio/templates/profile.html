@@ -29,7 +29,7 @@
                     <div class="hero-avatar-initials">{{ initials }}</div>
                 {% endif %}
                 <h1 class="hero-title">{{ profile.display_name|default:owner.username }}</h1>
-                <p class="hero-subtitle text-break" style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; max-width: 100%; white-space: normal;">{{ profile.bio|default:"Photography Portfolio" }}</p>
+                <p class="hero-subtitle text-break">{{ profile.bio|default:"Photography Portfolio" }}</p>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
                     {% endif %}
                     <h4>{{ profile.display_name|default:owner.username }}</h4>
                     <div class="profile-bio-container">
-                        <p class="profile-bio text-break" style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; max-width: 100%; white-space: normal;">{{ profile.bio }}</p>
+                        <p class="profile-bio text-break">{{ profile.bio }}</p>
                     </div>
                 {% endif %}
                 
@@ -62,18 +62,18 @@
                     <div class="row text-center">
                         <div class="col-3">
                             <div class="py-2">
-                                <div class="h5 mb-1 fw-bold" style="color: var(--highlight);">{{ photos_count }}</div>
+                                <div class="h5 mb-1 fw-bold stat-number">{{ photos_count }}</div>
                                 <div>
-                                    <i class="fas fa-camera" style="color: var(--text-secondary);"></i>
+                                    <i class="fas fa-camera stat-icon"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
                             <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none">
                                 <div class="py-2">
-                                    <div class="h5 mb-1 fw-bold" style="color: var(--highlight);">{{ followers_count }}</div>
+                                    <div class="h5 mb-1 fw-bold stat-number">{{ followers_count }}</div>
                                     <div>
-                                        <i class="fas fa-users" style="color: var(--text-secondary);"></i>
+                                        <i class="fas fa-users stat-icon"></i>
                                     </div>
                                 </div>
                             </a>
@@ -81,18 +81,18 @@
                         <div class="col-3">
                             <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none">
                                 <div class="py-2">
-                                    <div class="h5 mb-1 fw-bold" style="color: var(--highlight);">{{ following_count }}</div>
+                                    <div class="h5 mb-1 fw-bold stat-number">{{ following_count }}</div>
                                     <div>
-                                        <i class="fas fa-user-plus" style="color: var(--text-secondary);"></i>
+                                        <i class="fas fa-user-plus stat-icon"></i>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-3">
                             <div class="py-2">
-                                <div class="h5 mb-1 fw-bold" style="color: var(--coral);">{{ total_likes }}</div>
+                                <div class="h5 mb-1 fw-bold stat-number-coral">{{ total_likes }}</div>
                                 <div>
-                                    <i class="fas fa-heart" style="color: var(--coral);"></i>
+                                    <i class="fas fa-heart stat-icon-coral"></i>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                     {% if profile.website %}
                         <div class="d-flex align-items-center mb-2">
                             <i class="fas fa-link me-2 text-muted"></i>
-                            <a href="{{ profile.website }}" target="_blank" rel="noopener" class="text-decoration-none" style="color: var(--highlight);">
+                            <a href="{{ profile.website }}" target="_blank" rel="noopener" class="text-decoration-none profile-link">
                                 {{ profile.website|slice:":50" }}{% if profile.website|length > 50 %}...{% endif %}
                             </a>
                         </div>
@@ -125,7 +125,7 @@
                     {% if profile.instagram %}
                         <div class="d-flex align-items-center mb-2">
                             <i class="fab fa-instagram me-2 text-muted"></i>
-                            <a href="https://instagram.com/{{ profile.instagram }}" target="_blank" rel="noopener" class="text-decoration-none" style="color: var(--highlight);">
+                            <a href="https://instagram.com/{{ profile.instagram }}" target="_blank" rel="noopener" class="text-decoration-none profile-link">
                                 @{{ profile.instagram }}
                             </a>
                         </div>
@@ -294,7 +294,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center mb-3">
-                    <img id="deletePhotoImage" src="" class="img-fluid rounded" alt="" style="max-height: 200px;">
+                    <img id="deletePhotoImage" src="" class="img-fluid rounded modal-photo-preview" alt="">
                 </div>
                 <h5 class="text-center mb-3" id="deletePhotoTitle"></h5>
                 <div class="alert alert-warning">
@@ -307,7 +307,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i>Cancel
                 </button>
-                <form id="deletePhotoForm" method="post" style="display: inline;">
+                <form id="deletePhotoForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-trash me-1"></i>Yes, Delete Photo
@@ -331,7 +331,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <h6>On photo: "<span id="deleteCommentPhotoTitle"></span>"</h6>
-                    <div class="border rounded p-3" style="background: var(--bg-secondary);">
+                    <div class="border rounded p-3">
                         <strong id="deleteCommentAuthor"></strong>
                         <small class="text-muted" id="deleteCommentDate"></small>
                         <div class="mt-2" id="deleteCommentText"></div>
@@ -349,7 +349,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i>Cancel
                 </button>
-                <form id="deleteCommentForm" method="post" style="display: inline;">
+                <form id="deleteCommentForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-trash me-1"></i>Yes, Delete Comment

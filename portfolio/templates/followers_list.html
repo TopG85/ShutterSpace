@@ -26,7 +26,7 @@
                                      width="50" height="50">
                             {% else %}
                                 <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                     style="width: 50px; height: 50px;">
+                                     class="rounded-circle avatar-list-size">>
                                     <span class="text-white fw-bold">
                                         {{ follow.follower.username|slice:":2"|upper }}
                                     </span>
@@ -67,7 +67,7 @@
                 </div>
             {% else %}
                 <div class="text-center py-5">
-                    <i class="fas fa-users text-muted" style="font-size: 3rem;"></i>
+                    <i class="fas fa-users text-muted icon-large"></i>
                     <h4 class="text-muted mt-3">No followers yet</h4>
                     <p class="text-muted">When people follow {{ user.username }}, they'll appear here.</p>
                 </div>

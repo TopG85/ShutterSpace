@@ -153,7 +153,7 @@
                                         <img src="{{ form.instance.avatar.url }}?w_150&h_150&c_thumb&g_face&q_auto:eco&f_auto" 
                                              alt="Current avatar" 
                                              class="rounded-circle" 
-                                             style="width: 100px; height: 100px; object-fit: cover;">
+                                             class="rounded-circle profile-edit-avatar">>
                                     </div>
                                 {% endif %}
                                 {{ form.avatar }}
@@ -210,7 +210,7 @@
                                         <img src="{{ form.instance.hero_image.url }}?w_400&h_150&c_fill&q_auto:eco&f_auto" 
                                              alt="hero image" 
                                              class="img-thumbnail d-block" 
-                                             style="max-height: 150px; width: 100%; object-fit: cover;">
+                                             class="rounded profile-edit-hero">>
                                     </div>
                                 {% endif %}
                                 {{ form.hero_image }}

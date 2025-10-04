@@ -2351,3 +2351,75 @@ footer.site-footer {
 .edit-profile-header i {
   color: var(--primary) !important;
 }
+
+/* Logout button form styling for W3C compliance */
+.dropdown-item[type="submit"] {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 0.25rem 1rem;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-item[type="submit"]:hover {
+  background-color: var(--bs-dropdown-link-hover-bg, #e9ecef);
+  color: var(--bs-dropdown-link-hover-color, #1e2125);
+}
+
+/* Modal comment preview styling */
+.modal .border.rounded.p-3 {
+  background: var(--bg-secondary);
+}
+
+/* Profile stat styling classes */
+.stat-number {
+  color: var(--highlight);
+}
+
+.stat-number-coral {
+  color: var(--coral);
+}
+
+.stat-icon {
+  color: var(--text-secondary);
+}
+
+.stat-icon-coral {
+  color: var(--coral);
+}
+
+.profile-link {
+  color: var(--highlight);
+}
+
+/* Modal photo preview styling */
+.modal-photo-preview {
+  max-height: 200px;
+}
+
+/* Avatar sizing classes */
+.avatar-list-size {
+  width: 50px;
+  height: 50px;
+}
+
+/* Icon sizing classes */
+.icon-large {
+  font-size: 3rem;
+}
+
+/* Edit profile image sizing */
+.profile-edit-avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.profile-edit-hero {
+  max-height: 150px;
+  width: 100%;
+  object-fit: cover;
+}

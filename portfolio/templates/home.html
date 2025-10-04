@@ -122,7 +122,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <h6>On photo: "<span id="deleteCommentPhotoTitle"></span>"</h6>
-                    <div class="border rounded p-3" style="background: var(--bg-secondary);">
+                    <div class="border rounded p-3">
                         <strong id="deleteCommentAuthor"></strong>
                         <small class="text-muted" id="deleteCommentDate"></small>
                         <div class="mt-2" id="deleteCommentText"></div>
@@ -140,7 +140,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i>Cancel
                 </button>
-                <form id="deleteCommentForm" method="post" style="display: inline;">
+                <form id="deleteCommentForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-trash me-1"></i>Yes, Delete Comment

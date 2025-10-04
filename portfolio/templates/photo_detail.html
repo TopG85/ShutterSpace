@@ -117,7 +117,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center mb-3">
-                    <img id="deletePhotoImage" src="" class="img-fluid rounded" alt="" style="max-height: 200px;">
+                    <img id="deletePhotoImage" src="" class="img-fluid rounded modal-photo-preview" alt="">
                 </div>
                 <h5 class="text-center mb-3" id="deletePhotoTitle"></h5>
                 <div class="alert alert-warning">
@@ -130,7 +130,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i>Cancel
                 </button>
-                <form id="deletePhotoForm" method="post" style="display: inline;">
+                <form id="deletePhotoForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-trash me-1"></i>Yes, Delete Photo
@@ -154,7 +154,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <h6>On photo: "<span id="deleteCommentPhotoTitle"></span>"</h6>
-                    <div class="border rounded p-3" style="background: var(--bg-secondary);">
+                    <div class="border rounded p-3">
                         <strong id="deleteCommentAuthor"></strong>
                         <small class="text-muted" id="deleteCommentDate"></small>
                         <div class="mt-2" id="deleteCommentText"></div>
@@ -172,7 +172,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i>Cancel
                 </button>
-                <form id="deleteCommentForm" method="post" style="display: inline;">
+                <form id="deleteCommentForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-trash me-1"></i>Yes, Delete Comment
