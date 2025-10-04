@@ -923,6 +923,16 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   color: var(--text-secondary) !important;
   font-weight: 500;
   letter-spacing: 0.5px;
+  font-size: 1.1rem !important;
+}
+
+.stat-label i {
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-label i {
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .profile-hero-image {

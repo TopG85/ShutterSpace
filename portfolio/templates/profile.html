@@ -62,35 +62,38 @@
                 <div class="profile-stats-container mb-4">
                     <div class="row g-0">
                         <div class="col-3">
-                            <div class="stat-item text-center py-3">
+                            <div class="stat-item text-center py-3" title="Photos">
                                 <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ photos_count }}</div>
-                                <div class="stat-label text-muted small text-uppercase fw-medium">
-                                    <span class="d-none d-md-inline">Photos</span>
-                                    <span class="d-md-none">Pics</span>
+                                <div class="stat-label text-muted small fw-medium">
+                                    <i class="fas fa-camera"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
-                            <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none">
+                            <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none" title="Followers">
                                 <div class="stat-item text-center py-3 stat-clickable">
                                     <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ followers_count }}</div>
-                                    <div class="stat-label text-muted small text-uppercase fw-medium">Followers</div>
+                                    <div class="stat-label text-muted small fw-medium">
+                                        <i class="fas fa-users"></i>
+                                    </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-3">
-                            <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none">
+                            <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none" title="Following">
                                 <div class="stat-item text-center py-3 stat-clickable">
                                     <div class="stat-number h4 mb-1 fw-bold" style="color: var(--highlight);">{{ following_count }}</div>
-                                    <div class="stat-label text-muted small text-uppercase fw-medium">Following</div>
+                                    <div class="stat-label text-muted small fw-medium">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-3">
-                            <div class="stat-item text-center py-3">
+                            <div class="stat-item text-center py-3" title="Total Likes">
                                 <div class="stat-number h4 mb-1 fw-bold" style="color: var(--coral);">{{ total_likes }}</div>
-                                <div class="stat-label text-muted small text-uppercase fw-medium">
-                                    <i class="fas fa-heart me-1" style="color: var(--coral);"></i>Likes
+                                <div class="stat-label text-muted small fw-medium">
+                                    <i class="fas fa-heart" style="color: var(--coral);"></i>
                                 </div>
                             </div>
                         </div>
