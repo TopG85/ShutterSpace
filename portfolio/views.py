@@ -223,7 +223,11 @@ def edit_comment(request, comment_id):
 
 @login_required
 def delete_comment(request, comment_id):
-    # Allow both comment authors and photo owners to delete comments
+    """Allow comment authors and photo owners to delete comments.
+    
+    GET: Show confirmation page
+    POST: Actually delete the comment
+    """
     comment = get_object_or_404(Comment, id=comment_id)
 
     # Check if user is either the comment author or the photo owner
@@ -234,9 +238,17 @@ def delete_comment(request, comment_id):
             "You don't have permission to delete this comment."
         )
 
-    photo_id = comment.photo.id
-    comment.delete()
-    return redirect('photo_detail', photo_id=photo_id)
+    if request.method == 'POST':
+        # Delete the comment and redirect
+        photo_id = comment.photo.id
+        comment.delete()
+        return redirect('photo_detail', photo_id=photo_id)
+    
+    # If GET, show confirmation template
+    return render(request, 'confirm_delete_comment.html', {
+        'comment': comment,
+        'photo': comment.photo
+    })
 
 
 @login_required

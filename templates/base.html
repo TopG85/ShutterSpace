@@ -243,6 +243,7 @@
                 const icon = this.getNotificationIcon(notification.type);
                 const isUnread = !notification.is_read ? 'fw-bold' : '';
                 const timeAgo = this.timeAgo(new Date(notification.created_at));
+                const senderInfo = notification.sender_username ? ` from ${notification.sender_username}` : '';
                 
                 html += `
                     <li>
@@ -254,7 +255,9 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <div class="small">${notification.title}</div>
-                                    <div class="text-muted" style="font-size: 0.75rem;">${timeAgo}</div>
+                                    <div class="text-muted" style="font-size: 0.75rem;">
+                                        ${timeAgo}${senderInfo}
+                                    </div>
                                 </div>
                                 ${!notification.is_read ? '<span class="badge bg-primary ms-1">New</span>' : ''}
                             </div>
