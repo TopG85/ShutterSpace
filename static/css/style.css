@@ -1804,7 +1804,7 @@ footer.site-footer {
   /* Card improvements for desktop */
   .card {
     margin-bottom: 1.5rem !important;
-    border-radius: 12px !important;
+    border-radius: 16px !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease !important;
   }
   
@@ -1814,7 +1814,7 @@ footer.site-footer {
   }
   
   .card-body {
-    padding: 1.25rem !important;
+    padding: 2rem 1.75rem !important;
   }
   
   .card-img-wrapper {
@@ -1931,7 +1931,7 @@ footer.site-footer {
   }
   
   .card-body {
-    padding: 1.5rem !important;
+    padding: 2.25rem 2rem !important;
   }
   
   .card-img-wrapper {
