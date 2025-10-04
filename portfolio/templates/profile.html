@@ -156,26 +156,6 @@
                         </div>
                     {% endif %}
                 </div>
-                                Website
-                            </a>
-                        </div>
-                    {% endif %}
-                    
-                    {% if profile.instagram %}
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fab fa-instagram me-2 text-muted"></i>
-                            {% if profile.instagram|slice:":4" == 'http' %}
-                                <a href="{{ profile.instagram }}" target="_blank" rel="noopener" class="text-decoration-none">
-                                    Instagram
-                                </a>
-                            {% else %}
-                                <a href="https://instagram.com/{{ profile.instagram }}" target="_blank" rel="noopener" class="text-decoration-none">
-                                    @{{ profile.instagram }}
-                                </a>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                </div>
                 
                 <!-- Action Buttons -->
                 <div class="mt-3">
