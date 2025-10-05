@@ -115,16 +115,25 @@ def upload_photo(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            photo = form.save(commit=False)
-            photo.owner = request.user
-            photo.save()
+            try:
+                photo = form.save(commit=False)
+                photo.owner = request.user
+                photo.save()
 
-            # Optional: Create notification for followers
-            # (if follow system exists)
-            # For now, this is a placeholder for future enhancement
-            # create_notification_for_followers(request.user, photo)
+                # Optional: Create notification for followers
+                # (if follow system exists)
+                # For now, this is a placeholder for future enhancement
+                # create_notification_for_followers(request.user, photo)
 
-            return redirect('home')
+                return redirect('home')
+            except Exception as e:
+                # Handle upload errors gracefully
+                error_msg = (
+                    f"Upload failed: {str(e)}. Please try again with "
+                    "a smaller file or different format."
+                )
+                form.add_error(None, error_msg)
+        # If form is not valid, it will be re-rendered with errors
     else:
         form = PhotoForm()
     return render(request, 'upload_photo.html', {'form': form})

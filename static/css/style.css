@@ -478,9 +478,21 @@ p {
 }
 
 /* Special styling for photo cards */
+.photo-card {
+  height: 100%;
+}
+
 .photo-card .card-body {
   background: linear-gradient(180deg, var(--card-bg) 0%, rgba(242, 242, 242, 0.5) 100%);
   /* backdrop-filter removed for W3C validation compliance */
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-card .card-body .mt-2,
+.photo-card .card-body .mt-3 {
+  margin-top: auto !important;
 }
 
 /* Enhanced button styling with modern effects */

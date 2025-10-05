@@ -31,6 +31,34 @@
                             {{ form.image.label }}
                         </label>
                         {{ form.image }}
+                        
+                        <!-- File size and type information -->
+                        <div id="fileInfo" class="mt-2 d-none">
+                            <div class="alert alert-info mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-file-image me-2"></i>
+                                        <span id="fileName"></span>
+                                    </div>
+                                    <div>
+                                        <strong id="fileSize"></strong>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <div class="progress" style="height: 6px;">
+                                        <div id="sizeBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <small class="text-muted">Maximum file size: 10 MB</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Error display for file validation -->
+                        <div id="fileError" class="alert alert-danger d-none">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <span id="fileErrorMessage"></span>
+                        </div>
+                        
                         {% if form.image.help_text %}
                             <div class="form-text">
                                 <i class="fas fa-info-circle me-1"></i>{{ form.image.help_text }}
@@ -137,9 +165,85 @@
 document.addEventListener('DOMContentLoaded', function() {
     const titleField = document.getElementById('{{ form.title.id_for_label }}');
     const descriptionField = document.getElementById('{{ form.description.id_for_label }}');
+    const imageField = document.getElementById('{{ form.image.id_for_label }}');
     const titleCounter = document.getElementById('titleCounter');
     const descriptionCounter = document.getElementById('descriptionCounter');
     const submitBtn = document.getElementById('submitBtn');
+    
+    // File information elements
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const fileSize = document.getElementById('fileSize');
+    const sizeBar = document.getElementById('sizeBar');
+    const fileError = document.getElementById('fileError');
+    const fileErrorMessage = document.getElementById('fileErrorMessage');
+    
+    // File size limits
+    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
+    const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    
+    // Format file size for display
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // File validation and info display
+    function handleFileSelection() {
+        const file = imageField.files[0];
+        
+        // Hide previous states
+        fileInfo.classList.add('d-none');
+        fileError.classList.add('d-none');
+        imageField.classList.remove('is-invalid', 'is-valid');
+        
+        if (!file) return;
+        
+        let isValid = true;
+        let errorMsg = '';
+        
+        // Check file type
+        if (!ALLOWED_TYPES.includes(file.type)) {
+            errorMsg = 'Please select a valid image file (JPEG, PNG, GIF, or WebP).';
+            isValid = false;
+        }
+        
+        // Check file size
+        if (file.size > MAX_FILE_SIZE) {
+            errorMsg = `File size (${formatFileSize(file.size)}) exceeds the maximum limit of 10 MB.`;
+            isValid = false;
+        }
+        
+        if (!isValid) {
+            fileErrorMessage.textContent = errorMsg;
+            fileError.classList.remove('d-none');
+            imageField.classList.add('is-invalid');
+            return;
+        }
+        
+        // Display file information
+        fileName.textContent = file.name;
+        fileSize.textContent = formatFileSize(file.size);
+        
+        // Update progress bar based on file size (0-100% relative to max size)
+        const percentage = (file.size / MAX_FILE_SIZE) * 100;
+        sizeBar.style.width = percentage + '%';
+        
+        // Color code the progress bar
+        if (percentage < 50) {
+            sizeBar.className = 'progress-bar bg-success';
+        } else if (percentage < 80) {
+            sizeBar.className = 'progress-bar bg-warning';
+        } else {
+            sizeBar.className = 'progress-bar bg-danger';
+        }
+        
+        fileInfo.classList.remove('d-none');
+        imageField.classList.add('is-valid');
+    }
     
     // Character counters
     function updateTitleCounter() {
@@ -157,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners for real-time feedback
     titleField.addEventListener('input', updateTitleCounter);
     descriptionField.addEventListener('input', updateDescriptionCounter);
+    imageField.addEventListener('change', handleFileSelection);
     
     // Initialize counters
     updateTitleCounter();
@@ -166,6 +271,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = titleField.closest('form');
     form.addEventListener('submit', function(e) {
         let isValid = true;
+        
+        // File validation
+        const file = imageField.files[0];
+        if (!file) {
+            fileErrorMessage.textContent = 'Please select an image to upload.';
+            fileError.classList.remove('d-none');
+            imageField.classList.add('is-invalid');
+            isValid = false;
+        } else if (file.size > MAX_FILE_SIZE) {
+            fileErrorMessage.textContent = `File size (${formatFileSize(file.size)}) exceeds the maximum limit of 10 MB.`;
+            fileError.classList.remove('d-none');
+            imageField.classList.add('is-invalid');
+            isValid = false;
+        } else if (!ALLOWED_TYPES.includes(file.type)) {
+            fileErrorMessage.textContent = 'Please select a valid image file (JPEG, PNG, GIF, or WebP).';
+            fileError.classList.remove('d-none');
+            imageField.classList.add('is-invalid');
+            isValid = false;
+        }
         
         // Title validation
         const title = titleField.value.trim();
@@ -193,11 +317,21 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.classList.add('btn-danger');
             submitBtn.classList.remove('btn-primary');
             
+            // Scroll to first error
+            const firstError = form.querySelector('.is-invalid');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
             setTimeout(() => {
                 submitBtn.innerHTML = '<i class="fas fa-upload me-1"></i>Upload Photo';
                 submitBtn.classList.remove('btn-danger');
                 submitBtn.classList.add('btn-primary');
             }, 3000);
+        } else {
+            // Show upload progress
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Uploading...';
+            submitBtn.disabled = true;
         }
     });
 });
