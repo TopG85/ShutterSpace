@@ -17,7 +17,7 @@ from django.contrib import messages
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Import env.py if it exists in the project root
 if os.path.isfile(os.path.join(BASE_DIR, 'env.py')):
@@ -106,7 +106,7 @@ ROOT_URLCONF = 'shutterspace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+    'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -211,9 +211,8 @@ MESSAGE_TAGS = {
 
 # Use leading slashes for URL settings so URLs are absolute and consistent
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Media URL/root are defined near the top of this file to avoid duplicates
 # MEDIA_URL = '/media/'
