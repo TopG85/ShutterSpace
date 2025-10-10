@@ -3,34 +3,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% block title %}ShutterSpace{% endblock %}</title>
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}" />
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.svg' %}" />
-
-    <!-- Font Awesome -->
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link
+      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    {% block extras %}{% endblock %}
   </head>
-
   <body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">ShutterSpace</a>
+        <a class="navbar-brand fw-bold" href="/">ShutterSpace</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -43,76 +34,48 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             {% if user.is_authenticated %}
-            <!-- Upload link removed from navbar -->
-            {% endif %}
-          </ul>
-          <form
-            class="d-flex me-4 search-form"
-            action="{% url 'home' %}"
-            method="get"
-          >
-            <input
-              class="form-control form-control-sm me-2"
-              type="search"
-              placeholder="Search photos, users..."
-              aria-label="Search"
-              name="q"
-            />
-            <button class="btn btn-sm btn-primary px-3" type="submit">
-              <i class="fas fa-search d-md-none"></i>
-              <span class="d-none d-md-inline">Search</span>
-            </button>
-          </form>
-
-          <ul class="navbar-nav">
-            {% if user.is_authenticated %}
-            <!-- Notifications Dropdown -->
             <li class="nav-item dropdown me-2">
               <a
                 class="nav-link position-relative"
                 href="#"
-                id="notificationDropdown"
+                id="notificationsDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                title="Notifications"
               >
                 <i class="fas fa-bell"></i>
                 <span
+                  id="notification-badge"
                   class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                  id="notificationCounter"
-                  style="display: none"
+                  style="display: none; font-size: 0.7em; min-width: 1.5em"
+                  >0</span
                 >
-                  0
-                </span>
               </a>
               <ul
-                class="dropdown-menu dropdown-menu-end notification-dropdown"
-                aria-labelledby="notificationDropdown"
+                class="dropdown-menu dropdown-menu-end notification-dropdown p-0"
+                aria-labelledby="notificationsDropdown"
+                id="notificationsDropdownMenu"
               >
-                <li
-                  class="dropdown-header d-flex justify-content-between align-items-center"
-                >
-                  <span>Notifications</span>
-                  <a
-                    href="{% url 'notifications_list' %}"
-                    class="btn btn-sm btn-outline-primary"
-                  >
-                    <span class="d-none d-md-inline">View All</span>
-                    <i class="fas fa-list d-md-none"></i>
-                  </a>
+                <li class="p-0">
+                  <div class="card shadow-sm form-contrast m-2 mb-0">
+                    <div class="card-header py-2 px-3 d-flex align-items-center">
+                      <i class="fas fa-bell me-2"></i>
+                      <span class="fw-bold">Notifications</span>
+                    </div>
+                    <div class="card-body p-2" id="notificationsCardBody">
+                      <div id="notifications-loading">
+                        <span class="dropdown-item text-muted">
+                          <i class="fas fa-spinner fa-spin me-2"></i>Loading...
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </li>
-                <li><hr class="dropdown-divider" /></li>
-                <div id="notificationDropdownContent">
-                  <li class="dropdown-item-text text-muted text-center py-3">
-                    <i class="fas fa-spinner fa-spin"></i> Loading...
-                  </li>
-                </div>
               </ul>
             </li>
-
-            <!-- User Dropdown -->
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -122,19 +85,18 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {{ user.username }}
+                <i class="fas fa-user-circle me-1"></i> {{ user.username }}
               </a>
               <ul
-                class="dropdown-menu dropdown-menu-end user-dropdown"
+                class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="userDropdown"
               >
                 <li>
                   <a
                     class="dropdown-item"
                     href="{% url 'profile_view' user.username %}"
+                    ><i class="fas fa-user me-2"></i>My Profile</a
                   >
-                    <i class="fas fa-user me-2"></i>My profile
-                  </a>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
@@ -147,247 +109,126 @@
                 </li>
               </ul>
             </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            {% endif %}
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
           </ul>
         </div>
       </div>
     </nav>
 
-    <main class="container mt-4">{% block content %} {% endblock %}</main>
+    <!-- Main content block can go here -->
+    {% block content %}{% endblock %}
 
-    <footer class="site-footer mt-5">
-      <div class="container text-center">
-        <small class="text-muted"
-          >&copy; {{ now|date:"Y" }} ShutterSpace — Built with ❤️</small
-        >
-      </div>
-    </footer>
-
+    <!-- Bootstrap and other JavaScript dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      // CSRF helper for fetch
-      function getCookie(name) {
+      document.addEventListener('DOMContentLoaded', function () {
+        var dropdown = document.getElementById('notificationsDropdown');
+        var menu = document.getElementById('notificationsDropdownMenu');
+        var badge = document.getElementById('notification-badge');
+
+        // Function to update badge
+        function updateNotificationBadge() {
+          fetch('{% url 'notifications_count' %}')
+            .then(response => response.json())
+            .then(data => {
+              if (data.unread_count > 0) {
+                badge.textContent = data.unread_count > 99 ? '99+' : data.unread_count;
+                badge.style.display = 'inline-block';
+              } else {
+                badge.style.display = 'none';
+              }
+            })
+            .catch(error => console.error('Error fetching notification count:', error));
+        }
+
+        // Initial badge update
+        updateNotificationBadge();
+        // Optionally, poll every 60 seconds
+        setInterval(updateNotificationBadge, 60000);
+
+        if (dropdown && menu) {
+          dropdown.addEventListener('show.bs.dropdown', function () {
+            // Mark all notifications as read when dropdown is opened
+            fetch('{% url 'notifications_mark_all_read' %}', {
+              method: 'POST',
+              headers: { 'X-CSRFToken': getCSRFToken() },
+            })
+              .then(response => response.json())
+              .then(result => {
+                if (!result.success) {
+                  console.error('Failed to mark notifications as read:', result.error);
+                  document.getElementById('notificationsCardBody').innerHTML =
+                    '<span class="dropdown-item text-danger">Error marking notifications as read</span>';
+                  return;
+                }
+                updateNotificationBadge();
+                // Then reload the dropdown list
+                fetch('{% url 'notifications_dropdown' %}')
+                  .then(response => response.json())
+                  .then(data => {
+                    let html = '';
+                    if (data.notifications.length === 0) {
+                      html += `<a class="dropdown-item text-muted" href="{% url 'notifications_list' %}">
+                          <i class="fas fa-bell-slash me-2"></i>No new notifications
+                        </a>`;
+                    } else {
+                      data.notifications.forEach(function (n) {
+                        html += `<a class="dropdown-item${
+                            n.is_read ? ' notification-read' : ' fw-bold'
+                          }" href="${n.url}">
+                            <i class="fas fa-bell me-2"></i>${n.title}<br><small class="text-muted">${
+                          n.created_at
+                        }</small>
+                          </a>`;
+                      });
+                    }
+                    html += '<hr class="dropdown-divider my-2">';
+                    html += '<a class="dropdown-item text-center" href="{% url 'notifications_list' %}">View all notifications</a>';
+                    document.getElementById('notificationsCardBody').innerHTML = html;
+                  })
+                  .catch(err => {
+                    console.error('AJAX error:', err);
+                    document.getElementById('notificationsCardBody').innerHTML =
+                      '<span class="dropdown-item text-danger">Error loading notifications</span>';
+                  });
+              })
+              .catch(err => {
+                console.error('AJAX error:', err);
+                document.getElementById('notificationsCardBody').innerHTML =
+                  '<span class="dropdown-item text-danger">Error loading notifications</span>';
+              });
+          });
+        }
+
+        // Helper to get CSRF token from cookie
+        function getCSRFToken() {
           let cookieValue = null;
           if (document.cookie && document.cookie !== '') {
-              const cookies = document.cookie.split(';');
-              for (let i = 0; i < cookies.length; i++) {
-                  const cookie = cookies[i].trim();
-                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                      break;
-                  }
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, 10) === 'csrftoken=') {
+                cookieValue = decodeURIComponent(cookie.substring(10));
+                break;
               }
+            }
           }
           return cookieValue;
-      }
-
-      document.addEventListener('click', function(e) {
-          const likeBtn = e.target.closest('[data-like-button]');
-          if (!likeBtn) return;
-          e.preventDefault();
-          const photoId = likeBtn.dataset.photoId;
-          const countEl = document.querySelector(`[data-likes-count="${photoId}"]`);
-
-          // Optimistic UI: flip state locally first
-          const wasLiked = likeBtn.classList.contains('btn-danger');
-          let currentCount = countEl ? parseInt(countEl.textContent || '0', 10) : 0;
-          if (wasLiked) {
-              // assume unlike
-              likeBtn.classList.remove('btn-danger');
-              likeBtn.classList.add('btn-outline-danger');
-              likeBtn.textContent = '♡ Like';
-              if (countEl) countEl.textContent = Math.max(0, currentCount - 1);
-          } else {
-              // assume like
-              likeBtn.classList.add('btn-danger');
-              likeBtn.classList.remove('btn-outline-danger');
-              likeBtn.textContent = '♥ Liked';
-              if (countEl) countEl.textContent = currentCount + 1;
-          }
-
-          const url = `/portfolio/photo/${photoId}/like/`;
-          fetch(url, {
-              method: 'POST',
-              headers: {
-                  'X-CSRFToken': getCookie('csrftoken'),
-                  'Accept': 'application/json'
-              },
-          }).then(r => r.json()).then(data => {
-              // trust server response
-              if (countEl) countEl.textContent = data.likes_count;
-              if (data.liked) {
-                  likeBtn.classList.add('btn-danger');
-                  likeBtn.classList.remove('btn-outline-danger');
-                  likeBtn.textContent = '♥ Liked';
-              } else {
-                  likeBtn.classList.remove('btn-danger');
-                  likeBtn.classList.add('btn-outline-danger');
-                  likeBtn.textContent = '♡ Like';
-              }
-          }).catch(err => {
-              console.error('Like toggle failed', err);
-              // Revert optimistic UI change on error
-              if (wasLiked) {
-                  likeBtn.classList.add('btn-danger');
-                  likeBtn.classList.remove('btn-outline-danger');
-                  likeBtn.textContent = '♥ Liked';
-                  if (countEl) countEl.textContent = currentCount;
-              } else {
-                  likeBtn.classList.remove('btn-danger');
-                  likeBtn.classList.add('btn-outline-danger');
-                  likeBtn.textContent = '♡ Like';
-                  if (countEl) countEl.textContent = currentCount;
-              }
-          });
+        }
       });
-
-      {% if user.is_authenticated %}
-      // Notification System JavaScript
-      class NotificationManager {
-          constructor() {
-              this.counter = document.getElementById('notificationCounter');
-              this.dropdown = document.getElementById('notificationDropdownContent');
-              this.pollInterval = 30000; // Poll every 30 seconds
-              this.init();
-          }
-
-          init() {
-              this.updateCounter();
-              this.loadDropdownContent();
-
-              // Set up polling for real-time updates
-              setInterval(() => {
-                  this.updateCounter();
-              }, this.pollInterval);
-
-              // Load dropdown content when clicked
-              const dropdownToggle = document.getElementById('notificationDropdown');
-              dropdownToggle.addEventListener('click', () => {
-                  this.loadDropdownContent();
-              });
-          }
-
-          updateCounter() {
-              fetch('{% url "notifications_count" %}')
-                  .then(response => response.json())
-                  .then(data => {
-                      if (data.unread_count > 0) {
-                          this.counter.textContent = data.unread_count > 99 ? '99+' : data.unread_count;
-                          this.counter.style.display = 'inline';
-                      } else {
-                          this.counter.style.display = 'none';
-                      }
-                  })
-                  .catch(error => console.error('Error updating notification counter:', error));
-          }
-
-          loadDropdownContent() {
-              this.dropdown.innerHTML = '<li class="dropdown-item-text text-muted text-center py-3"><i class="fas fa-spinner fa-spin"></i> Loading...</li>';
-
-              fetch('{% url "notifications_dropdown" %}')
-                  .then(response => response.json())
-                  .then(data => {
-                      this.renderDropdownContent(data.notifications);
-                  })
-                  .catch(error => {
-                      console.error('Error loading notifications:', error);
-                      this.dropdown.innerHTML = '<li class="dropdown-item-text text-muted text-center py-3">Error loading notifications</li>';
-                  });
-          }
-
-          renderDropdownContent(notifications) {
-              if (notifications.length === 0) {
-                  this.dropdown.innerHTML = '<li class="dropdown-item-text text-muted text-center py-3">No notifications</li>';
-                  return;
-              }
-
-              let html = '';
-              notifications.forEach(notification => {
-                  const icon = this.getNotificationIcon(notification.type);
-                  const isUnread = !notification.is_read ? 'fw-bold' : '';
-                  const timeAgo = this.timeAgo(new Date(notification.created_at));
-                  const senderInfo = notification.sender_username ? ` from ${notification.sender_username}` : '';
-
-                  html += `
-                      <li>
-                          <a class="dropdown-item py-2 ${isUnread}" href="${notification.url}"
-                             onclick="markNotificationAsRead(${notification.id})">
-                              <div class="d-flex align-items-start">
-                                  <div class="me-2 text-muted">
-                                      <i class="${icon}"></i>
-                                  </div>
-                                  <div class="flex-grow-1">
-                                      <div class="small">${notification.title}</div>
-                                      <div class="text-muted" style="font-size: 0.75rem;">
-                                          ${timeAgo}${senderInfo}
-                                      </div>
-                                  </div>
-                                  ${!notification.is_read ? '<span class="badge bg-primary ms-1">New</span>' : ''}
-                              </div>
-                          </a>
-                      </li>
-                  `;
-              });
-
-              this.dropdown.innerHTML = html;
-          }
-
-          getNotificationIcon(type) {
-              const icons = {
-                  'like': 'fas fa-heart text-danger',
-                  'comment': 'fas fa-comment text-primary',
-                  'follow': 'fas fa-user-plus text-success',
-                  'photo_upload': 'fas fa-camera text-info'
-              };
-              return icons[type] || 'fas fa-bell text-secondary';
-          }
-
-          timeAgo(date) {
-              const now = new Date();
-              const diffInSeconds = Math.floor((now - date) / 1000);
-
-              if (diffInSeconds < 60) return 'Just now';
-              if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
-              if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
-              return `${Math.floor(diffInSeconds / 86400)}d ago`;
-          }
-      }
-
-      // Global function to mark notification as read
-      window.markNotificationAsRead = function(notificationId) {
-          fetch(`{% url "notifications_mark_read" 0 %}`.replace('0', notificationId), {
-              method: 'POST',
-              headers: {
-                  'X-CSRFToken': getCookie('csrftoken'),
-                  'Content-Type': 'application/json',
-              },
-          })
-          .then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  // Update counter after marking as read
-                  setTimeout(() => {
-                      window.notificationManager.updateCounter();
-                  }, 500);
-              }
-          })
-          .catch(error => console.error('Error marking notification as read:', error));
-      };
-
-      // Initialize notification manager when DOM is loaded
-      document.addEventListener('DOMContentLoaded', function() {
-          window.notificationManager = new NotificationManager();
-      });
-
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-      {% block extras %}
-      {% endif %}
     </script>
+    <style>
+      .notification-read {
+        opacity: 0.5;
+        pointer-events: auto;
+      }
+    </style>
   </body>
 </html>

@@ -39,7 +39,7 @@
 <div class="row">
     <div class="col-lg-3 mb-4">
         <div class="card profile-sidebar">
-            <div class="card-body text-center">
+            <div class="card-body text-center sidebar-dark-bg">
                 {% if not profile.hero_image %}
                     {% if profile and profile.avatar %}
                         <img 
@@ -59,8 +59,8 @@
                 
                 <!-- Profile Stats -->
                 <div class="profile-stats-container mb-4">
-                    <div class="row text-center">
-                        <div class="col-3">
+                    <div class="profile-stats-row row text-center">
+                        <div class="profile-stats-col col-3">
                             <div class="py-2">
                                 <div class="h5 mb-1 fw-bold stat-number">{{ photos_count }}</div>
                                 <div>
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="profile-stats-col col-3">
                             <a href="{% url 'followers_list' username=owner.username %}" class="text-decoration-none">
                                 <div class="py-2">
                                     <div class="h5 mb-1 fw-bold stat-number">{{ followers_count }}</div>
@@ -78,7 +78,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-3">
+                        <div class="profile-stats-col col-3">
                             <a href="{% url 'following_list' username=owner.username %}" class="text-decoration-none">
                                 <div class="py-2">
                                     <div class="h5 mb-1 fw-bold stat-number">{{ following_count }}</div>
@@ -88,7 +88,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-3">
+                        <div class="profile-stats-col col-3">
                             <div class="py-2">
                                 <div class="h5 mb-1 fw-bold stat-number">{{ total_likes }}</div>
                                 <div>
@@ -206,7 +206,7 @@
                                     <small class="ms-2" data-likes-count="{{ photo.id }}">{{ photo.likes.count }}</small>
                                 </div>
                                 <div>
-                                    <a href="{% url 'add_comment' photo.id %}" class="btn btn-sm btn-secondary">Comment</a>
+                                    <a href="{% url 'photo_detail' photo.id %}" class="btn btn-sm btn-secondary">Comment</a>
                                     {% if user.is_authenticated and user == owner %}
                                         <button type="button" class="btn btn-sm btn-outline-danger ms-1" 
                                                 data-bs-toggle="modal" 

@@ -1,44 +1,190 @@
-/* Color palette variables - Warm Sophisticated Theme */
-:root {
-  /* Core sophisticated palette */
-  --primary: #1c1c1c;        /* Rich black */
-  --secondary: #2a2a2a;      /* Warm charcoal */
-  --accent: #f8f8f2;         /* Cream white */
-  --highlight: #d4a574;      /* Warm caramel */
-  --tertiary: #8b6f47;       /* Coffee brown */
-  --danger: #a0522d;         /* Warm sienna brown for danger actions */
-  
-  /* Legacy color support (refined) */
-  --sand: #d4a574;           /* Updated to warm caramel */
-  --rose: #e8d5d0;           /* Warmer rose tone */
-  --coral: #c8956d;          /* Sophisticated coral-brown */
-  --light: #f8f8f2;          /* Cream white */
-  --dark: #1c1c1c;           /* Rich black */
-  --muted: #8b7355;          /* Warm muted brown */
-  
-  /* Dark theme colors - refined */
-  --bg-primary: #1c1c1c;     /* Rich black */
-  --bg-secondary: #2a2a2a;   /* Warm charcoal */
-  --text-primary: #f8f8f2;   /* Cream white */
-  --text-secondary: #d4c19f; /* Warm secondary text */
-  --card-bg: #252525;        /* Slightly warmer card background */
-  --border-color: #3d3529;   /* Warm border color */
-  --container-max-width: 1100px;
+.card.mb-4 {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Utility classes */
-.bg-sand { background-color: #d4a574 !important; background-color: var(--sand) !important; }
-.bg-rose { background-color: #e8d5d0 !important; background-color: var(--rose) !important; }
-.bg-coral { background-color: #c8956d !important; background-color: var(--coral) !important; }
-.bg-light { background-color: #2a2a2a !important; background-color: var(--bg-secondary) !important; }
-.bg-dark { background-color: #1c1c1c !important; background-color: var(--bg-primary) !important; color: #f8f8f2; color: var(--text-primary); }
+.card-body {
+  /* width reset */
+}
 
-.text-sand { color: #d4a574 !important; color: var(--sand) !important; }
-.text-rose { color: #e8d5d0 !important; color: var(--rose) !important; }
-.text-coral { color: #c8956d !important; color: var(--coral) !important; }
-.text-light { color: #f8f8f2 !important; color: var(--text-primary) !important; }
-.text-dark { color: #d4c19f !important; color: var(--text-secondary) !important; }
-.text-muted { color: #d4c19f !important; color: var(--text-secondary) !important; }
+/* Consistent width for all comment-related card bodies */
+.comment-card-body {
+  /* width reset */
+}
+.photo-card .card-body,
+.card.mb-4 .card-body {
+  /* width reset */
+}
+.card.photo-card {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.photo-card .card-body,
+.photo-card .text-center.p-3 {
+  background: #000 !important;
+}
+.photo-detail-image {
+  background: #000 !important;
+}
+.photo-card .card-body {
+  background: #000000 !important;
+}
+.photo-card .card {
+  background: #000000 !important;
+}
+/* Notifications dropdown menu dark background */
+.dropdown-menu.notification-dropdown {
+  background-color: #212529 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+/* Notifications bell dropdown trigger dark background */
+#notificationsDropdown.nav-link {
+  background: var(--card-bg, #252525) !important;
+  color: var(--text-primary, #f8f8f2) !important;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+#notificationsDropdown.nav-link:hover, #notificationsDropdown.nav-link:focus {
+  background: #1c1c1c !important;
+  color: #fff !important;
+}
+/* Custom styles for ShutterSpace */ /* Color palette variables - Warm Sophisticated Theme */
+
+:root {
+  body {
+    /* Core sophisticated palette */
+
+    background-color: #f8f9fa;
+    --primary: #1c1c1c; /* Rich black */
+
+    color: #222;
+    --secondary: #2a2a2a; /* Warm charcoal */
+
+    font-family: "Inter", Arial, sans-serif;
+    --accent: #f8f8f2; /* Cream white */
+  }
+  --highlight: #d4a574; /* Warm caramel */
+
+  --tertiary: #8b6f47; /* Coffee brown */
+
+  .navbar {
+    --danger: #a0522d; /* Warm sienna brown for danger actions */
+
+    background-color: #fff;
+
+    border-bottom: 1px solid #e5e5e5; /* Legacy color support (refined) */
+  }
+  --sand: #d4a574; /* Updated to warm caramel */
+
+  --rose: #e8d5d0; /* Warmer rose tone */
+
+  .sidebar {
+    --coral: #c8956d; /* Sophisticated coral-brown */
+
+    background: #f4f4f4;
+    --light: #f8f8f2; /* Cream white */
+
+    border-right: 1px solid #e5e5e5;
+    --dark: #1c1c1c; /* Rich black */
+  }
+  --muted: #8b7355; /* Warm muted brown */
+
+  .card {
+    /* Dark theme colors - refined */
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --bg-primary: #1c1c1c; /* Rich black */
+
+    border-radius: 12px;
+    --bg-secondary: #2a2a2a; /* Warm charcoal */
+
+    border: 1px solid #e5e5e5;
+    --text-primary: #f8f8f2; /* Cream white */
+
+    background: #fff;
+    --text-secondary: #d4c19f; /* Warm secondary text */
+  }
+  --card-bg: #252525; /* Slightly warmer card background */
+
+  --border-color: #3d3529; /* Warm border color */
+
+  .btn-primary {
+    --container-max-width: 1100px;
+
+    background: #007bff;
+  }
+
+  border: none;
+
+  border-radius: 6px; /* Utility classes */
+
+  transition: background 0.2s;
+  .bg-sand {
+    background-color: #d4a574 !important;
+    background-color: var(--sand) !important;
+  }
+}
+.bg-rose {
+  background-color: #e8d5d0 !important;
+  background-color: var(--rose) !important;
+}
+
+.bg-coral {
+  background-color: #c8956d !important;
+  background-color: var(--coral) !important;
+}
+
+.btn-primary:hover {
+  .bg-light {
+    background-color: #2a2a2a !important;
+    background-color: var(--bg-secondary) !important;
+  }
+
+  background: #0056b3;
+  .bg-dark {
+    background-color: #1c1c1c !important;
+    background-color: var(--bg-primary) !important;
+    color: #f8f8f2;
+    color: var(--text-primary);
+  }
+}
+
+.text-sand {
+  color: #d4a574 !important;
+  color: var(--sand) !important;
+}
+
+.form-control {
+  .text-rose {
+    color: #e8d5d0 !important;
+    color: var(--rose) !important;
+  }
+
+  border-radius: 6px;
+  .text-coral {
+    color: #c8956d !important;
+    color: var(--coral) !important;
+  }
+
+  border: 1px solid #ced4da;
+  .text-light {
+    color: #f8f8f2 !important;
+    color: var(--text-primary) !important;
+  }
+}
+.text-dark {
+  color: #d4c19f !important;
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: #ffe6b0 !important;
+  /* Soft light gold for better contrast on dark backgrounds */
+}
+
+/* Add more custom styles as needed */
 
 /* General responsive improvements */
 img {
@@ -77,17 +223,17 @@ img {
     flex: 0 0 33.333333% !important;
     max-width: 33.333333% !important;
   }
-  
+
   .col-lg-3 {
     flex: 0 0 25% !important;
     max-width: 25% !important;
   }
-  
+
   .col-lg-6 {
     flex: 0 0 50% !important;
     max-width: 50% !important;
   }
-  
+
   .col-lg-8 {
     flex: 0 0 66.666667% !important;
     max-width: 66.666667% !important;
@@ -131,12 +277,12 @@ img {
 
 /* Basic layout */
 body {
-  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: #1c1c1c;
   background: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 100%);
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  color: #f8f8f2;
-  color: var(--text-primary);
+  color: #f9fafb;
+  color: #fff;
   line-height: 1.6;
   letter-spacing: -0.01em;
   margin: 0;
@@ -149,17 +295,19 @@ body {
 }
 
 /* Global link styles: use sophisticated coral accent */
-a, a:link, a:visited {
-  color: #c8956d;
-  color: var(--coral);
+a,
+a:link,
+a:visited {
+  color: #ffd580;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
   text-decoration: none;
   font-weight: 500;
 }
 
-a:hover, a:focus {
+a:hover,
+a:focus {
   /* Use the warm caramel for hover to ensure contrast */
-  color: #d4a574; /* warm caramel */
-  color: var(--highlight); /* warm caramel */
+  color: #fffbe6;
   text-decoration: underline;
 }
 
@@ -171,7 +319,8 @@ a:hover, a:focus {
   text-decoration: none;
 }
 
-.small a:hover, .small a:focus {
+.small a:hover,
+.small a:focus {
   text-decoration: underline;
 }
 
@@ -196,17 +345,19 @@ main.container {
   background: rgba(42, 42, 42, 0.95) !important;
 }
 
-.navbar-brand { 
-  font-weight: 700; 
+.navbar-brand {
+  font-weight: 700;
   font-size: 1.75rem;
   letter-spacing: -0.02em;
-  color: var(--text-primary) !important;
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
   transition: transform 0.2s ease;
 }
 
 .navbar-nav .nav-link {
   font-weight: 500;
-  color: var(--text-primary) !important;
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
   transition: all 0.3s ease;
   position: relative;
   padding: 0.75rem 1.25rem !important;
@@ -214,7 +365,7 @@ main.container {
 }
 
 .navbar-nav .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -235,34 +386,38 @@ main.container {
 }
 
 /* Enhanced typography with better hierarchy - Dark Theme */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #f8f8f2;
-  color: var(--text-primary);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
   margin-bottom: 1.2rem;
   position: relative;
 }
 
-h1 { 
-  font-size: 3rem; 
+h1 {
+  font-size: 3rem;
   line-height: 1.1;
   font-weight: 700;
 }
-h2 { 
-  font-size: 2.25rem; 
+h2 {
+  font-size: 2.25rem;
   line-height: 1.2;
   margin-bottom: 2rem;
 }
-h3 { 
-  font-size: 1.75rem; 
+h3 {
+  font-size: 1.75rem;
   line-height: 1.3;
   margin-bottom: 1.5rem;
 }
 
 /* Enhanced section headings */
 h2::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 0;
@@ -275,7 +430,7 @@ h2::after {
 .display-4 {
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1.0;
+  line-height: 1;
   font-size: 3.5rem;
 }
 
@@ -323,8 +478,8 @@ p {
   line-height: 1.5;
 }
 
-.card { 
-  border-radius: 16px; 
+.card {
+  border-radius: 16px;
   border: none;
   overflow: hidden;
 }
@@ -333,9 +488,7 @@ p {
 .card {
   background: #252525;
   background: var(--card-bg);
-  box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
@@ -346,26 +499,28 @@ p {
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 50%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
-.card { 
+.card {
   background: var(--card-bg);
   /* backdrop-filter removed for W3C validation compliance */
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  box-shadow: 
-    0 10px 20px rgba(0, 0, 0, 0.2),
-    0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15);
   transition: none;
 }
 
@@ -410,13 +565,17 @@ p {
   padding-top: 80%; /* 5:4 aspect ratio */
 }
 .card-img-wrapper::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(13, 13, 13, 0.1) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(13, 13, 13, 0.1) 100%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -436,7 +595,8 @@ p {
   font-weight: 600;
   font-size: 1.125rem;
   margin-bottom: 0.75rem;
-  color: var(--text-primary);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
@@ -483,7 +643,11 @@ p {
 }
 
 .photo-card .card-body {
-  background: linear-gradient(180deg, var(--card-bg) 0%, rgba(242, 242, 242, 0.5) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--card-bg) 0%,
+    rgba(242, 242, 242, 0.5) 100%
+  );
   /* backdrop-filter removed for W3C validation compliance */
   min-height: 200px;
   display: flex;
@@ -509,13 +673,18 @@ p {
 }
 
 .btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s;
 }
 
@@ -527,8 +696,16 @@ p {
 .btn.btn-primary,
 .btn.btn-sm.btn-primary {
   background: #8b6f47; /* Coffee brown fallback */
-  background: linear-gradient(135deg, #8b6f47 0%, #1c1c1c 100%); /* Using darker coffee brown to rich black */
-  background: linear-gradient(135deg, var(--tertiary) 0%, var(--primary) 100%); /* Using darker coffee brown to rich black */
+  background: linear-gradient(
+    135deg,
+    #8b6f47 0%,
+    #1c1c1c 100%
+  ); /* Using darker coffee brown to rich black */
+  background: linear-gradient(
+    135deg,
+    var(--tertiary) 0%,
+    var(--primary) 100%
+  ); /* Using darker coffee brown to rich black */
   color: #f8f8f2 !important; /* Using cream white for maximum contrast */
   color: var(--accent) !important; /* Using cream white for maximum contrast */
   box-shadow: 0 2px 4px rgba(139, 111, 71, 0.3);
@@ -540,12 +717,22 @@ p {
 
 .btn-primary:hover,
 .btn.btn-primary:hover,
-.btn.btn-sm.btn-primary:hover { 
+.btn.btn-sm.btn-primary:hover {
   background: #d4a574; /* Warm caramel fallback */
-  background: linear-gradient(135deg, #d4a574 0%, #c8956d 100%); /* Using warm caramel to coral */
-  background: linear-gradient(135deg, var(--highlight) 0%, var(--coral) 100%); /* Using warm caramel to coral */
+  background: linear-gradient(
+    135deg,
+    #d4a574 0%,
+    #c8956d 100%
+  ); /* Using warm caramel to coral */
+  background: linear-gradient(
+    135deg,
+    var(--highlight) 0%,
+    var(--coral) 100%
+  ); /* Using warm caramel to coral */
   color: #1c1c1c !important; /* Dark text on light background for contrast */
-  color: var(--primary) !important; /* Dark text on light background for contrast */
+  color: var(
+    --primary
+  ) !important; /* Dark text on light background for contrast */
   box-shadow: 0 4px 8px rgba(212, 165, 116, 0.4);
   transform: translateY(-1px);
 }
@@ -596,7 +783,7 @@ p {
 
 .btn-outline-danger:hover,
 .btn-outline-danger:focus {
-  background-color: rgba(255,105,87,0.08) !important; /* subtle coral tint */
+  background-color: rgba(255, 105, 87, 0.08) !important; /* subtle coral tint */
   color: var(--coral) !important;
 }
 
@@ -608,7 +795,7 @@ p {
 
 .navbar-dark .btn-outline-danger:hover,
 .bg-dark .btn-outline-danger:hover {
-  background-color: rgba(255,105,87,0.12) !important;
+  background-color: rgba(255, 105, 87, 0.12) !important;
   color: var(--light) !important;
 }
 
@@ -639,7 +826,11 @@ p {
 
 /* Featured card styling */
 .card-featured {
-  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(242, 242, 242, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--card-bg) 0%,
+    rgba(242, 242, 242, 0.9) 100%
+  );
   border: 2px solid var(--sand);
 }
 
@@ -655,17 +846,198 @@ p {
 }
 
 @keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Enhanced utility classes */
-.mb-sm { margin-bottom: 0.5rem !important; }
-.mt-sm { margin-top: 0.5rem !important; }
+.mb-sm {
+  margin-bottom: 0.5rem !important;
+}
+.mt-sm {
+  margin-top: 0.5rem !important;
+}
+
+/* ================================
+   DELETE COMMENT MODAL OVERRIDES
+   ================================ */
+#deleteCommentModal .alert-warning {
+  color: #fff !important;
+  background-color: #f0ad4e !important;
+  border-color: #eea236 !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+#deleteCommentModal .btn.btn-secondary {
+  color: #f8f9fa !important;
+  background-color: #495057 !important;
+  border-color: #495057 !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, color 0.2s;
+}
+#deleteCommentModal .btn.btn-secondary:hover, 
+#deleteCommentModal .btn.btn-secondary:focus {
+  background-color: #343a40 !important;
+  color: #fff !important;
+}
+/* End modal-specific delete comment form styles */
+.card > .card-header {
+  background: linear-gradient(135deg, var(--highlight) 0%, #b8956b 100%) !important;
+  color: var(--primary) !important;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.3);
+  padding: 1.25rem 1.5rem;
+  border-radius: 20px 20px 0 0;
+}
+.card > .card-header h3,
+.card > .card-header i {
+  color: var(--primary) !important;
+}
+.card > .card-body {
+  background: #23201b !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+/* Dark background for comments and add comment card bodies */
+.comments-card > .card-body,
+.add-comment-card > .card-body {
+  background: #23201b !important; /* warm dark brown */
+  color: #f8f8f2 !important;
+  border: none;
+}
+/* Sidebar card-body dark background for profile */
+.sidebar-dark-bg {
+  background: #181818 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+/* Ensure dark background for card-body.text-center in form-contrast cards */
+.form-contrast .card-body.text-center {
+  background: #181818 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+/* Match upload photo form header to edit profile header */
+.form-contrast .card-header.bg-primary {
+  background: linear-gradient(135deg, var(--highlight) 0%, #b8956b 100%) !important;
+  color: var(--primary) !important;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.3);
+  padding: 1.25rem 1.5rem;
+  border-radius: 20px 20px 0 0;
+}
+.form-contrast .card-header.bg-primary h3,
+.form-contrast .card-header.bg-primary i {
+  color: var(--primary) !important;
+}
+/* Ensure dark background for only the card body in form-contrast cards (applies to upload photo as well) */
+.form-contrast .card-body {
+  background: #181818 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+.form-contrast {
+  background: #181818 !important;
+}
+/* Ensure dark background for only the card body in form-contrast cards */
+.form-contrast .card-body {
+  background: #181818 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+/* High-contrast, consistent form style for all main forms */
+.form-contrast {
+  background: #181818 !important;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  padding: 2.5rem 2rem;
+/* Photo card body text color changed to black */
+  color: #000000;
+}
+.form-contrast label,
+.form-contrast .form-label,
+.form-contrast .form-check-label {
+  color: #ffd580;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.form-contrast .form-control,
+.form-contrast .form-select {
+  background: #232323;
+  color: #f8f8f2;
+  border: 1.5px solid #d4a574;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  box-shadow: none;
+  transition: border-color 0.2s;
+}
+.form-contrast .form-control:focus,
+.form-contrast .form-select:focus {
+  border-color: #ffd580;
+  background: #232323;
+  color: #fff;
+  outline: none;
+}
+.form-contrast .form-text,
+.form-contrast .form-check-label,
+.form-contrast .form-check-input {
+  color: #d4c19f;
+}
+.form-contrast .invalid-feedback,
+.form-contrast .alert-danger {
+  color: #fff;
+  background: #a0522d;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+}
+.form-contrast .btn-primary {
+  background: linear-gradient(90deg, #d4a574 0%, #c8956d 100%);
+  color: #181818;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(212,165,116,0.12);
+}
+.form-contrast .btn-primary:hover {
+  background: linear-gradient(90deg, #ffd580 0%, #d4a574 100%);
+  color: #181818;
+}
+.form-contrast .btn-outline-secondary {
+  border: 1.5px solid #ffd580;
+  color: #ffd580;
+  color: #ffd580;
+  background: transparent;
+}
+.form-contrast .btn-outline-secondary:hover {
+  background: #ffd580;
+  color: #181818;
+}
+/* Force profile stats horizontal on desktop */
+@media (min-width: 992px) {
+  .profile-stats-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .profile-stats-col {
+    flex: 1 1 0;
+    max-width: 25%;
+    text-align: center;
+  }
+}
 
 /* Footer */
-footer.site-footer { padding: 24px 0; color: var(--muted); }
-
+footer.site-footer {
+  padding: 24px 0;
+  color: var(--muted);
+}
 
 /* Enhanced jumbotron/hero section with sophisticated colors */
 .jumbotron {
@@ -675,24 +1047,27 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
   margin-bottom: 4rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 
-    0 20px 40px rgba(28, 28, 28, 0.3),
+  box-shadow: 0 20px 40px rgba(28, 28, 28, 0.3),
     0 10px 20px rgba(28, 28, 28, 0.2);
 }
 
 .jumbotron::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(212, 165, 116, 0.15) 0%, transparent 60%);
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(212, 165, 116, 0.15) 0%,
+    transparent 60%
+  );
   pointer-events: none;
 }
 
 .jumbotron::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -724,7 +1099,11 @@ footer.site-footer { padding: 24px 0; color: var(--muted); }
 
 div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   color: var(--accent) !important;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--secondary) 100%
+  ) !important;
 }
 
 /* Enhanced alert styling */
@@ -745,8 +1124,7 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   object-position: center center;
   display: block;
   border-radius: 12px;
-  box-shadow: 
-    0 10px 15px -3px rgba(13, 13, 13, 0.1),
+  box-shadow: 0 10px 15px -3px rgba(13, 13, 13, 0.1),
     0 4px 6px -2px rgba(13, 13, 13, 0.05);
   background: var(--light);
   margin: 0 auto;
@@ -759,13 +1137,17 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 }
 
 .photo-card::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(13, 13, 13, 0.1) 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(13, 13, 13, 0.1) 100%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -775,16 +1157,16 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 }
 
 /* Enhanced avatar styling */
-.avatar-sm { 
-  width: 120px; 
-  height: 120px; 
-  object-fit: cover; 
+.avatar-sm {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
   border: 3px solid white;
   box-shadow: 0 4px 8px rgba(13, 13, 13, 0.15);
 }
 
-.avatar-circle { 
-  border-radius: 50%; 
+.avatar-circle {
+  border-radius: 50%;
 }
 
 /* Enhanced avatar initials fallback */
@@ -857,7 +1239,6 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 .card-body {
   overflow-wrap: break-word !important;
   overflow-wrap: anywhere !important;
-  max-width: 100% !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
   /* Removed padding override to use base padding (1.75rem 1.5rem) like home page */
@@ -980,19 +1361,19 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
     margin-top: -1rem;
     margin-bottom: 1rem;
   }
-  
+
   .profile-hero-image {
     height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2rem !important;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem !important;
   }
-  
+
   .hero-avatar,
   .hero-avatar-initials {
     width: 80px !important;
@@ -1090,7 +1471,9 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 .btn-sm.btn-outline-secondary:hover {
   background-color: var(--accent);
   border-color: var(--highlight);
-  color: var(--primary) !important; /* Dark text on light background for contrast */
+  color: var(
+    --primary
+  ) !important; /* Dark text on light background for contrast */
 }
 
 .btn-sm.btn-outline-danger {
@@ -1134,16 +1517,18 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 
 /* Enhanced image effects */
 .card-img-wrapper::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, 
-    transparent 30%, 
-    rgba(255, 255, 255, 0.1) 50%, 
-    transparent 70%);
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
   opacity: 0;
   transition: all 0.6s ease;
   transform: translateX(-100%);
@@ -1162,11 +1547,11 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 }
 
 /* Enhanced profile stats with animations */
-.profile-stats { 
-  display: flex; 
+.profile-stats {
+  display: flex;
   /* gap replaced with margin for W3C validation compliance */
-  justify-content: center; 
-  margin-top: 2rem; 
+  justify-content: center;
+  margin-top: 2rem;
   padding: 1.5rem;
   background: var(--primary);
   border-radius: 16px;
@@ -1175,7 +1560,7 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   overflow: hidden;
 }
 
-.profile-stats .stat { 
+.profile-stats .stat {
   text-align: center;
   transition: transform 0.3s ease;
   margin: 0 0.5rem;
@@ -1210,9 +1595,9 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   margin: 0 auto;
 }
 
-.profile-meta { 
-  color: var(--text-primary); 
-  font-size: 0.9rem; 
+.profile-meta {
+  color: var(--text-primary);
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
@@ -1246,10 +1631,14 @@ label {
 }
 
 /* Enhanced footer */
-footer.site-footer { 
-  padding: 48px 0; 
+footer.site-footer {
+  padding: 48px 0;
   color: var(--text-secondary);
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(45, 45, 45, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 26, 0.9) 0%,
+    rgba(45, 45, 45, 0.9) 100%
+  );
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 4rem;
 }
@@ -1291,12 +1680,24 @@ footer.site-footer {
   animation: fadeInUp 0.6s ease-out backwards;
 }
 
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.6s; }
+.card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.card:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 .jumbotron {
   animation: slideInFromLeft 0.8s ease-out;
@@ -1313,29 +1714,33 @@ footer.site-footer {
     padding: 2.5rem 1.5rem;
     margin-bottom: 2rem;
   }
-  
+
   .profile-stats {
     /* gap replaced with margin for W3C validation compliance */
     padding: 1rem;
   }
-  
+
   .profile-stats .stat {
     margin: 0 8px;
   }
-  
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  
+
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+
   /* Mobile card adjustments - removed padding override to match home page */
-  
+
   /* Card image wrapper aspect ratio removed - using base 75% for consistency */
-  
+
   .card-meta {
     flex-direction: column;
     align-items: flex-start;
     /* gap replaced with margin for W3C validation compliance */
   }
-  
+
   .card-meta > * {
     margin-bottom: 0.5rem;
   }
@@ -1346,7 +1751,7 @@ footer.site-footer {
   .card {
     background: rgba(255, 255, 255, 0.95);
   }
-  
+
   .card-minimal {
     background: rgba(255, 255, 255, 0.9);
   }
@@ -1361,42 +1766,42 @@ footer.site-footer {
   :root {
     --container-max-width: 100%;
   }
-  
+
   .container {
     padding-left: 15px;
     padding-right: 15px;
   }
-  
+
   /* Navigation adjustments for mobile */
   .navbar {
     padding: 0.25rem 0;
   }
-  
+
   .navbar-brand {
     font-size: 1.1rem;
   }
-  
+
   .navbar-nav .nav-link {
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .navbar-nav .nav-link:last-child {
     border-bottom: none;
   }
-  
+
   /* Search form on mobile */
   .search-form {
     width: 100%;
     margin: 1rem 0;
     min-width: auto;
   }
-  
+
   .search-form .form-control {
     font-size: 16px; /* Prevents zoom on iOS */
   }
-  
+
   /* Dropdown positioning on mobile */
   .dropdown-menu {
     position: fixed !important;
@@ -1407,173 +1812,181 @@ footer.site-footer {
     max-width: none !important;
     transform: none !important;
   }
-  
+
   .notification-dropdown {
     width: auto !important;
   }
-  
+
   /* Typography for very small screens */
-  h1 { font-size: 1.75rem; }
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 1.25rem; }
-  h4 { font-size: 1.1rem; }
-  
+  h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 1.1rem;
+  }
+
   /* Card grid - single column */
   .row .col-md-4,
   .row .col-lg-4,
   .row .col-sm-6 {
     margin-bottom: 1.5rem;
   }
-  
+
   /* Profile section mobile adjustments */
   .profile-stats-container {
     margin-bottom: 2rem !important;
   }
-  
+
   .profile-stats-container .row {
     margin: 0;
   }
-  
+
   .profile-stats-container .col-3 {
     padding: 0 0.25rem;
   }
-  
+
   .stat-item {
     padding: 1rem 0.5rem !important;
   }
-  
+
   .stat-number {
     font-size: 1.25rem !important;
   }
-  
+
   .stat-label {
     font-size: 0.75rem !important;
   }
-  
+
   /* Button adjustments - larger touch targets */
   .btn {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     min-height: 44px; /* iOS minimum touch target */
   }
-  
+
   .btn-sm {
     padding: 0.5rem 1rem;
     min-height: 38px;
   }
-  
+
   /* Form adjustments */
   .form-control {
     font-size: 16px; /* Prevents zoom on iOS */
     padding: 0.75rem;
     min-height: 44px;
   }
-  
+
   .form-control:focus {
     border-color: var(--highlight);
     box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
   }
-  
+
   /* Form labels and text */
   .form-label {
     font-size: 1rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
   }
-  
+
   .form-text {
     font-size: 0.875rem;
   }
-  
+
   /* File input improvements */
   .form-control[type="file"] {
     padding: 0.5rem;
   }
-  
+
   /* Textarea improvements */
   textarea.form-control {
     min-height: 120px;
     resize: vertical;
   }
-  
+
   /* Form layout on mobile */
   .row .col-md-6 {
     margin-bottom: 1rem;
   }
-  
+
   /* Card forms mobile optimization */
   .card {
     border-radius: 12px;
     border: none;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   }
-  
+
   .card-header {
     border-radius: 12px 12px 0 0;
     border-bottom: none;
     padding: 1.25rem;
   }
-  
+
   /* Card body padding removed to match home page */
-  
+
   /* Jumbotron adjustments */
   .jumbotron {
     padding: 2rem 1.5rem !important;
     text-align: center;
   }
-  
+
   .display-4 {
     font-size: 2rem !important;
   }
-  
+
   /* Card improvements for mobile */
   .card {
     margin-bottom: 2rem;
     border-radius: 12px;
     overflow: hidden;
   }
-  
+
   /* Card body padding removed to match home page */
-  
+
   .card-title {
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
   }
-  
+
   /* Photo card specific adjustments - removed to match home page cards */
-  
+
   /* Profile page mobile optimizations */
   .profile-sidebar {
     margin-bottom: 2rem;
   }
-  
+
   .profile-photos-section h2 {
     font-size: 1.5rem;
   }
-  
+
   .photo-grid .col-sm-6 {
     flex: 0 0 100%;
     max-width: 100%;
   }
-  
+
   /* Hero section mobile adjustments */
   .profile-hero-image {
     height: 300px !important;
   }
-  
+
   .hero-content {
     padding: 1rem;
   }
-  
+
   .hero-title {
     font-size: 1.75rem !important;
   }
-  
+
   .hero-subtitle {
     font-size: 0.9rem !important;
     margin-bottom: 0.5rem;
   }
-  
+
   .hero-avatar,
   .hero-avatar-initials {
     width: 70px !important;
@@ -1587,57 +2000,57 @@ footer.site-footer {
   :root {
     --container-max-width: 540px;
   }
-  
+
   /* Navigation improvements */
   .search-form {
     min-width: 250px;
   }
-  
+
   /* Two-column layout for small tablets */
   .row .col-md-4 {
     flex: 0 0 50%;
     max-width: 50%;
   }
-  
+
   /* Adjust card spacing */
   .card {
     margin-bottom: 1.5rem;
   }
-  
+
   /* Profile hero adjustments */
   .profile-hero-image {
     height: 350px;
   }
-  
+
   .hero-title {
     font-size: 2.25rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   /* Profile stats responsive */
   .profile-stats-container .col-3 {
     padding: 0 0.5rem;
   }
-  
+
   .stat-item {
     padding: 1.25rem 0.75rem !important;
   }
-  
+
   /* Button improvements */
   .btn {
     min-height: 40px;
   }
-  
+
   /* Form improvements */
   .form-control {
     min-height: 40px;
   }
-  
+
   /* Card body padding removed to match home page */
-  
+
   /* Profile photos responsive layout */
   .photo-grid .col-sm-6 {
     flex: 0 0 50%;
@@ -1650,53 +2063,53 @@ footer.site-footer {
   :root {
     --container-max-width: 720px;
   }
-  
+
   /* Three-column layout for tablets */
   .row .col-md-4 {
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
   }
-  
+
   /* Navigation improvements */
   .search-form {
     min-width: 280px;
   }
-  
+
   /* Profile hero adjustments */
   .profile-hero-image {
     height: 450px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.2rem;
   }
-  
+
   /* Profile stats for tablets */
   .profile-stats-container .col-3 {
     padding: 0 0.75rem;
   }
-  
+
   .stat-item {
     padding: 1.5rem 1rem !important;
   }
-  
+
   /* Card improvements */
   .card {
     margin-bottom: 2rem;
   }
-  
+
   /* Card body padding removed - using base padding to match home page */
-  
+
   /* Touch-friendly buttons */
   .btn {
     min-height: 42px;
     padding: 0.625rem 1.25rem;
   }
-  
+
   .btn-sm {
     min-height: 36px;
     padding: 0.5rem 1rem;
@@ -1708,103 +2121,103 @@ footer.site-footer {
   :root {
     --container-max-width: 960px;
   }
-  
+
   /* Reset mobile-specific overrides for desktop */
   .btn {
     padding: 0.375rem 0.75rem !important;
     font-size: 0.875rem !important;
     min-height: auto !important;
   }
-  
+
   .btn-sm {
     padding: 0.25rem 0.5rem !important;
     font-size: 0.75rem !important;
     min-height: auto !important;
   }
-  
+
   .form-control {
     font-size: 0.875rem !important;
     padding: 0.375rem 0.75rem !important;
     min-height: auto !important;
   }
-  
+
   /* Card improvements for desktop */
   .card {
     margin-bottom: 1.5rem !important;
     border-radius: 16px !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease !important;
   }
-  
+
   .card:hover {
     transform: translateY(-5px) !important;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
   }
-  
+
   /* Removed card-body padding override to match home page card sizing */
-  
+
   /* Card image wrapper aspect ratio removed - using base 75% for consistency */
-  
+
   /* Profile photos responsive layout reset */
   .photo-grid .col-sm-6 {
     flex: 0 0 50% !important;
     max-width: 50% !important;
   }
-  
+
   /* Optimal four-column layout */
   .row .col-lg-3 {
     flex: 0 0 25%;
     max-width: 25%;
   }
-  
+
   .row .col-lg-4 {
     flex: 0 0 33.333333% !important;
     max-width: 33.333333% !important;
   }
-  
+
   /* Enhanced navigation */
   .navbar {
     padding: 1rem 0;
   }
-  
+
   .navbar-brand {
     font-size: 1.5rem;
   }
-  
+
   /* Profile hero full potential */
   .profile-hero-image {
     height: 500px !important;
   }
-  
+
   .hero-title {
     font-size: 3rem !important;
   }
-  
+
   .hero-subtitle {
     font-size: 1.25rem !important;
   }
-  
+
   /* Profile stats improvements for desktop */
   .profile-stats-container .col-3 {
     padding: 0 1rem !important;
   }
-  
+
   .stat-item {
     padding: 1.5rem 1rem !important;
   }
-  
+
   .stat-number {
     font-size: 1.5rem !important;
   }
-  
+
   .stat-label {
     font-size: 0.875rem !important;
   }
-  
+
   /* Better spacing for content */
   .jumbotron {
     padding: 4rem 2rem !important;
   }
-  
+
   /* Search improvements */
   .search-form {
     min-width: 300px !important;
@@ -1816,123 +2229,127 @@ footer.site-footer {
   :root {
     --container-max-width: 1140px;
   }
-  
+
   /* Reset mobile overrides for large desktop */
   .btn {
     padding: 0.375rem 0.75rem !important;
     font-size: 0.875rem !important;
     min-height: auto !important;
   }
-  
+
   .btn-sm {
     padding: 0.25rem 0.5rem !important;
     font-size: 0.75rem !important;
     min-height: auto !important;
   }
-  
+
   .form-control {
     font-size: 0.875rem !important;
     padding: 0.375rem 0.75rem !important;
     min-height: auto !important;
   }
-  
+
   /* Maximum layout potential */
   .container {
     max-width: var(--container-max-width);
   }
-  
+
   /* Enhanced card behavior for large desktop */
   .card {
     margin-bottom: 2rem !important;
     border-radius: 16px !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   }
-  
+
   .card:hover {
     transform: translateY(-8px) !important;
-    box-shadow: 0 16px 32px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2) !important;
   }
-  
+
   /* Removed card-body padding override to match home page card sizing */
-  
+
   /* Card image wrapper aspect ratio removed - using base 75% for consistency */
-  
+
   /* Column layout improvements */
   .row .col-lg-4 {
     flex: 0 0 33.333333% !important;
     max-width: 33.333333% !important;
   }
-  
+
   .photo-grid .col-sm-6 {
     flex: 0 0 33.333333% !important;
     max-width: 33.333333% !important;
   }
-  
+
   /* Five-column layout for very wide screens */
   @media (min-width: 1400px) {
     .row .col-xl-2-4 {
       flex: 0 0 20%;
       max-width: 20%;
     }
-    
+
     .photo-grid .col-lg-4 {
       flex: 0 0 25% !important;
       max-width: 25% !important;
     }
   }
-  
+
   /* Enhanced typography for large screens */
-  h1 { font-size: 3.5rem !important; }
-  h2 { font-size: 2.75rem !important; }
-  
+  h1 {
+    font-size: 3.5rem !important;
+  }
+  h2 {
+    font-size: 2.75rem !important;
+  }
+
   /* Profile hero maximum impact */
   .profile-hero-image {
     height: 600px !important;
   }
-  
+
   .hero-title {
     font-size: 4rem !important;
   }
-  
+
   .hero-subtitle {
     font-size: 1.5rem !important;
   }
-  
+
   /* Profile stats for large desktop */
   .profile-stats-container .col-3 {
     padding: 0 1.5rem !important;
   }
-  
+
   .stat-item {
     padding: 2rem 1.5rem !important;
   }
-  
+
   .stat-number {
     font-size: 2rem !important;
   }
-  
+
   .stat-label {
     font-size: 1rem !important;
   }
-  
+
   /* Enhanced navigation */
   .navbar {
     padding: 1.5rem 0 !important;
   }
-  
+
   .navbar-brand {
     font-size: 1.75rem !important;
   }
-  
+
   /* Better spacing for large screens */
   .jumbotron {
     padding: 5rem 3rem !important;
   }
-  
+
   .display-4 {
     font-size: 3.5rem !important;
   }
-  
+
   /* Search improvements */
   .search-form {
     min-width: 400px !important;
@@ -1940,60 +2357,60 @@ footer.site-footer {
   .profile-hero-image {
     height: 600px;
   }
-  
+
   .hero-title {
     font-size: 4rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.5rem;
   }
-  
+
   /* Enhanced card presentation */
   .card {
     transition: all 0.3s ease;
   }
-  
+
   /* Profile stats for extra large screens */
   .profile-stats {
     padding: 2.5rem;
   }
-  
+
   .profile-stats .stat {
     min-width: 100px;
     max-width: 140px;
     margin: 0 1.5rem;
   }
-  
+
   .profile-stats .stat .label {
     font-size: 0.85rem;
     max-width: 120px;
     letter-spacing: 0.1em;
   }
-  
+
   .profile-meta {
     font-size: 0.85rem;
   }
-  
+
   /* Even more generous bio width on large screens */
   .profile-bio-container {
     max-width: 550px;
   }
-  
+
   .hero-subtitle {
     max-width: 1200px !important;
   }
-  
+
   .card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   }
-  
+
   /* Better spacing for large screens */
   .jumbotron {
     padding: 5rem 2rem;
   }
-  
+
   /* Enhanced navigation spacing */
   .navbar-nav .nav-link {
     padding: 0.75rem 1.25rem;
@@ -2006,18 +2423,18 @@ footer.site-footer {
   :root {
     --container-max-width: 1400px;
   }
-  
+
   /* Maximum content width to maintain readability */
   .container {
     max-width: var(--container-max-width);
   }
-  
+
   /* Enhanced grid for ultra-wide */
   .row .col-xxl-2 {
     flex: 0 0 16.666667%;
     max-width: 16.666667%;
   }
-  
+
   /* Ultra-wide specific adjustments */
   .profile-hero-image {
     height: 700px;
@@ -2029,11 +2446,11 @@ footer.site-footer {
   .profile-hero-image {
     height: 300px;
   }
-  
+
   .navbar {
     padding: 0.5rem 0;
   }
-  
+
   .jumbotron {
     padding: 2rem 1rem;
   }
@@ -2055,13 +2472,13 @@ footer.site-footer {
   .search-container {
     display: none !important;
   }
-  
+
   .card {
     break-inside: avoid;
     box-shadow: none;
     border: 1px solid #ddd;
   }
-  
+
   body {
     background: white !important;
     color: black !important;
@@ -2073,71 +2490,71 @@ footer.site-footer {
   .col-lg-2 .profile-stats-container {
     padding: 0.75rem 0.5rem !important;
   }
-  
+
   .col-lg-2 .profile-stats-container .col-3 {
     padding: 0 0.25rem !important;
   }
-  
+
   .col-lg-2 .stat-item {
     padding: 0.75rem 0.25rem !important;
     font-size: 0.85rem;
   }
-  
+
   .col-lg-2 .stat-number {
     font-size: 1.1rem !important;
   }
-  
+
   .col-lg-2 .stat-label {
     font-size: 0.7rem !important;
     line-height: 1.2;
   }
-  
+
   .col-lg-2 .profile-info {
     padding: 0.75rem !important;
     font-size: 0.9rem;
   }
-  
+
   .col-lg-2 .card-body {
     padding: 1rem 0.75rem !important;
   }
-  
+
   .col-lg-2 .avatar-sm {
     width: 80px !important;
     height: 80px !important;
   }
-  
+
   /* Ultra-narrow sidebar (col-lg-1) optimizations */
   .col-lg-1 .profile-stats-container {
     padding: 0.5rem 0.25rem !important;
   }
-  
+
   .col-lg-1 .profile-stats-container .col-3 {
     padding: 0 0.1rem !important;
   }
-  
+
   .col-lg-1 .stat-item {
     padding: 0.5rem 0.1rem !important;
     font-size: 0.75rem;
   }
-  
+
   .col-lg-1 .stat-number {
     font-size: 0.9rem !important;
   }
-  
+
   .col-lg-1 .stat-label {
     font-size: 0.6rem !important;
     line-height: 1.1;
   }
-  
+
   .col-lg-1 .profile-info {
     padding: 0.5rem !important;
     font-size: 0.8rem;
   }
-  
+
   .col-lg-1 .card-body {
     padding: 0.75rem 0.5rem !important;
   }
-  
+
   .col-lg-1 .avatar-sm {
     width: 60px !important;
     height: 60px !important;
@@ -2167,9 +2584,7 @@ footer.site-footer {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
   color: var(--text-primary);
   overflow: hidden;
 }
@@ -2254,7 +2669,11 @@ footer.site-footer {
 /* Warning alert matching your theme */
 #deletePhotoModal .alert-warning,
 #deleteCommentModal .alert-warning {
-  background: linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, rgba(139, 111, 71, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(212, 165, 116, 0.15) 0%,
+    rgba(139, 111, 71, 0.1) 100%
+  );
   border: 1px solid rgba(212, 165, 116, 0.3);
   border-radius: 12px;
   color: var(--text-primary);
@@ -2339,18 +2758,18 @@ footer.site-footer {
     margin: 1rem;
     max-width: none;
   }
-  
+
   #deletePhotoModal .modal-body,
   #deleteCommentModal .modal-body {
     padding: 1.5rem 1rem;
   }
-  
+
   #deletePhotoModal .modal-footer,
   #deleteCommentModal .modal-footer {
     padding: 1rem;
     flex-direction: column;
   }
-  
+
   #deletePhotoModal .modal-footer .btn,
   #deleteCommentModal .modal-footer .btn {
     width: 100%;
@@ -2364,7 +2783,11 @@ footer.site-footer {
 
 /* Edit profile header to match website theme */
 .edit-profile-header {
-  background: linear-gradient(135deg, var(--highlight) 0%, #b8956b 100%) !important;
+  background: linear-gradient(
+    135deg,
+    var(--highlight) 0%,
+    #b8956b 100%
+  ) !important;
   color: var(--primary) !important;
   border-bottom: 1px solid rgba(212, 165, 116, 0.3);
   padding: 1.25rem 1.5rem;
@@ -2407,6 +2830,7 @@ footer.site-footer {
 .stat-number {
   color: #d4a574;
   color: var(--highlight);
+  white-space: nowrap;
 }
 
 .stat-number-coral {

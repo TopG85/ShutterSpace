@@ -6,7 +6,7 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card mb-4">
+    <div class="card photo-card mb-4">
             <div class="text-center p-3">
                 <img 
                     src="{{ photo.image.url }}?w_800&h_600&c_limit&q_auto:good&f_auto" 
@@ -58,9 +58,13 @@
                                     {% if comment.author == user or user == photo.owner %}
                                         <div class="mt-2">
                                             {% if comment.author == user %}
-                                                <a href="{% url 'edit_comment' comment.id %}" class="btn btn-sm btn-outline-secondary me-2">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary me-2" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#editCommentModal"
+                                                        data-comment-id="{{ comment.id }}"
+                                                        data-comment-text="{{ comment.text|escapejs }}">
                                                     <i class="fas fa-edit"></i> Edit
-                                                </a>
+                                                </button>
                                             {% endif %}
                                             <button type="button" class="btn btn-sm btn-outline-danger" 
                                                     data-bs-toggle="modal" 
@@ -240,4 +244,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+{% include 'edit_comment_modal.html' %}
+
+<script>
+// Edit Comment Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const editCommentModal = document.getElementById('editCommentModal');
+    if (editCommentModal) {
+        editCommentModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const commentId = button.getAttribute('data-comment-id');
+            const commentText = button.getAttribute('data-comment-text');
+            const editForm = editCommentModal.querySelector('#editCommentForm');
+            const textArea = editCommentModal.querySelector('#editCommentText');
+            textArea.value = commentText;
+            editForm.action = `/portfolio/comment/${commentId}/edit/`;
+        });
+    }
+});
+</script>
 {% endblock %}

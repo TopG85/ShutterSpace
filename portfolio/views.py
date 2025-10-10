@@ -140,35 +140,6 @@ def upload_photo(request):
 
 
 @login_required
-def add_comment(request, photo_id):
-    photo = Photo.objects.get(id=photo_id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.photo = photo
-            comment.author = request.user
-            comment.save()
-
-            # Create notification for photo owner
-            comment_preview = (comment.text[:50] + "..."
-                               if len(comment.text) > 50 else comment.text)
-            message_text = (f'{request.user.username} commented: '
-                            f'"{comment_preview}"')
-            create_notification(
-                recipient=photo.owner,
-                sender=request.user,
-                notification_type='comment',
-                title='New comment on your photo',
-                message=message_text,
-                photo=photo,
-                comment=comment
-            )
-
-            return redirect('photo_detail', photo_id=photo.id)
-    else:
-        form = CommentForm()
-    return render(request, 'add_comment.html', {'form': form, 'photo': photo})
 
 
 @login_required
@@ -237,6 +208,21 @@ def photo_detail(request, photo_id):
             comment.photo = photo
             comment.author = request.user
             comment.save()
+
+            # Create notification for photo owner
+            if photo.owner != request.user:
+                comment_preview = (comment.text[:50] + "..." if len(comment.text) > 50 else comment.text)
+                message_text = f'{request.user.username} commented: "{comment_preview}"'
+                create_notification(
+                    recipient=photo.owner,
+                    sender=request.user,
+                    notification_type='comment',
+                    title='New comment on your photo',
+                    message=message_text,
+                    photo=photo,
+                    comment=comment
+                )
+
             return redirect('photo_detail', photo_id=photo.id)
     else:
         form = CommentForm()
@@ -263,11 +249,8 @@ def edit_comment(request, comment_id):
             return redirect('photo_detail', photo_id=comment.photo.id)
     else:
         form = CommentForm(instance=comment)
-    return render(
-        request,
-        'edit_comment.html',
-        {'form': form, 'comment': comment}
-    )
+    # No longer render a separate edit_comment.html; redirect to photo_detail
+    return redirect('photo_detail', photo_id=comment.photo.id)
 
 
 @login_required
@@ -425,15 +408,20 @@ def notifications_mark_all_read(request):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
+
 @login_required
 def notifications_dropdown(request):
     """AJAX endpoint to get recent notifications for dropdown"""
-    # Latest 5 for dropdown
-    recent_notifications = request.user.notifications.all()[:5]
-    unread_count = request.user.notifications.filter(is_read=False).count()
-
+    # Show up to 5 notifications, prioritizing unread
+    unread = list(request.user.notifications.filter(is_read=False).order_by('-created_at')[:5])
+    if len(unread) < 5:
+        # Fill with recent read notifications if less than 5 unread
+        read = list(request.user.notifications.filter(is_read=True).order_by('-created_at')[:5-len(unread)])
+    else:
+        read = []
+    notifications = unread + read
     notifications_data = []
-    for notification in recent_notifications:
+    for notification in notifications:
         notifications_data.append({
             'id': notification.id,
             'title': notification.title,
@@ -441,11 +429,10 @@ def notifications_dropdown(request):
             'is_read': notification.is_read,
             'created_at': notification.created_at.strftime('%Y-%m-%d %H:%M'),
             'url': notification.get_url(),
-            'sender_username': (notification.sender.username
-                                if notification.sender else None),
+            'sender_username': (notification.sender.username if notification.sender else None),
             'type': notification.notification_type
         })
-
+    unread_count = request.user.notifications.filter(is_read=False).count()
     return JsonResponse({
         'notifications': notifications_data,
         'unread_count': unread_count

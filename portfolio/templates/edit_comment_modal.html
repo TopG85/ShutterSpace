@@ -1,0 +1,33 @@
+<!-- Edit Comment Modal -->
+<div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-0 bg-transparent border-0">
+            <div class="card shadow-sm form-contrast mb-0">
+                <div class="card-header edit-profile-header bg-primary text-white">
+                    <h3 class="mb-0" id="editCommentModalLabel">
+                        <i class="fas fa-edit me-2"></i>Edit Comment
+                    </h3>
+                    <button type="button" class="btn-close btn-close-white float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                    <form id="editCommentForm" method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="editCommentText" class="form-label fw-bold">Edit your comment</label>
+                            <textarea class="form-control" id="editCommentText" name="text" rows="3" maxlength="500" required></textarea>
+                            <div class="form-text text-muted"><span id="editCommentCounter">0</span>/500 characters</div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <i class="fas fa-times me-1"></i>Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i>Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
