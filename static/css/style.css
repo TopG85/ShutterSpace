@@ -84,18 +84,17 @@
 }
 
 .btn-primary:hover {
-  .bg-light {
-    background-color: #2a2a2a !important;
-    background-color: var(--bg-secondary) !important;
-  }
-
   background: #0056b3;
-  .bg-dark {
-    background-color: #1c1c1c !important;
-    background-color: var(--bg-primary) !important;
-    color: #f8f8f2;
-    color: var(--text-primary);
-  }
+}
+.btn-primary:hover .bg-light {
+  background-color: #2a2a2a !important;
+  background-color: var(--bg-secondary) !important;
+}
+.btn-primary:hover .bg-dark {
+  background-color: #1c1c1c !important;
+  background-color: var(--bg-primary) !important;
+  color: #f8f8f2;
+  color: var(--text-primary);
 }
 
 .text-sand {
@@ -104,22 +103,20 @@
 }
 
 .form-control {
-  .text-rose {
-    color: #e8d5d0 !important;
-    color: var(--rose) !important;
-  }
-
   border-radius: 6px;
-  .text-coral {
-    color: #c8956d !important;
-    color: var(--coral) !important;
-  }
-
   border: 1px solid #ced4da;
-  .text-light {
-    color: #f8f8f2 !important;
-    color: var(--text-primary) !important;
-  }
+}
+.form-control .text-rose {
+  color: #e8d5d0 !important;
+  color: var(--rose) !important;
+}
+.form-control .text-coral {
+  color: #c8956d !important;
+  color: var(--coral) !important;
+}
+.form-control .text-light {
+  color: #f8f8f2 !important;
+  color: var(--text-primary) !important;
 }
 .text-dark {
   color: #d4c19f !important;
