@@ -53,78 +53,25 @@
 /* Custom styles for ShutterSpace */ /* Color palette variables - Warm Sophisticated Theme */
 
 :root {
-  body {
-    /* Core sophisticated palette */
-
-    background-color: #f8f9fa;
-    --primary: #1c1c1c; /* Rich black */
-
-    color: #222;
-    --secondary: #2a2a2a; /* Warm charcoal */
-
-    font-family: "Inter", Arial, sans-serif;
-    --accent: #f8f8f2; /* Cream white */
-  }
+  --primary: #1c1c1c; /* Rich black */
+  --secondary: #2a2a2a; /* Warm charcoal */
+  --accent: #f8f8f2; /* Cream white */
   --highlight: #d4a574; /* Warm caramel */
-
   --tertiary: #8b6f47; /* Coffee brown */
-
-  .navbar {
-    --danger: #a0522d; /* Warm sienna brown for danger actions */
-
-    background-color: #fff;
-
-    border-bottom: 1px solid #e5e5e5; /* Legacy color support (refined) */
-  }
+  --danger: #a0522d; /* Warm sienna brown for danger actions */
   --sand: #d4a574; /* Updated to warm caramel */
-
   --rose: #e8d5d0; /* Warmer rose tone */
-
-  .sidebar {
-    --coral: #c8956d; /* Sophisticated coral-brown */
-
-    background: #f4f4f4;
-    --light: #f8f8f2; /* Cream white */
-
-    border-right: 1px solid #e5e5e5;
-    --dark: #1c1c1c; /* Rich black */
-  }
+  --coral: #c8956d; /* Sophisticated coral-brown */
+  --light: #f8f8f2; /* Cream white */
+  --dark: #1c1c1c; /* Rich black */
   --muted: #8b7355; /* Warm muted brown */
-
-  .card {
-    /* Dark theme colors - refined */
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    --bg-primary: #1c1c1c; /* Rich black */
-
-    border-radius: 12px;
-    --bg-secondary: #2a2a2a; /* Warm charcoal */
-
-    border: 1px solid #e5e5e5;
-    --text-primary: #f8f8f2; /* Cream white */
-
-    background: #fff;
-    --text-secondary: #d4c19f; /* Warm secondary text */
-  }
+  --bg-primary: #1c1c1c; /* Rich black */
+  --bg-secondary: #2a2a2a; /* Warm charcoal */
+  --text-primary: #f8f8f2; /* Cream white */
+  --text-secondary: #d4c19f; /* Warm secondary text */
   --card-bg: #252525; /* Slightly warmer card background */
-
   --border-color: #3d3529; /* Warm border color */
-
-  .btn-primary {
-    --container-max-width: 1100px;
-
-    background: #007bff;
-  }
-
-  border: none;
-
-  border-radius: 6px; /* Utility classes */
-
-  transition: background 0.2s;
-  .bg-sand {
-    background-color: #d4a574 !important;
-    background-color: var(--sand) !important;
-  }
+  --container-max-width: 1100px;
 }
 .bg-rose {
   background-color: #e8d5d0 !important;

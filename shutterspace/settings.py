@@ -39,11 +39,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # only for local development by editing this file or setting the
 DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS',
-    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com,'
-    'heroku.com,127.0.0.1'
-).split(',')
+ALLOWED_HOSTS = [
+    'django-project-shutterspace-a676bf7fbd5b.herokuapp.com',
+    'heroku.com',
+    '127.0.0.1'
+]
+
 
 # Site framework: prefer SITE_ID from environment,
 # fallback to localhost site id (2)

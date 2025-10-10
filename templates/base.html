@@ -17,6 +17,12 @@
       crossorigin="anonymous"
     />
     {% block extras %}{% endblock %}
+    <style>
+      .notification-read {
+        opacity: 0.5;
+        pointer-events: auto;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
@@ -224,11 +230,5 @@
         }
       });
     </script>
-    <style>
-      .notification-read {
-        opacity: 0.5;
-        pointer-events: auto;
-      }
-    </style>
   </body>
 </html>
