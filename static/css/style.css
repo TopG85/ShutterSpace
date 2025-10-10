@@ -820,7 +820,7 @@ p {
 #deleteCommentModal .btn.btn-secondary {
   color: #f8f9fa !important;
   background-color: #495057 !important;
-  border-color: #495057 !important;
+  border-color: #495057 !important; /* Match background-color for W3C compliance */
   font-weight: 600;
   letter-spacing: 0.02em;
   transition: background 0.2s, color 0.2s;
