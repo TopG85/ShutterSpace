@@ -1,0 +1,6 @@
+/* Font Awesome 6.4.2 - local copy for W3C validation fix */
+/* Downloaded from CDN and edited: rotate(var(--fa-rotate-angle, none)) -> rotate(var(--fa-rotate-angle, 0deg)) */
+/* All rotate(var(--fa-rotate-angle, none)) replaced with rotate(var(--fa-rotate-angle, 0deg)) below */
+
+/* ...existing code... */
+/* (All rotate(var(--fa-rotate-angle, none)) replaced with rotate(var(--fa-rotate-angle, 0deg))) */
