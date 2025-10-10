@@ -298,6 +298,11 @@ main.container {
   transition: transform 0.2s ease;
 }
 
+.navbar {
+  /* keep navbar above content (Bootstrap uses 1030+) */
+  z-index: 1030;
+}
+
 .navbar-nav .nav-link {
   font-weight: 500;
   color: #fff !important;
@@ -1296,18 +1301,19 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
 .profile-hero-image {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 360px;
+  min-height: 260px;
   overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .profile-hero-section {
-    margin-top: -1rem;
+    margin-top: 0;
     margin-bottom: 1rem;
   }
 
   .profile-hero-image {
-    height: 400px;
+    height: 280px;
   }
 
   .hero-title {
@@ -1324,6 +1330,11 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
     height: 80px !important;
     font-size: 24px !important;
   }
+}
+
+/* Ensure main content sits below fixed/sticky navbars in case of overlap */
+body {
+  padding-top: 0; /* leave as 0 unless a fixed navbar is used */
 }
 
 .profile-hero-image .hero-image {
