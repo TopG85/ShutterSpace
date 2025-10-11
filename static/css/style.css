@@ -2309,68 +2309,6 @@ footer.site-footer {
   .search-form {
     min-width: 400px !important;
   }
-  .profile-hero-image {
-    height: 600px;
-  }
-
-  .hero-title {
-    font-size: 4rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.5rem;
-  }
-
-  /* Enhanced card presentation */
-  .card {
-    transition: all 0.3s ease;
-  }
-
-  /* Profile stats for extra large screens */
-  .profile-stats {
-    padding: 2.5rem;
-  }
-
-  .profile-stats .stat {
-    min-width: 100px;
-    max-width: 140px;
-    margin: 0 1.5rem;
-  }
-
-  .profile-stats .stat .label {
-    font-size: 0.85rem;
-    max-width: 120px;
-    letter-spacing: 0.1em;
-  }
-
-  .profile-meta {
-    font-size: 0.85rem;
-  }
-
-  /* Even more generous bio width on large screens */
-  .profile-bio-container {
-    max-width: 550px;
-  }
-
-  .hero-subtitle {
-    max-width: 1200px !important;
-  }
-
-  .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Better spacing for large screens */
-  .jumbotron {
-    padding: 5rem 2rem;
-  }
-
-  /* Enhanced navigation spacing */
-  .navbar-nav .nav-link {
-    padding: 0.75rem 1.25rem;
-    margin: 0 0.25rem;
-  }
 }
 
 /* Ultra Wide Screens (1600px and up) */
@@ -2837,29 +2775,12 @@ footer.site-footer {
   object-fit: cover;
 }
 
-:root {
-  --fa-animation-delay: 0s;
-  --fa-rotate-angle: 0deg;
-}
-
-.fa-rotate-by {
-  transform: rotate(var(--fa-rotate-angle, 0deg)) !important;
-}
-
-.fa {
-  animation-delay: 0s !important;
-  transform: rotate(0deg) !important;
-}
-
-.fa-spin {
-  animation: spin 2s linear infinite !important;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Font Awesome base class adjustments */
+i[class^="fa-"] {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
