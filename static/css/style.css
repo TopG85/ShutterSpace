@@ -2836,3 +2836,23 @@ footer.site-footer {
   width: 100%;
   object-fit: cover;
 }
+
+/* Font Awesome animation and transform overrides */
+.fa {
+  animation-delay: 0s !important;
+  transform: rotate(0deg) !important;
+}
+
+/* Add specific overrides for animated icons */
+.fa-spin {
+  animation: spin 2s linear infinite !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
