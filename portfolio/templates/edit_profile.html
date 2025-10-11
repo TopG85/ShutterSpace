@@ -9,14 +9,14 @@
     <div class="card shadow-sm form-contrast">
             <div class="card-header edit-profile-header">
                 <h3 class="mb-0">
-                    <i class="fa-solid fa-user-edit me-2"></i>Edit Profile
+                    <i class="fas fa-user-edit me-2"></i>Edit Profile
                 </h3>
             </div>
             <div class="card-body">
                 <!-- Overall form errors -->
                 {% if form.non_field_errors %}
                     <div class="alert alert-danger" role="alert">
-                        <i class="fa-solid fa-exclamation-triangle me-2"></i>
+                        <i class="fas fa-exclamation-triangle me-2"></i>
                         <strong>Please correct the following:</strong>
                         {{ form.non_field_errors }}
                     </div>
@@ -35,12 +35,12 @@
                                 {{ form.display_name }}
                                 {% if form.display_name.help_text %}
                                     <div class="form-text">
-                                        <i class="fa-solid fa-info-circle me-1"></i>{{ form.display_name.help_text }}
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.display_name.help_text }}
                                     </div>
                                 {% endif %}
                                 {% if form.display_name.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.display_name.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -59,12 +59,12 @@
                                 {{ form.location }}
                                 {% if form.location.help_text %}
                                     <div class="form-text">
-                                        <i class="fa-solid fa-info-circle me-1"></i>{{ form.location.help_text }}
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.location.help_text }}
                                     </div>
                                 {% endif %}
                                 {% if form.location.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.location.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -80,12 +80,12 @@
                                 {{ form.website }}
                                 {% if form.website.help_text %}
                                     <div class="form-text">
-                                        <i class="fa-solid fa-info-circle me-1"></i>{{ form.website.help_text }}
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.website.help_text }}
                                     </div>
                                 {% endif %}
                                 {% if form.website.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.website.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -104,12 +104,12 @@
                                 </div>
                                 {% if form.instagram.help_text %}
                                     <div class="form-text">
-                                        <i class="fa-solid fa-info-circle me-1"></i>{{ form.instagram.help_text }}
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.instagram.help_text }}
                                     </div>
                                 {% endif %}
                                 {% if form.instagram.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.instagram.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -127,12 +127,12 @@
                                 {{ form.bio }}
                                 {% if form.bio.help_text %}
                                     <div class="form-text">
-                                        <i class="fa-solid fa-info-circle me-1"></i>{{ form.bio.help_text }}
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.bio.help_text }}
                                     </div>
                                 {% endif %}
                                 {% if form.bio.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.bio.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -159,12 +159,12 @@
                                 {{ form.avatar }}
                                 {% if form.avatar.help_text %}
                                     <div class="form-text">
-                                        <i class="fa-solid fa-info-circle me-1"></i>{{ form.avatar.help_text }}
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.avatar.help_text }}
                                     </div>
                                 {% endif %}
                                 {% if form.avatar.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.avatar.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -184,13 +184,13 @@
                                     </label>
                                     {% if form.show_email.help_text %}
                                         <div class="form-text">
-                                            <i class="fa-solid fa-info-circle me-1"></i>{{ form.show_email.help_text }}
+                                            <i class="fas fa-info-circle me-1"></i>{{ form.show_email.help_text }}
                                         </div>
                                     {% endif %}
                                 </div>
                                 {% if form.show_email.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.show_email.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -216,12 +216,12 @@
                                 {{ form.hero_image }}
                                 {% if form.hero_image.help_text %}
                                     <div class="form-text">
-                                        <i class="fa-solid fa-info-circle me-1"></i>{{ form.hero_image.help_text }}
+                                        <i class="fas fa-info-circle me-1"></i>{{ form.hero_image.help_text }}
                                     </div>
                                 {% endif %}
                                 {% if form.hero_image.errors %}
                                     <div class="invalid-feedback d-block">
-                                        <i class="fa-solid fa-times-circle me-1"></i>
+                                        <i class="fas fa-times-circle me-1"></i>
                                         {% for error in form.hero_image.errors %}
                                             {{ error }}{% if not forloop.last %}<br>{% endif %}
                                         {% endfor %}
@@ -237,10 +237,10 @@
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <div>
                             <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fa-solid fa-save me-2"></i>Save Changes
+                                <i class="fas fa-save me-2"></i>Save Changes
                             </button>
                             <a href="{% url 'profile_view' username=user.username %}" class="btn btn-secondary ms-2">
-                                <i class="fa-solid fa-times me-2"></i>Cancel
+                                <i class="fas fa-times me-2"></i>Cancel
                             </a>
                         </div>
                     </div>

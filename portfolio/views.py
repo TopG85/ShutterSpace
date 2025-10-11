@@ -153,45 +153,33 @@ def profile_view(request, username):
     else:
         for p in photos:
             p.liked = False
-    
+
     # compute simple stats
     photos_count = photos.count()
     total_likes = sum(p.likes.count() for p in photos)
     total_comments = sum(p.comments.count() for p in photos)
+    followers_count = user.followers.count() if hasattr(user, 'followers') else 0
+    following_count = user.following.count() if hasattr(user, 'following') else 0
     joined = user.date_joined
-    
-    # Follow stats and status
-    followers_count = user.followers.count()
-    following_count = user.following.count()
     is_following = False
-    
     if request.user.is_authenticated and request.user != user:
-        is_following = Follow.objects.filter(
-            follower=request.user,
-            following=user
-        ).exists()
-    
-    # initials fallback for avatar
-    if profile:
-        display_name = profile.display_name or user.username
-        initials = display_name.strip()[:2].upper()
-    else:
-        initials = user.username[:2].upper()
+        is_following = user.followers.filter(follower=request.user).exists()
+    initials = user.username[:2].upper()
 
-    context = {
+    return render(request, 'profile.html', {
+        'user': request.user,
+        'owner': user,
         'profile': profile,
         'photos': photos,
-        'owner': user,
         'photos_count': photos_count,
         'total_likes': total_likes,
         'total_comments': total_comments,
-        'joined': joined,
-        'initials': initials,
         'followers_count': followers_count,
         'following_count': following_count,
+        'joined': joined,
         'is_following': is_following,
-    }
-    return render(request, 'profile.html', context)
+        'initials': initials,
+    })
 
 
 @login_required

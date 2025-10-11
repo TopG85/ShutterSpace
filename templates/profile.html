@@ -56,7 +56,6 @@
                         <p class="profile-bio text-break">{{ profile.bio }}</p>
                     </div>
                 {% endif %}
-                
                 <!-- Profile Stats -->
                 <div class="profile-stats-container mb-4">
                     <div class="profile-stats-row row text-center">
@@ -98,30 +97,26 @@
                         </div>
                     </div>
                 </div>
-                
                 <!-- Profile Info -->
                 <div class="profile-info mb-4">
                     <div class="d-flex align-items-center text-muted mb-2">
                         <i class="fas fa-calendar-alt me-2"></i>
                         <span>Joined {{ joined|date:"M d, Y" }}</span>
                     </div>
-                    
                     {% if profile.location %}
                         <div class="d-flex align-items-center text-muted mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i>
                             <span>{{ profile.location }}</span>
                         </div>
                     {% endif %}
-                    
                     {% if profile.website %}
                         <div class="d-flex align-items-center mb-2">
                             <i class="fas fa-link me-2 text-muted"></i>
                             <a href="{{ profile.website }}" target="_blank" rel="noopener" class="text-decoration-none profile-link">
-                                {{ profile.website|slice:":50" }}{% if profile.website|length > 50 %}...{% endif %}
+                                {{ profile.website|slice:":0:50" }}{% if profile.website|length > 50 %}...{% endif %}
                             </a>
                         </div>
                     {% endif %}
-                    
                     {% if profile.instagram %}
                         <div class="d-flex align-items-center mb-2">
                             <i class="fab fa-instagram me-2 text-muted"></i>
@@ -131,7 +126,6 @@
                         </div>
                     {% endif %}
                 </div>
-                
                 <!-- Action Buttons -->
                 <div class="mt-3">
                     {% if user.is_authenticated and user == owner %}
@@ -251,4 +245,21 @@
                                                         {% endif %}
                                                     {% endif %}
                                                 </li>
-                                            {% for
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">No photos uploaded yet.</div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

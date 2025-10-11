@@ -37,7 +37,7 @@
                                 data-photo-id="{{ photo.id }}"
                                 data-photo-title="{{ photo.title }}"
                                 data-photo-image="{{ photo.image.url }}">
-                            <i class="fa-solid fa-trash"></i> Delete Photo
+                            <i class="fas fa-trash"></i> Delete Photo
                         </button>
                     {% endif %}
                 </div>
@@ -63,7 +63,7 @@
                                                         data-bs-target="#editCommentModal"
                                                         data-comment-id="{{ comment.id }}"
                                                         data-comment-text="{{ comment.text|escapejs }}">
-                                                    <i class="fa-solid fa-edit"></i> Edit
+                                                    <i class="fas fa-edit"></i> Edit
                                                 </button>
                                             {% endif %}
                                             <button type="button" class="btn btn-sm btn-outline-danger" 
@@ -74,7 +74,7 @@
                                                     data-comment-text="{{ comment.text }}"
                                                     data-comment-date="{{ comment.created_at|date:'M d, Y H:i' }}"
                                                     data-photo-title="{{ photo.title }}">
-                                                <i class="fa-solid fa-trash"></i> Delete{% if user == photo.owner and comment.author != user %} (as photo owner){% endif %}
+                                                <i class="fas fa-trash"></i> Delete{% if user == photo.owner and comment.author != user %} (as photo owner){% endif %}
                                             </button>
                                         </div>
                                     {% endif %}
@@ -115,7 +115,7 @@
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
                 <h5 class="modal-title" id="deletePhotoModalLabel">
-                    <i class="fa-solid fa-exclamation-triangle me-2"></i>Delete Photo
+                    <i class="fas fa-exclamation-triangle me-2"></i>Delete Photo
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -125,19 +125,19 @@
                 </div>
                 <h5 class="text-center mb-3" id="deletePhotoTitle"></h5>
                 <div class="alert alert-warning">
-                    <i class="fa-solid fa-exclamation-triangle me-2"></i>
+                    <i class="fas fa-exclamation-triangle me-2"></i>
                     <strong>Warning:</strong> This action cannot be undone. The photo and all its comments and likes will be permanently deleted.
                 </div>
                 <p class="text-center">Are you sure you want to permanently delete this photo?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fa-solid fa-times me-1"></i>Cancel
+                    <i class="fas fa-times me-1"></i>Cancel
                 </button>
                 <form id="deletePhotoForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
-                        <i class="fa-solid fa-trash me-1"></i>Yes, Delete Photo
+                        <i class="fas fa-trash me-1"></i>Yes, Delete Photo
                     </button>
                 </form>
             </div>
@@ -151,7 +151,7 @@
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
                 <h5 class="modal-title" id="deleteCommentModalLabel">
-                    <i class="fa-solid fa-exclamation-triangle me-2"></i>Delete Comment
+                    <i class="fas fa-exclamation-triangle me-2"></i>Delete Comment
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -166,7 +166,7 @@
                 </div>
                 
                 <div class="alert alert-warning">
-                    <i class="fa-solid fa-exclamation-triangle me-2"></i>
+                    <i class="fas fa-exclamation-triangle me-2"></i>
                     <strong>Warning:</strong> This action cannot be undone. The comment will be permanently deleted.
                 </div>
                 
@@ -174,12 +174,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fa-solid fa-times me-1"></i>Cancel
+                    <i class="fas fa-times me-1"></i>Cancel
                 </button>
                 <form id="deleteCommentForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
-                        <i class="fa-solid fa-trash me-1"></i>Yes, Delete Comment
+                        <i class="fas fa-trash me-1"></i>Yes, Delete Comment
                     </button>
                 </form>
             </div>

@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2><i class="fa-solid fa-bell me-2"></i>Notifications</h2>
+                <h2><i class="fas fa-bell me-2"></i>Notifications</h2>
                 {% if unread_count > 0 %}
                 <button class="btn btn-sm btn-outline-primary" id="markAllReadBtn">
-                    <i class="fa-solid fa-check-double me-1"></i>Mark all as read
+                    <i class="fas fa-check-double me-1"></i>Mark all as read
                 </button>
                 {% endif %}
             </div>
@@ -25,15 +25,15 @@
                             <div class="d-flex align-items-start">
                                 <div class="notification-icon me-3">
                                     {% if notification.notification_type == 'like' %}
-                                        <i class="fa-solid fa-heart text-danger"></i>
+                                        <i class="fas fa-heart text-danger"></i>
                                     {% elif notification.notification_type == 'comment' %}
-                                        <i class="fa-solid fa-comment text-primary"></i>
+                                        <i class="fas fa-comment text-primary"></i>
                                     {% elif notification.notification_type == 'follow' %}
-                                        <i class="fa-solid fa-user-plus text-success"></i>
+                                        <i class="fas fa-user-plus text-success"></i>
                                     {% elif notification.notification_type == 'photo_upload' %}
-                                        <i class="fa-solid fa-camera text-info"></i>
+                                        <i class="fas fa-camera text-info"></i>
                                     {% else %}
-                                        <i class="fa-solid fa-bell text-secondary"></i>
+                                        <i class="fas fa-bell text-secondary"></i>
                                     {% endif %}
                                 </div>
                                 
@@ -42,12 +42,12 @@
                                     <p class="mb-2 text-muted">{{ notification.message }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-muted">
-                                            <i class="fa-solid fa-clock me-1"></i>
+                                            <i class="fas fa-clock me-1"></i>
                                             {{ notification.created_at|timesince }} ago
                                         </small>
                                         {% if notification.sender %}
                                             <small class="text-muted">
-                                                <i class="fa-solid fa-user me-1"></i>
+                                                <i class="fas fa-user me-1"></i>
                                                 from <a href="{% url 'profile_view' username=notification.sender.username %}" class="text-decoration-none">
                                                     {% if notification.sender.profile.display_name %}
                                                         {{ notification.sender.profile.display_name }}
@@ -79,7 +79,7 @@
                 </div>
             {% else %}
                 <div class="text-center py-5">
-                    <i class="fa-solid fa-bell-slash text-muted icon-large"></i>
+                    <i class="fas fa-bell-slash text-muted icon-large"></i>
                     <h4 class="text-muted mt-3">No notifications yet</h4>
                     <p class="text-muted">When someone likes or comments on your photos, you'll see it here.</p>
                 </div>
