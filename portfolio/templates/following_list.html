@@ -9,7 +9,7 @@
         <div class="col-lg-8 mx-auto">
             <div class="d-flex align-items-center mb-4">
                 <a href="{% url 'profile_view' username=user.username %}" class="btn btn-outline-secondary me-3">
-                    <i class="fas fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
                 </a>
                 <h2>{{ title }}</h2>
             </div>
@@ -63,7 +63,7 @@
                 </div>
             {% else %}
                 <div class="text-center py-5">
-                    <i class="fas fa-user-plus text-muted icon-large"></i>
+                    <i class="fa-solid fa-user-plus text-muted icon-large"></i>
                     <h4 class="text-muted mt-3">Not following anyone yet</h4>
                     <p class="text-muted">When {{ user.username }} follows people, they'll appear here.</p>
                 </div>

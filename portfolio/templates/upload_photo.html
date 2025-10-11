@@ -9,14 +9,14 @@
     <div class="card shadow-sm form-contrast">
             <div class="card-header bg-primary text-white">
                 <h3 class="mb-0">
-                    <i class="fas fa-camera me-2"></i>Upload New Photo
+                    <i class="fa-solid fa-camera me-2"></i>Upload New Photo
                 </h3>
             </div>
             <div class="card-body">
                 <!-- Overall form errors -->
                 {% if form.non_field_errors %}
                     <div class="alert alert-danger" role="alert">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <i class="fa-solid fa-exclamation-triangle me-2"></i>
                         <strong>Please correct the following:</strong>
                         {{ form.non_field_errors }}
                     </div>
@@ -37,7 +37,7 @@
                             <div class="alert alert-info mb-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <i class="fas fa-file-image me-2"></i>
+                                        <i class="fa-solid fa-file-image me-2"></i>
                                         <span id="fileName"></span>
                                     </div>
                                     <div>
@@ -55,18 +55,18 @@
                         
                         <!-- Error display for file validation -->
                         <div id="fileError" class="alert alert-danger d-none">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <i class="fa-solid fa-exclamation-triangle me-2"></i>
                             <span id="fileErrorMessage"></span>
                         </div>
                         
                         {% if form.image.help_text %}
                             <div class="form-text">
-                                <i class="fas fa-info-circle me-1"></i>{{ form.image.help_text }}
+                                <i class="fa-solid fa-info-circle me-1"></i>{{ form.image.help_text }}
                             </div>
                         {% endif %}
                         {% if form.image.errors %}
                             <div class="invalid-feedback d-block">
-                                <i class="fas fa-times-circle me-1"></i>
+                                <i class="fa-solid fa-times-circle me-1"></i>
                                 {% for error in form.image.errors %}
                                     {{ error }}{% if not forloop.last %}<br>{% endif %}
                                 {% endfor %}
@@ -82,12 +82,12 @@
                         {{ form.title }}
                         {% if form.title.help_text %}
                             <div class="form-text">
-                                <i class="fas fa-info-circle me-1"></i>{{ form.title.help_text }}
+                                <i class="fa-solid fa-info-circle me-1"></i>{{ form.title.help_text }}
                             </div>
                         {% endif %}
                         {% if form.title.errors %}
                             <div class="invalid-feedback d-block">
-                                <i class="fas fa-times-circle me-1"></i>
+                                <i class="fa-solid fa-times-circle me-1"></i>
                                 {% for error in form.title.errors %}
                                     {{ error }}{% if not forloop.last %}<br>{% endif %}
                                 {% endfor %}
@@ -106,12 +106,12 @@
                         {{ form.description }}
                         {% if form.description.help_text %}
                             <div class="form-text">
-                                <i class="fas fa-info-circle me-1"></i>{{ form.description.help_text }}
+                                <i class="fa-solid fa-info-circle me-1"></i>{{ form.description.help_text }}
                             </div>
                         {% endif %}
                         {% if form.description.errors %}
                             <div class="invalid-feedback d-block">
-                                <i class="fas fa-times-circle me-1"></i>
+                                <i class="fa-solid fa-times-circle me-1"></i>
                                 {% for error in form.description.errors %}
                                     {{ error }}{% if not forloop.last %}<br>{% endif %}
                                 {% endfor %}
@@ -131,13 +131,13 @@
                             </label>
                             {% if form.is_public.help_text %}
                                 <div class="form-text">
-                                    <i class="fas fa-info-circle me-1"></i>{{ form.is_public.help_text }}
+                                    <i class="fa-solid fa-info-circle me-1"></i>{{ form.is_public.help_text }}
                                 </div>
                             {% endif %}
                         </div>
                         {% if form.is_public.errors %}
                             <div class="invalid-feedback d-block">
-                                <i class="fas fa-times-circle me-1"></i>
+                                <i class="fa-solid fa-times-circle me-1"></i>
                                 {% for error in form.is_public.errors %}
                                     {{ error }}{% if not forloop.last %}<br>{% endif %}
                                 {% endfor %}
@@ -148,10 +148,10 @@
                     <!-- Submit Buttons -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{% url 'home' %}" class="btn btn-outline-secondary me-md-2">
-                            <i class="fas fa-times me-1"></i>Cancel
+                            <i class="fa-solid fa-times me-1"></i>Cancel
                         </a>
                         <button type="submit" class="btn btn-primary" id="submitBtn">
-                            <i class="fas fa-upload me-1"></i>Upload Photo
+                            <i class="fa-solid fa-upload me-1"></i>Upload Photo
                         </button>
                     </div>
                 </form>

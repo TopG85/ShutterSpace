@@ -20,19 +20,19 @@
           </div>
           <h5 class="text-center mb-3">"{{ photo.title }}"</h5>
           <div class="alert alert-warning">
-            <i class="fas fa-exclamation-triangle me-2"></i>
+            <i class="fa-solid fa-exclamation-triangle me-2"></i>
             <strong>Warning:</strong> This action cannot be undone. The photo and all its comments and likes will be permanently deleted.
           </div>
           <p class="text-center">Are you sure you want to permanently delete this photo?</p>
           
           <div class="d-flex justify-content-center gap-3">
             <a href="{% url 'photo_detail' photo.id %}" class="btn btn-secondary">
-              <i class="fas fa-times me-1"></i>Cancel
+              <i class="fa-solid fa-times me-1"></i>Cancel
             </a>
             <form method="post" class="d-inline">
               {% csrf_token %}
               <button class="btn btn-danger" type="submit">
-                <i class="fas fa-trash me-1"></i>Yes, Delete Photo
+                <i class="fa-solid fa-trash me-1"></i>Yes, Delete Photo
               </button>
             </form>
           </div>

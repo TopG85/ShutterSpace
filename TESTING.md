@@ -67,6 +67,13 @@ Summary of common warnings you may see:
 - Deprecated properties (example: `clip`) may appear in third-party libraries; they are safe to ignore when they originate from Bootstrap or Font Awesome.
 - Other vendor-only pseudo-elements/classes (e.g., `::-webkit-...`, `:-moz-...`) are safe to ignore.
 
+### Font Awesome Validation Note
+
+- **Issue**: The W3C CSS Validator flags the `rotate(var(--fa-rotate-angle, none))` property in Font Awesome as invalid because `none` is not a valid transform value.
+- **Reason**: This is a known issue with the way Font Awesome uses CSS variables for rotation. Browsers, however, correctly interpret this property and apply the intended rotation.
+- **Decision**: The validation error will be ignored as it does not affect browser rendering or functionality.
+- **Impact**: No impact on user experience or functionality. Icons will display and rotate as expected.
+
 Practical guidance:
 
 1. The only warnings you should consider changing are ones coming from our own CSS (`static/css/style.css`). Examples we fixed in this project:
