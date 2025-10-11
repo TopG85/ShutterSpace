@@ -4,10 +4,10 @@
 
 
 ## Mobile
-
+![testing](docs/readme_images/testing-lighthouse-mobile.png)
 
 ## Desktop
-
+![testing](docs/readme_images/testing-lighthouse-desktop.png)
 
 
 
@@ -73,6 +73,8 @@ Summary of common warnings you may see:
 - **Reason**: This is a known issue with the way Font Awesome uses CSS variables for rotation. Browsers, however, correctly interpret this property and apply the intended rotation.
 - **Decision**: The validation error will be ignored as it does not affect browser rendering or functionality.
 - **Impact**: No impact on user experience or functionality. Icons will display and rotate as expected.
+
+![testing](docs/readme_images/testing-css-error-fontawesome.png)
 
 Practical guidance:
 

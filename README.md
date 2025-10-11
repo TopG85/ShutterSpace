@@ -2,6 +2,8 @@
 
 A sophisticated photography portfolio platform designed to bridge the gap in today's photography community landscape.
 
+![readme](docs/readme_images/readme-shutterspace.png)
+
 ## Project Purpose & Market Need
 
 The photography community faces a significant challenge: **there is no dedicated rival to 500px**, and Instagram has strayed far from its original photography-focused roots. ShutterSpace addresses this market gap by providing photographers with a professional platform that prioritizes visual excellence and community engagement.
