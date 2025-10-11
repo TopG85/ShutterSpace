@@ -1,3 +1,55 @@
+# Project Testing & Validation Documentation (October 2025)
+
+## Recent Changes (Documented)
+
+- **Font Awesome Icon Fixes:** All icon classes in templates were updated to use the correct `fas` or `fab` prefix for reliable rendering. This ensures all icons display as intended after removing the local `all.min.css` file.
+- **Removal of all.min.css:** The local Font Awesome CSS file was removed to eliminate W3C validation errors and simplify static file management. All references were updated to use the CDN or handled via `style.css`.
+- **Testing Steps:**
+	1. Run the W3C CSS Validator on `static/css/style.css`.
+	2. Manually check all pages for correct icon rendering.
+	3. Test in multiple browsers for consistency.
+	4. After static file changes, run `python manage.py collectstatic` and hard-refresh your browser.
+- **Git Workflow:**
+	- After making documentation or code changes, use:
+		```sh
+		git add .
+		git commit -m "Describe your change"
+		git push
+		```
+	- This ensures your updates (including to TESTING.md) are visible on GitHub and to collaborators.
+
+# October 2025: Font Awesome Icon & CSS Validation Updates
+
+## Font Awesome Icon Class Fixes
+
+- All Font Awesome icon classes in every template were updated to use the correct `fas` (solid) or `fab` (brands) prefix for consistent icon rendering. This ensures all icons display as intended after removing the local `all.min.css` file.
+- Templates updated: profile, edit profile, notifications, edit comment modal, home, photo detail, upload photo, following/followers lists, and all global/app profile pages.
+- If any icon is missing, check the template for the correct `fas`/`fab` prefix and ensure the CDN or static files are loaded.
+
+## Removal of all.min.css
+
+- The local `static/css/all.min.css` (Font Awesome) was removed to eliminate W3C validation errors and simplify static file management.
+- All references to `all.min.css` were removed from templates and replaced with the Font Awesome CDN or handled via `style.css`.
+- The `rotate(var(--fa-rotate-angle, none))` validation issue is no longer present.
+
+## Testing & Validation Steps
+
+1. **CSS Validation**
+	- Run the W3C CSS Validator on `static/css/style.css` to ensure no errors or only safe vendor warnings.
+2. **Icon Verification**
+	- Manually check all pages (profile, edit profile, notifications, comments, etc.) to confirm all Font Awesome icons render correctly.
+	- If any icon is missing, verify the correct class prefix (`fas`, `fab`) and that the CDN or static files are loaded.
+3. **Browser Testing**
+	- Test in Chrome, Firefox, and Safari to confirm consistent icon rendering and no layout issues.
+4. **Static Files**
+	- After any static file changes, run `python manage.py collectstatic` and hard-refresh the browser (Cmd+Shift+R).
+
+## Troubleshooting
+
+- If icons are missing, check for typos in the class (should be `fas` or `fab`), and ensure the Font Awesome CDN is included in `base.html`.
+- For persistent issues, clear browser cache and verify static files are up to date on the server.
+
+---
 # Testing markdown file (linked in README)
 
 # Lighthouse 
