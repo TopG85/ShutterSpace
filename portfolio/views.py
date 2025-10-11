@@ -9,13 +9,10 @@ from .forms import ProfileForm, PhotoForm, CommentForm
 
 
 # Create your views here.
-
-
 @login_required
 def portfolio_home(request):
     # Handle search functionality
     search_query = request.GET.get('q', '').strip()
-    
     if search_query:
         # Search for photos by title or description
         photos = Photo.objects.filter(
@@ -23,18 +20,16 @@ def portfolio_home(request):
             Q(description__icontains=search_query),
             is_public=True
         ).order_by('-created_at')
-        
         # Also search for users
         users = User.objects.filter(
             Q(username__icontains=search_query) |
             Q(first_name__icontains=search_query) |
             Q(last_name__icontains=search_query)
         ).distinct()
-        
         # If only one photo matches, redirect to it
         if photos.count() == 1 and users.count() == 0:
             return redirect('photo_detail', pk=photos.first().id)
-        
+
         # If only one user matches, redirect to their profile
         if users.count() == 1 and photos.count() == 0:
             return redirect('profile_view', username=users.first().username)
@@ -43,7 +38,6 @@ def portfolio_home(request):
         photos = Photo.objects.filter(is_public=True).order_by(
             '-created_at')[:6]
         users = User.objects.none()  # Empty queryset
-    
     # Add liked status for authenticated users
     if request.user.is_authenticated:
         for p in photos:
@@ -51,7 +45,6 @@ def portfolio_home(request):
     else:
         for p in photos:
             p.liked = False
-    
     context = {
         'photos': photos,
         'users': users,
@@ -83,6 +76,7 @@ def edit_profile(request):
             return redirect('home')
     else:
         form = ProfileForm(instance=profile)
+
     return render(request, 'edit_profile.html', {'form': form})
 
 
@@ -103,6 +97,13 @@ def edit_profile_user(request, username):
             return redirect('profile_view', username=username)
     else:
         form = ProfileForm(instance=profile)
+
+        return render(
+            request,
+            'edit_profile.html',
+            {'form': form, 'profile_owner': request.user}
+        )
+
     return render(
         request,
         'edit_profile.html',
@@ -136,10 +137,8 @@ def upload_photo(request):
         # If form is not valid, it will be re-rendered with errors
     else:
         form = PhotoForm()
+
     return render(request, 'upload_photo.html', {'form': form})
-
-
-@login_required
 
 
 @login_required
@@ -158,8 +157,12 @@ def profile_view(request, username):
     photos_count = photos.count()
     total_likes = sum(p.likes.count() for p in photos)
     total_comments = sum(p.comments.count() for p in photos)
-    followers_count = user.followers.count() if hasattr(user, 'followers') else 0
-    following_count = user.following.count() if hasattr(user, 'following') else 0
+    followers_count = (
+        user.followers.count() if hasattr(user, 'followers') else 0
+    )
+    following_count = (
+        user.following.count() if hasattr(user, 'following') else 0
+    )
     joined = user.date_joined
     is_following = False
     if request.user.is_authenticated and request.user != user:
@@ -199,8 +202,13 @@ def photo_detail(request, photo_id):
 
             # Create notification for photo owner
             if photo.owner != request.user:
-                comment_preview = (comment.text[:50] + "..." if len(comment.text) > 50 else comment.text)
-                message_text = f'{request.user.username} commented: "{comment_preview}"'
+                comment_preview = (
+                    comment.text[:50] + "..." if len(comment.text) > 50
+                    else comment.text
+                )
+                message_text = (
+                    f'{request.user.username} commented: "{comment_preview}"'
+                )
                 create_notification(
                     recipient=photo.owner,
                     sender=request.user,
@@ -214,6 +222,18 @@ def photo_detail(request, photo_id):
             return redirect('photo_detail', photo_id=photo.id)
     else:
         form = CommentForm()
+
+        return render(
+            request,
+            'photo_detail.html',
+            {
+                'photo': photo,
+                'comments': comments,
+                'form': form,
+                'liked': liked
+            }
+        )
+
     return render(
         request,
         'photo_detail.html',
@@ -244,7 +264,6 @@ def edit_comment(request, comment_id):
 @login_required
 def delete_comment(request, comment_id):
     """Allow comment authors and photo owners to delete comments.
-    
     GET: Show confirmation page
     POST: Actually delete the comment
     """
@@ -263,7 +282,6 @@ def delete_comment(request, comment_id):
         photo_id = comment.photo.id
         comment.delete()
         return redirect('photo_detail', photo_id=photo_id)
-    
     # If GET, show confirmation template
     return render(request, 'confirm_delete_comment.html', {
         'comment': comment,
@@ -326,8 +344,8 @@ def accounts_profile_redirect(request):
     username = request.user.username
     return redirect('profile_view', username=username)
 
-
 # ===== NOTIFICATION SYSTEM =====
+
 
 def create_notification(recipient, sender, notification_type, title, message,
                         photo=None, comment=None):
@@ -396,15 +414,20 @@ def notifications_mark_all_read(request):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
-
 @login_required
 def notifications_dropdown(request):
     """AJAX endpoint to get recent notifications for dropdown"""
     # Show up to 5 notifications, prioritizing unread
-    unread = list(request.user.notifications.filter(is_read=False).order_by('-created_at')[:5])
+    unread = list(
+        request.user.notifications.filter(is_read=False)
+        .order_by('-created_at')[:5]
+    )
     if len(unread) < 5:
         # Fill with recent read notifications if less than 5 unread
-        read = list(request.user.notifications.filter(is_read=True).order_by('-created_at')[:5-len(unread)])
+        read = list(
+            request.user.notifications.filter(is_read=True)
+            .order_by('-created_at')[:5-len(unread)]
+        )
     else:
         read = []
     notifications = unread + read
@@ -417,7 +440,9 @@ def notifications_dropdown(request):
             'is_read': notification.is_read,
             'created_at': notification.created_at.strftime('%Y-%m-%d %H:%M'),
             'url': notification.get_url(),
-            'sender_username': (notification.sender.username if notification.sender else None),
+            'sender_username': (
+                notification.sender.username if notification.sender else None
+            ),
             'type': notification.notification_type
         })
     unread_count = request.user.notifications.filter(is_read=False).count()
@@ -432,20 +457,17 @@ def follow_user(request, username):
     """Follow a user"""
     if request.method == 'POST':
         user_to_follow = get_object_or_404(User, username=username)
-        
         # Can't follow yourself
         if user_to_follow == request.user:
             return JsonResponse({
                 'success': False,
                 'error': 'Cannot follow yourself'
             })
-        
         # Create or get the follow relationship
         follow, created = Follow.objects.get_or_create(
             follower=request.user,
             following=user_to_follow
         )
-        
         if created:
             # Create notification for the followed user
             create_notification(
@@ -455,7 +477,6 @@ def follow_user(request, username):
                 title='New Follower',
                 message=f'{request.user.username} started following you!'
             )
-            
             return JsonResponse({
                 'success': True,
                 'action': 'followed',
@@ -466,7 +487,6 @@ def follow_user(request, username):
                 'success': False,
                 'error': 'Already following this user'
             })
-    
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
@@ -475,7 +495,6 @@ def unfollow_user(request, username):
     """Unfollow a user"""
     if request.method == 'POST':
         user_to_unfollow = get_object_or_404(User, username=username)
-        
         # Try to find and delete the follow relationship
         try:
             follow = Follow.objects.get(
@@ -483,7 +502,6 @@ def unfollow_user(request, username):
                 following=user_to_unfollow
             )
             follow.delete()
-            
             return JsonResponse({
                 'success': True,
                 'action': 'unfollowed',
@@ -494,7 +512,6 @@ def unfollow_user(request, username):
                 'success': False,
                 'error': 'Not following this user'
             })
-    
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
@@ -503,7 +520,6 @@ def followers_list(request, username):
     """Display a user's followers"""
     user = get_object_or_404(User, username=username)
     followers = user.followers.select_related('follower__profile').all()
-    
     return render(request, 'followers_list.html', {
         'user': user,
         'followers': followers,
@@ -516,7 +532,6 @@ def following_list(request, username):
     """Display users that this user is following"""
     user = get_object_or_404(User, username=username)
     following = user.following.select_related('following__profile').all()
-    
     return render(request, 'following_list.html', {
         'user': user,
         'following': following,
