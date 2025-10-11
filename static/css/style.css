@@ -2848,7 +2848,7 @@ footer.site-footer {
 }
 
 .fa-rotate-by {
-  transform: rotate(var(--fa-rotate-angle, 0deg)) !important;
+  transform:rotate(var(--fa-rotate-angle,0deg))
 }
 
 
