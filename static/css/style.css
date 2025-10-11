@@ -2847,6 +2847,11 @@ footer.site-footer {
   transform: rotate(0deg) !important;
 }
 
+.fa-rotate-by {
+  transform: rotate(var(--fa-rotate-angle, 0deg)) !important;
+}
+
+
 .fa-spin {
   animation: spin 2s linear infinite !important;
 }
