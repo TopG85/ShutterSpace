@@ -20,8 +20,8 @@
     />
 
     <!-- Custom CSS -->
-        /* Workaround: Some validators require an explicit value for animation-delay to avoid CSS validation errors with Font Awesome animations. */
-        animation-delay: 0s;
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    
     <style>
       .notification-read {
         opacity: 0.5;
@@ -34,12 +34,12 @@
       .fa-fade,
       .fa-flip,
       .fa-spin {
-      /* Use a valid, explicit value for animation-delay */
-      animation-delay: 0s !important;
+        /* Use a valid, explicit value for animation-delay */
+        animation-delay: 0s !important;
       }
       .fa-rotate-by {
-      /* Use a valid, explicit value for transform */
-      transform: rotate(0deg) !important;
+        /* Use a valid, explicit value for transform */
+        transform: rotate(0deg) !important;
       }
     </style>
   </head>
