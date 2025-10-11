@@ -2842,15 +2842,14 @@ footer.site-footer {
   --fa-rotate-angle: 0deg;
 }
 
+.fa-rotate-by {
+  transform: rotate(var(--fa-rotate-angle, 0deg)) !important;
+}
+
 .fa {
   animation-delay: 0s !important;
   transform: rotate(0deg) !important;
 }
-
-.fa-rotate-by {
-  transform:rotate(var(--fa-rotate-angle,0deg))
-}
-
 
 .fa-spin {
   animation: spin 2s linear infinite !important;
