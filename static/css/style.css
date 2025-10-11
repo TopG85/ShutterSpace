@@ -2837,16 +2837,26 @@ footer.site-footer {
   object-fit: cover;
 }
 
-/* Font Awesome animation and transform overrides */
+:root {
+  --fa-animation-delay: 0s;
+  --fa-rotate-angle: 0deg;
+}
+
 .fa {
   animation-delay: 0s !important;
   transform: rotate(0deg) !important;
 }
 
-/* Add specific overrides for animated icons */
 .fa-spin {
   animation: spin 2s linear infinite !important;
 }
+
+/* Optional: define your own spin keyframes if needed */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 @keyframes spin {
   from {
