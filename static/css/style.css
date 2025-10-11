@@ -2855,13 +2855,6 @@ footer.site-footer {
   animation: spin 2s linear infinite !important;
 }
 
-/* Optional: define your own spin keyframes if needed */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
