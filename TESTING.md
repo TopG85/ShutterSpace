@@ -1,23 +1,3 @@
-# Project Testing & Validation Documentation (October 2025)
-
-## Recent Changes (Documented)
-
-- **Font Awesome Icon Fixes:** All icon classes in templates were updated to use the correct `fas` or `fab` prefix for reliable rendering. This ensures all icons display as intended after removing the local `all.min.css` file.
-- **Removal of all.min.css:** The local Font Awesome CSS file was removed to eliminate W3C validation errors and simplify static file management. All references were updated to use the CDN or handled via `style.css`.
-- **Testing Steps:**
-	1. Run the W3C CSS Validator on `static/css/style.css`.
-	2. Manually check all pages for correct icon rendering.
-	3. Test in multiple browsers for consistency.
-	4. After static file changes, run `python manage.py collectstatic` and hard-refresh your browser.
-- **Git Workflow:**
-	- After making documentation or code changes, use:
-		```sh
-		git add .
-		git commit -m "Describe your change"
-		git push
-		```
-	- This ensures your updates (including to TESTING.md) are visible on GitHub and to collaborators.
-
 # October 2025: Font Awesome Icon & CSS Validation Updates
 
 ## Font Awesome Icon Class Fixes

@@ -23,14 +23,12 @@ A modern, clean photography portfolio platform that combines:
 - **Portfolio management**: Comprehensive tools for photographers to showcase their work professionally
 - **Responsive design**: Optimized experience across all devices, from desktop galleries to mobile browsing
 
-
 ### Target Audience
 
 - **Emerging photographers** seeking a professional platform to showcase their work
 - **Photography enthusiasts** looking for high-quality visual content and community
 - **Professional photographers** wanting an alternative to mainstream social media
 - **Visual artists** needing a clean, distraction-free portfolio solution
-- **Retouchers and photo editors** who want to showcase their editing and retouching work in a professional portfolio environment
 
 ### Vision
 
@@ -59,7 +57,18 @@ have contrast issues. I also started with light theme and change that to dark
 
 ![frontend](docs/readme_images/front-end-designcolourpalette.jpeg)
 
+# Final colour palette
+
+![frontend](docs/readme_images/front-end-colourpalette-final.jpeg)
+
+One fo the main reasons for changing the colours when a photograph is
+in a frame you don't want the colours to detract from the photography the the users eyes to
+to draw to the image and so the image stands out, it's why photography frame in a gallery are black and white.
+It also improve the contrast the red colour did cause some problems.
+
 ## Wireframes
+
+Same Idea with colour not detracting from the photographs I wanted the images to be in digital frame and the ShutterSpace is the gallery for photographers and retouchers can showcase there work!
 
 ### Homepage Desktop Design
 
