@@ -13,18 +13,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
 
-    <!-- Add this custom style block to override the validation error -->
-    <style>
-      .fa-beat,
-      .fa-fade,
-      .fa-flip,
-      .fa-spin,
-      .fa-rotate-by {
-        /* Adds an explicit, valid value that validators will accept */
-        animation-delay: 0s;
-      }
-    </style>
-
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -32,12 +20,26 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block extras %}{% endblock %}
+        /* Workaround: Some validators require an explicit value for animation-delay to avoid CSS validation errors with Font Awesome animations. */
+        animation-delay: 0s;
     <style>
       .notification-read {
         opacity: 0.5;
         pointer-events: initial;
+      }
+    </style>
+    <!-- Add this custom style block to override the validation error -->
+    <style>
+      .fa-beat,
+      .fa-fade,
+      .fa-flip,
+      .fa-spin {
+      /* Use a valid, explicit value for animation-delay */
+      animation-delay: 0s !important;
+      }
+      .fa-rotate-by {
+      /* Use a valid, explicit value for transform */
+      transform: rotate(0deg) !important;
       }
     </style>
   </head>
