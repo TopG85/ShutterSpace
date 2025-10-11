@@ -102,3 +102,28 @@ static/
 5. If you want zero W3C validator warnings, host local copies of third-party CSS and (optionally) edit them for strict conformance — but be aware that editing vendor files may need re-application after upgrades.
 
 If you want, I can open a Pull Request with `static/webfonts/` and `static/css/all.min.css` added once you run the install script locally and commit the changes; or I can prepare a minimal PR that includes the `TESTING.md` additions and instructions only.
+
+### Updates: Removal of all.min.css
+
+- The `all.min.css` file has been removed from the project to simplify the codebase and eliminate W3C validation errors caused by third-party vendor code.
+- All references to `all.min.css` have been replaced with `style.css`, which now handles the required styles for Font Awesome icons.
+- The `rotate()` property issue flagged by the W3C validator has been resolved by removing the dependency on `all.min.css`.
+
+### Validation Notes
+
+- Ensure that the `style.css` file is validated using the W3C CSS Validator to confirm no further issues.
+- Verify that all icons are displayed correctly in the UI after the changes.
+
+### Testing Checklist
+
+1. **CSS Validation**:
+   - Run the W3C CSS Validator on `style.css` to ensure no errors.
+2. **Icon Verification**:
+   - Check that all Font Awesome icons are visible and styled correctly in the application.
+3. **Browser Testing**:
+   - Perform cross-browser testing to confirm consistent icon rendering.
+
+### Practical Guidance
+
+- If any icons are missing, ensure that the `webfonts/` folder is present and contains the necessary `.woff2`/`.woff` files.
+- After making changes to static files, run `python manage.py collectstatic` and redeploy the application.
