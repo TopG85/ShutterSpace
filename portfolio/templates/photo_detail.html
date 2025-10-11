@@ -92,16 +92,54 @@
             <div class="card mb-4">
                 <div class="card-header">Add a Comment</div>
                 <div class="card-body">
-                    <form method="post">
+                    <form id="commentForm" method="post">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="id_text" class="form-label">Comment</label>
                             {{ form.text }}
                         </div>
                         <button class="btn btn-primary" type="submit">Post Comment</button>
+                        <div id="commentFormMsg" class="mt-2"></div>
                     </form>
                 </div>
             </div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const commentForm = document.getElementById('commentForm');
+                const commentList = document.querySelector('.card-body ul.list-unstyled');
+                const commentMsg = document.getElementById('commentFormMsg');
+                commentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    commentMsg.textContent = '';
+                    const formData = new FormData(commentForm);
+                    fetch(window.location.pathname, {
+                        method: 'POST',
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Add new comment to the list
+                            const li = document.createElement('li');
+                            li.className = 'mb-3';
+                            li.innerHTML = `<strong>${data.comment.author}</strong> <small class="text-muted"> · ${data.comment.created_at}</small><div>${data.comment.text}</div>`;
+                            if (commentList) commentList.appendChild(li);
+                            commentForm.reset();
+                            commentMsg.innerHTML = '<span class="text-success">Comment posted!</span>';
+                            // Update notification badge and dropdown instantly
+                            if (window.updateNotificationBadge) window.updateNotificationBadge();
+                            if (window.updateNotificationDropdown) window.updateNotificationDropdown();
+                        } else {
+                            commentMsg.innerHTML = '<span class="text-danger">' + (data.error || 'Error posting comment') + '</span>';
+                        }
+                    })
+                    .catch(() => {
+                        commentMsg.innerHTML = '<span class="text-danger">Error posting comment</span>';
+                    });
+                });
+            });
+            </script>
         {% else %}
             <div class="alert alert-info">You must <a href="{% url 'login' %}">log in</a> to comment.</div>
         {% endif %}
@@ -261,6 +299,63 @@ document.addEventListener('DOMContentLoaded', function() {
             editForm.action = `/portfolio/comment/${commentId}/edit/`;
         });
     }
+});
+</script>
+
+<script>
+// Like button AJAX logic
+document.addEventListener('DOMContentLoaded', function() {
+    function getCSRFToken() {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, 10) === 'csrftoken=') {
+                    cookieValue = decodeURIComponent(cookie.substring(10));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    document.querySelectorAll('[data-like-button]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const photoId = this.getAttribute('data-photo-id');
+            fetch(`/portfolio/photo/${photoId}/like/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(),
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin',
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update button and like count
+                if (data.liked) {
+                    this.classList.remove('btn-outline-danger');
+                    this.classList.add('btn-danger');
+                    this.textContent = '♥ Liked';
+                } else {
+                    this.classList.remove('btn-danger');
+                    this.classList.add('btn-outline-danger');
+                    this.textContent = '♡ Like';
+                }
+                const countElem = document.querySelector(`[data-likes-count="${photoId}"]`);
+                if (countElem) {
+                    countElem.textContent = data.likes_count;
+                }
+                // Update notification badge and dropdown instantly
+                if (window.updateNotificationBadge) window.updateNotificationBadge();
+                if (window.updateNotificationDropdown) window.updateNotificationDropdown();
+            })
+            .catch(err => {
+                alert('Error toggling like.');
+            });
+        });
+    });
 });
 </script>
 {% endblock %}

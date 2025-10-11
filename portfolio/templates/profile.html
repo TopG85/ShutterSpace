@@ -222,6 +222,59 @@
                             <!-- Comments -->
                             <div class="mt-3">
                                 {% with photo.comments.all|slice:":5" as recent_comments %}
+<script>
+// Like button AJAX logic
+document.addEventListener('DOMContentLoaded', function() {
+    function getCSRFToken() {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, 10) === 'csrftoken=') {
+                    cookieValue = decodeURIComponent(cookie.substring(10));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    document.querySelectorAll('[data-like-button]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const photoId = this.getAttribute('data-photo-id');
+            fetch(`/portfolio/photo/${photoId}/like/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(),
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin',
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update button and like count
+                if (data.liked) {
+                    this.classList.remove('btn-outline-danger');
+                    this.classList.add('btn-danger');
+                    this.textContent = '♥ Liked';
+                } else {
+                    this.classList.remove('btn-danger');
+                    this.classList.add('btn-outline-danger');
+                    this.textContent = '♡ Like';
+                }
+                const countElem = document.querySelector(`[data-likes-count="${photoId}"]`);
+                if (countElem) {
+                    countElem.textContent = data.likes_count;
+                }
+            })
+            .catch(err => {
+                alert('Error toggling like.');
+            });
+        });
+    });
+});
+</script>
                                     {% if recent_comments %}
                                         <ul class="list-unstyled mb-0">
                                             {% for comment in recent_comments %}

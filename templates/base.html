@@ -140,9 +140,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        var dropdown = document.getElementById('notificationsDropdown');
-        var menu = document.getElementById('notificationsDropdownMenu');
-        var badge = document.getElementById('notification-badge');
+  var dropdown = document.getElementById('notificationsDropdown');
+  var menu = document.getElementById('notificationsDropdownMenu');
+  var badge = document.getElementById('notification-badge');
+  // Debug: Log when script loads
+  console.log('[DEBUG] Notification JS loaded');
+
 
         // Function to update badge
         function updateNotificationBadge() {
@@ -156,7 +159,40 @@
                 badge.style.display = 'none';
               }
             })
-            .catch(error => console.error('Error fetching notification count:', error));
+            .catch(error => {
+              console.error('[DEBUG] Error fetching notification count:', error);
+              badge.textContent = '!';
+              badge.style.display = 'inline-block';
+            });
+        }
+
+        // Function to update dropdown notifications (unread only)
+        function updateNotificationDropdown() {
+          fetch('{% url 'notifications_dropdown' %}')
+            .then(response => response.json())
+            .then(data => {
+              let html = '';
+              if (data.notifications.length === 0) {
+                html += `<a class="dropdown-item text-muted" href="{% url 'notifications_list' %}">
+                    <i class="fas fa-bell-slash me-2"></i>No new notifications
+                  </a>`;
+              } else {
+                data.notifications.forEach(function (n) {
+                  html += `<a class="dropdown-item${n.is_read ? ' notification-read' : ' fw-bold'}" href="${n.url}">
+                        <i class="fas fa-bell me-2"></i>${n.title}<br><small class="text-muted">${n.created_at}</small>
+                      </a>`;
+                });
+                html += '<button class="dropdown-item text-center text-primary" id="mark-all-read-btn" type="button"><i class="fas fa-check-double me-2"></i>Mark all as read</button>';
+              }
+              html += '<hr class="dropdown-divider my-2">';
+              html += '<a class="dropdown-item text-center" href="{% url 'notifications_list' %}">View all notifications</a>';
+              document.getElementById('notificationsCardBody').innerHTML = html;
+            })
+            .catch(err => {
+              console.error('[DEBUG] AJAX error loading notifications:', err);
+              document.getElementById('notificationsCardBody').innerHTML =
+                '<span class="dropdown-item text-danger">Error loading notifications</span>';
+            });
         }
 
         // Initial badge update
@@ -164,9 +200,19 @@
         // Optionally, poll every 60 seconds
         setInterval(updateNotificationBadge, 60000);
 
+        // Expose updateNotificationDropdown globally for AJAX comment/like/follow
+        window.updateNotificationDropdown = updateNotificationDropdown;
+
         if (dropdown && menu) {
           dropdown.addEventListener('show.bs.dropdown', function () {
-            // Mark all notifications as read when dropdown is opened
+            console.log('[DEBUG] Notification dropdown opened');
+            updateNotificationDropdown();
+          });
+        }
+
+        // Mark all as read button handler
+        document.addEventListener('click', function(e) {
+          if (e.target && e.target.id === 'mark-all-read-btn') {
             fetch('{% url 'notifications_mark_all_read' %}', {
               method: 'POST',
               headers: { 'X-CSRFToken': getCSRFToken() },
@@ -174,49 +220,17 @@
               .then(response => response.json())
               .then(result => {
                 if (!result.success) {
-                  console.error('Failed to mark notifications as read:', result.error);
-                  document.getElementById('notificationsCardBody').innerHTML =
-                    '<span class="dropdown-item text-danger">Error marking notifications as read</span>';
+                  alert('Error marking notifications as read: ' + result.error);
                   return;
                 }
                 updateNotificationBadge();
-                // Then reload the dropdown list
-                fetch('{% url 'notifications_dropdown' %}')
-                  .then(response => response.json())
-                  .then(data => {
-                    let html = '';
-                    if (data.notifications.length === 0) {
-                      html += `<a class="dropdown-item text-muted" href="{% url 'notifications_list' %}">
-                          <i class="fas fa-bell-slash me-2"></i>No new notifications
-                        </a>`;
-                    } else {
-                      data.notifications.forEach(function (n) {
-                        html += `<a class="dropdown-item${
-                            n.is_read ? ' notification-read' : ' fw-bold'
-                          }" href="${n.url}">
-                            <i class="fas fa-bell me-2"></i>${n.title}<br><small class="text-muted">${
-                          n.created_at
-                        }</small>
-                          </a>`;
-                      });
-                    }
-                    html += '<hr class="dropdown-divider my-2">';
-                    html += '<a class="dropdown-item text-center" href="{% url 'notifications_list' %}">View all notifications</a>';
-                    document.getElementById('notificationsCardBody').innerHTML = html;
-                  })
-                  .catch(err => {
-                    console.error('AJAX error:', err);
-                    document.getElementById('notificationsCardBody').innerHTML =
-                      '<span class="dropdown-item text-danger">Error loading notifications</span>';
-                  });
+                updateNotificationDropdown();
               })
-              .catch(err => {
-                console.error('AJAX error:', err);
-                document.getElementById('notificationsCardBody').innerHTML =
-                  '<span class="dropdown-item text-danger">Error loading notifications</span>';
+              .catch(() => {
+                alert('Error marking notifications as read.');
               });
-          });
-        }
+          }
+        });
 
         // Helper to get CSRF token from cookie
         function getCSRFToken() {

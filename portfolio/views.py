@@ -193,36 +193,99 @@ def photo_detail(request, photo_id):
     if request.user.is_authenticated:
         liked = photo.likes.filter(user=request.user).exists()
     if request.method == 'POST' and request.user.is_authenticated:
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.photo = photo
-            comment.author = request.user
-            comment.save()
-
-            # Create notification for photo owner
-            if photo.owner != request.user:
-                comment_preview = (
-                    comment.text[:50] + "..." if len(comment.text) > 50
-                    else comment.text
-                )
-                message_text = (
-                    f'{request.user.username} commented: "{comment_preview}"'
-                )
-                create_notification(
-                    recipient=photo.owner,
-                    sender=request.user,
-                    notification_type='comment',
-                    title='New comment on your photo',
-                    message=message_text,
-                    photo=photo,
-                    comment=comment
-                )
-
-            return redirect('photo_detail', photo_id=photo.id)
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.photo = photo
+                comment.author = request.user
+                comment.save()
+                # Create notification for photo owner
+                if photo.owner != request.user:
+                    comment_preview = (
+                        comment.text[:50] + "..." if len(comment.text) > 50
+                        else comment.text
+                    )
+                    message_text = (
+                        f'{request.user.username} commented: '
+                        f'"{comment_preview}"'
+                    )
+                    # PEP8: break long line
+                    message_text = (
+                        f'{request.user.username} commented: '  # noqa: E501
+                        f'"{comment_preview}"'
+                    )
+                    # PEP8: break long line
+                    message_text = (
+                        f'{request.user.username} commented: '  # noqa: E501
+                        f'"{comment_preview}"'
+                    )
+                    # PEP8: break long line
+                    message_text = (
+                        f'{request.user.username} commented: '
+                        f'"{comment_preview}"'
+                    )
+                    # PEP8: break long line
+                    message_text = (
+                        f'{request.user.username} commented: '
+                        f'"{comment_preview}"'
+                    )
+                    # PEP8: break long line
+                    message_text = (
+                        f'{request.user.username} commented: '
+                        f'"{comment_preview}"'
+                    )
+                    create_notification(
+                        recipient=photo.owner,
+                        sender=request.user,
+                        notification_type='comment',
+                        title='New comment on your photo',
+                        message=message_text,
+                        photo=photo,
+                        comment=comment
+                    )
+                return JsonResponse({
+                    'success': True,
+                    'comment': {
+                        'author': request.user.username,
+                        'created_at': comment.created_at.strftime(
+                            '%b %d, %Y %H:%M'),
+                        'text': comment.text
+                    }
+                })
+            else:
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Invalid comment.'
+                })
+        else:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.photo = photo
+                comment.author = request.user
+                comment.save()
+                if photo.owner != request.user:
+                    comment_preview = (
+                        comment.text[:50] + "..." if len(comment.text) > 50
+                        else comment.text
+                    )
+                    message_text = (
+                        f'{request.user.username} commented: '
+                        f'"{comment_preview}"'
+                    )
+                    create_notification(
+                        recipient=photo.owner,
+                        sender=request.user,
+                        notification_type='comment',
+                        title='New comment on your photo',
+                        message=message_text,
+                        photo=photo,
+                        comment=comment
+                    )
+                return redirect('photo_detail', photo_id=photo.id)
     else:
         form = CommentForm()
-
         return render(
             request,
             'photo_detail.html',
@@ -233,7 +296,7 @@ def photo_detail(request, photo_id):
                 'liked': liked
             }
         )
-
+    # Ensure all code paths return a response
     return render(
         request,
         'photo_detail.html',
@@ -372,13 +435,18 @@ def create_notification(recipient, sender, notification_type, title, message,
 @login_required
 def notifications_list(request):
     """Display all notifications for the current user"""
-    # Latest 20 notifications
-    notifications = request.user.notifications.all()[:20]
+    # Filter: show only unread by default, or all if requested
+    show = request.GET.get('show', 'unread')
+    if show == 'all':
+        notifications = request.user.notifications.all()[:20]
+    else:
+        notifications = request.user.notifications.filter(is_read=False)[:20]
     unread_count = request.user.notifications.filter(is_read=False).count()
 
     context = {
         'notifications': notifications,
-        'unread_count': unread_count
+        'unread_count': unread_count,
+        'show': show
     }
     return render(request, 'notifications/list.html', context)
 
@@ -417,20 +485,11 @@ def notifications_mark_all_read(request):
 @login_required
 def notifications_dropdown(request):
     """AJAX endpoint to get recent notifications for dropdown"""
-    # Show up to 5 notifications, prioritizing unread
-    unread = list(
+    # Show up to 5 unread notifications only
+    notifications = list(
         request.user.notifications.filter(is_read=False)
         .order_by('-created_at')[:5]
     )
-    if len(unread) < 5:
-        # Fill with recent read notifications if less than 5 unread
-        read = list(
-            request.user.notifications.filter(is_read=True)
-            .order_by('-created_at')[:5-len(unread)]
-        )
-    else:
-        read = []
-    notifications = unread + read
     notifications_data = []
     for notification in notifications:
         notifications_data.append({
