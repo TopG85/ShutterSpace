@@ -37,7 +37,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG is explicitly disabled here for production safety. Set to True
 # only for local development by editing this file or setting the
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'django-project-shutterspace-a676bf7fbd5b.herokuapp.com',
@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_summernote',
     'django_filters',
-    'portfolio',
+    'portfolio.apps.PortfolioConfig',
     'imagekit',
     'storages',
 ]

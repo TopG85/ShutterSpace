@@ -8,14 +8,12 @@
 {% if profile.hero_image %}
 <div class="profile-hero-section mb-4">
     <div class="profile-hero-image">
-        {% if profile.hero_image %}
-            <img 
-                src="{{ profile.hero_image.url }}?w_1200&h_400&c_fill&q_auto:eco&f_auto" 
-                alt="{{ owner.username }}'s hero image" 
-                class="hero-image"
-                loading="lazy"
-            >
-        {% endif %}
+        <img 
+            src="{{ profile.hero_image.url }}?w_1200&h_400&c_fill&q_auto:eco&f_auto" 
+            alt="{{ owner.username }}'s hero image" 
+            class="hero-image"
+            loading="lazy"
+        >
         <div class="hero-overlay">
             <div class="hero-content">
                 {% if profile and profile.avatar %}
@@ -97,18 +95,17 @@
                         </div>
                     </div>
                 </div>
+<!-- end of template -->
                 <!-- Profile Info -->
                 <div class="profile-info mb-4">
                     <div class="d-flex align-items-center text-muted mb-2">
                         <i class="fas fa-calendar-alt me-2"></i>
-                        <span>Joined {{ joined|date:"M d, Y" }}</span>
+                        <span>Joined {{ joined|date:"M d, Y"|default:"[No join date]" }}</span>
                     </div>
-                    {% if profile.location %}
-                        <div class="d-flex align-items-center text-muted mb-2">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            <span>{{ profile.location }}</span>
-                        </div>
-                    {% endif %}
+                    <div class="d-flex align-items-center text-muted mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <span>{% if profile.location %}{{ profile.location }}{% else %}[No location]{% endif %}</span>
+                    </div>
                     {% if profile.website %}
                         <div class="d-flex align-items-center mb-2">
                             <i class="fas fa-link me-2 text-muted"></i>
