@@ -1,13 +1,3 @@
-# Website Field in User Profile
-
-The user profile includes a `website` field, allowing users to add a personal or portfolio website URL to their profile. This field is editable via the profile edit form and, if set, is intended to display as a clickable link in the profile sidebar.
-
-**Current status:**
-- The website field is present in the model, form, and template.
-- However, as of the latest update, the website field is **not currently functional** (it does not save or display as intended).
-- This is a known issue and will be addressed in a future update.
-
-If you attempt to use the website field and it does not save or display, this is expected until the issue is resolved.
 # ShutterSpace
 
 A sophisticated photography portfolio platform designed to bridge the gap in today's photography community landscape.
@@ -1496,87 +1486,13 @@ heroku restart --app <app>
 
 ---
 
-## Full Stack Individual Capstone Checklist
+# Website Field in User Profile
 
-AI-Augmented FullStack Bootcamp | Django Web Framework
+The user profile includes a `website` field, allowing users to add a personal or portfolio website URL to their profile. This field is editable via the profile edit form and, if set, is intended to display as a clickable link in the profile sidebar.
 
----
+**Current status:**
+- The website field is present in the model, form, and template.
+- However, as of the latest update, the website field is **not currently functional** (it does not save or display as intended).
+- This is a known issue and will be addressed in a future update.
 
-### LO1: Agile Planning & Front-End Design
-
-[x] Created wireframes/mockups and documented UX design process — Evidence: `README.md` wireframes and `docs/readme_images/`
-[x] Designed a responsive front-end using Flexbox, Grid, Bootstrap, and/or media queries — Evidence: `static/css/style.css`, Bootstrap in `templates/base.html`
-[~] Used semantic HTML and passed WCAG accessibility checks — Partial: semantic markup present; recommend running Lighthouse/axe audits for final confirmation
-[x] Built a user-friendly interface with consistent styles and clear navigation — Evidence: `templates/base.html`, `static/css/style.css`
-[~] Tracked user stories and tasks in an Agile tool, linking them to project goals — Partial: user stories in `README.md`; external Agile board not found in repo
-
----
-
-### LO2: Data Model & Business Logic
-
-[x] Defined at least one custom Django model with appropriate fields and relationships — Evidence: `portfolio/models.py` (Profile, Photo, Comment, Like, Follow, Notification)
-[x] Used Django ORM and migrations to manage schema and data integrity — Evidence: `migrations/` files (e.g., `0001_initial.py`, `0007_notification.py`)
-[x] Implemented secure CRUD operations with user-friendly interfaces — Evidence: `portfolio/views.py` (upload_photo, edit_profile, delete_photo, edit_comment, delete_comment)
-[~] Enabled real-time or near-real-time user notifications for data changes — Partial: Notifications via DB model + AJAX polling (`portfolio/views.py`, `templates/base.html`); WebSocket push (Channels) not implemented
-[x] Created forms with validation, clear labels, and accessible design — Evidence: `portfolio/forms.py` (PhotoForm, CommentForm, ProfileForm)
-[x] Displayed informative error messages for invalid submissions — Evidence: ValidationError usage in forms and form.add_error in views
-
----
-
-### LO3: Authentication & Authorization
-
-[~] Implemented role-based login and registration (e.g., user/admin) — Partial: Django auth present (`register` view) but no custom role system beyond staff/superuser
-[x] Reflected login state across all pages (e.g., avatar, logout button) — Evidence: `templates/base.html` shows user dropdown when `user.is_authenticated`
-[x] Conditionally rendered content based on login state and role — Evidence: templates and `@login_required`; role-based rendering limited
-[x] Restricted access to protected content and functionality — Evidence: `@login_required` decorators and object-level checks (e.g., delete views)
-[x] Provided clear error messages or redirects for unauthorized access — Evidence: 403 returns and login redirects in tests and views
-
----
-
-### LO4: Testing
-
-[x] Designed manual or automated Python test procedures for key features — Evidence: `portfolio/tests.py` (CommentWorkflowTests, NotificationTests, SecurityTests)
-[ ] (If applicable) Created JavaScript test procedures for frontend components — Missing: no JS tests found
-[~] Documented all test cases, expected outcomes, and results in README.md — Partial: `TESTING.md` contains screenshots and descriptions; no machine-readable results
-[ ] Included coverage metrics or pass/fail summaries — Missing: no coverage report or CI workflow detected
-
----
-
-### LO5: Version Control
-
-[x] Used Git for version control with meaningful commit messages — Evidence: commit history (descriptive commit messages)
-[~] Maintained a clean, incremental commit history — Partial: descriptive commits present; full history review not performed here
-[~] Avoided committing passwords or sensitive info — Partial: `settings.py` reads `SECRET_KEY` from env; recommend scanning repo for leaks
-[x] Used .gitignore and environment variables for secret keys — Evidence: `settings.py` uses environment variables; `staticfiles/` ignored per workflow
-
----
-
-### LO6: Deployment
-
-[x] Successfully deployed the app to a cloud-based platform — Evidence: Heroku references, `Procfile`, `runtime.txt`, and helper scripts in README
-[~] Verified that deployed version matches development version in functionality — Partial: deployment documented; live site verification recommended
-[x] Turned off DEBUG mode in production — Evidence: `DEBUG = False` in `shutterspace/settings.py`
-[x] Documented deployment steps clearly in README.md — Evidence: deployment steps and helper script instructions
-[~] Ensured no sensitive info is exposed in the repository — Partial: env-based secrets in settings; recommend scanning repo for accidental commits
-
----
-
-### LO7: Object-Oriented Design
-
-[x] Designed a custom data model that fits the project’s domain — Evidence: `portfolio/models.py` (domain-focused models)
-[x] Implemented the model using Django’s ORM with appropriate relationships and constraints — Evidence: ForeignKey, OneToOneField, unique_together, CheckConstraint, indexes
-
----
-
-### LO8: AI-Augmented Development
-
-[~] Used AI tools (e.g., Copilot, Copilot Chat) to generate code aligned with project goals — Partial: README references Copilot; explicit mapping not present
-[x] Reflected briefly in README.md on AI-assisted code creation — Evidence: README mentions Copilot and AI in Resources and debugging sections
-[~] Used AI tools to identify and resolve bugs — Partial: debugging notes reference AI assistance; add concrete examples for clarity
-[~] Summarized AI’s role in debugging within README.md — Partial: present but could be condensed and linked to commits
-[~] Leveraged AI suggestions to improve performance and UX — Partial: some optimizations documented; explicit mappings would help
-[~] Included a short reflection on AI’s impact on performance and usability — Partial: high-level statements exist
-[ ] Used GitHub Copilot to generate Django unit tests — Missing: tests exist but provenance not documented
-[ ] Reviewed and adjusted Copilot-generated tests for accuracy — Missing: not documented
-[~] Reflected on Copilot’s role in test creation in README.md — Partial: general AI notes exist; add explicit test-attribution statements
-[~] Included a high-level reflection on how AI influenced workflow and efficiency — Partial: present in README; could be made more explicit
+If you attempt to use the website field and it does not save or display, this is expected until the issue is resolved.
