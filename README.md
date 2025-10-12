@@ -1,3 +1,13 @@
+# Website Field in User Profile
+
+The user profile includes a `website` field, allowing users to add a personal or portfolio website URL to their profile. This field is editable via the profile edit form and, if set, is intended to display as a clickable link in the profile sidebar.
+
+**Current status:**
+- The website field is present in the model, form, and template.
+- However, as of the latest update, the website field is **not currently functional** (it does not save or display as intended).
+- This is a known issue and will be addressed in a future update.
+
+If you attempt to use the website field and it does not save or display, this is expected until the issue is resolved.
 # ShutterSpace
 
 A sophisticated photography portfolio platform designed to bridge the gap in today's photography community landscape.
