@@ -559,11 +559,36 @@ This project exemplifies agile methodology through careful planning, thorough do
 **Core Functionality Implementation**: The development focused on essential user features:
 
 - User account creation and authentication system
+![ui-createaccount](docs/readme_images/ui-createaccount.png)
 - Image upload functionality with Cloudinary integration
+![ui-upload](docs/readme_images/ui-upload.png)
 - Photo interaction features (likes and comments)
+![ui-like&comments](docs/readme_images/ui-like&comments.png)
 - Comment editing and deletion capabilities
+![ui-editcomments](docs/readme_images/ui-editcomments.png)
+![ui-deletecomments](docs/readme_images/ui-deletecomments.png)
 - User profile creation and editing functionality
+![ui-edit-profile](docs/readme_images/ui-edit-profile.png)
+![ui-profile](docs/readme_images/ui-profilepage.png)
 - Responsive design and image optimization
+ShutterSpace is fully responsive, providing an optimal experience on desktop, tablet, and mobile devices. This is achieved through:
+- Mobile-first CSS and media queries
+- Flexible grid layouts (Bootstrap)
+- Touch-friendly navigation and controls
+
+Images are optimized for fast loading and high quality:
+- Cloudinary integration for automatic resizing, WebP conversion, and CDN delivery
+- Lazy loading for offscreen images
+- Responsive `<img>` tags with `srcset` for different device resolutions
+# Desktop
+![readme-shutterspace](docs/readme_images/readme-shutterspace.png)
+# Tablet
+![ui-tablet](docs/readme_images/ui-tablet.png)
+# Mobile
+![ui-mobile](docs/readme_images/ui-mobile.png)
+# Lighthouse performance
+![Lighthouse performance](docs/readme_images/testing-lighthouse-mobile.png)
+
 
 **MVP-First Approach**: This strategy proved highly effective:
 
