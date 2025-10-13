@@ -37,7 +37,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG is explicitly disabled here for production safety. Set to True
 # only for local development by editing this file or setting the
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'django-project-shutterspace-a676bf7fbd5b.herokuapp.com',
@@ -110,6 +110,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'portfolio/templates'),
+           
+           
         ],
         'APP_DIRS': True,
         'OPTIONS': {

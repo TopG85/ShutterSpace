@@ -1212,6 +1212,11 @@ div.jumbotron.bg-primary.text-white.p-5.rounded.mb-4 {
   margin-bottom: 0.75rem;
 }
 
+.profile-link {
+  color: #ffe6b0 !important;
+  font-weight: 600;
+}
+
 /* Hero subtitle with contained width for readability */
 .hero-subtitle {
   word-wrap: break-word !important;

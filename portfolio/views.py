@@ -86,14 +86,11 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 @login_required
 def edit_profile_user(request, username):
-    """Allow the owner to edit their profile at /profile/<username>/edit/.
-    Redirects non-owners to the public profile view.
-    """
     if request.user.username != username:
-        # optionally allow staff to edit others; currently redirect
         return redirect('profile_view', username=username)
 
     profile, created = Profile.objects.get_or_create(user=request.user)
+
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -102,16 +99,14 @@ def edit_profile_user(request, username):
     else:
         form = ProfileForm(instance=profile)
 
-        return render(
-            request,
-            'edit_profile.html',
-            {'form': form, 'profile_owner': request.user}
-        )
-
     return render(
         request,
         'edit_profile.html',
-        {'form': form, 'profile_owner': request.user}
+        {
+            'form': form,
+            'profile_owner': request.user,
+            'profile': profile  # ✅ This makes sidebar access work
+        }
     )
 
 
@@ -146,17 +141,17 @@ def upload_photo(request):
 
 
 @login_required
-def profile_view(request, username):
+def profile(request, username):
     user = get_object_or_404(User, username=username)
-    profile = Profile.objects.filter(user=user).first()
+    profile, created = Profile.objects.get_or_create(user=user)
     photos = Photo.objects.filter(owner=user).order_by('-created_at')
+
     if request.user.is_authenticated:
         for p in photos:
             p.liked = p.likes.filter(user=request.user).exists()
     else:
         for p in photos:
             p.liked = False
-
     # compute simple stats
     photos_count = photos.count()
     total_likes = sum(p.likes.count() for p in photos)
