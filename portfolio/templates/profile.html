@@ -1,5 +1,9 @@
-{% extends 'base.html' %} {% load static %} {% block title %}Profile - {{
-owner.username }}{% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile - {{ owner.username }}{% endblock %}
+
+{% block content %}
 <!-- Hero Image Section -->
 {% if profile.hero_image %}
 <div class="profile-hero-section mb-4">
