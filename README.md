@@ -541,6 +541,8 @@ The custom data model design demonstrates sophisticated understanding of both Dj
 
 # Agile Methodology
 
+**Project Board:** [View the ShutterSpace GitHub Project Board](https://github.com/users/TopG85/projects/26)
+
 This project exemplifies agile methodology through careful planning, thorough documentation, and strategic pivoting when necessary. The development process demonstrated key agile principles of adaptability and continuous improvement throughout the project lifecycle.
 
 ## Development Approach
