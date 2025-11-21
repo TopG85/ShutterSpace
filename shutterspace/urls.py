@@ -20,15 +20,22 @@ from portfolio.views import portfolio_home
 from portfolio.views import accounts_profile_redirect
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', portfolio_home, name='home'),
     path('portfolio/', include('portfolio.urls')),
-    # Auth URLs (login, logout, password reset)
+    # Custom auth URLs that handle redirects properly
+    path('accounts/login/', auth_views.LoginView.as_view(
+        template_name='registration/login.html',
+        redirect_authenticated_user=True
+    ), name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     # Provide a friendly redirect for /accounts/profile/ to the user's profile
     path('accounts/profile/', accounts_profile_redirect,
          name='accounts_profile_redirect'),
+    # Include remaining auth URLs (password reset, etc.)
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 

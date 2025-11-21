@@ -8,7 +8,6 @@ from django.db.models import Q
 from .models import Profile, Photo, Comment, Notification, Follow
 from .forms import ProfileForm, PhotoForm, CommentForm
 
-  
 
 @login_required
 def edit_profile(request):
@@ -74,16 +73,22 @@ def portfolio_home(request):
 
 
 def register(request):
+    # Redirect logged-in users to home
+    if request.user.is_authenticated:
+        return redirect('home')
+        
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            Profile.objects.create(user=user)  # auto-create profile
-            # Don't auto-login, redirect to login page instead
+            form.save()
+            # Profile is automatically created by the post_save signal
+            # Redirect to login page after successful registration
             return redirect('login')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+
 @login_required
 def edit_profile_user(request, username):
     if request.user.username != username:

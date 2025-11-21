@@ -32,7 +32,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-dev-key-only-for-development-change-in-production"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG is explicitly disabled here for production safety. Set to True
@@ -42,7 +45,9 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'django-project-shutterspace-a676bf7fbd5b.herokuapp.com',
     'heroku.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost',
+    'testserver',  # For Django testing
 ]
 
 
@@ -139,15 +144,20 @@ WSGI_APPLICATION = 'shutterspace.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL", ""))
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL", "sqlite:///db.sqlite3")
+    )
 }
 
-# Add connection pooling and SSL settings after parsing
-DATABASES['default']['CONN_MAX_AGE'] = 600
-DATABASES['default']['OPTIONS'] = {
-    'sslmode': 'require',
-    'connect_timeout': 10,
-}
+# Add connection pooling and SSL settings after parsing (PostgreSQL only)
+if DATABASES['default'].get('ENGINE') == 'django.db.backends.postgresql':
+    DATABASES['default']['CONN_MAX_AGE'] = 600
+    if 'OPTIONS' not in DATABASES['default']:
+        DATABASES['default']['OPTIONS'] = {}
+    DATABASES['default']['OPTIONS'].update({
+        'sslmode': 'require',
+        'connect_timeout': 10,
+    })
 
 # Additional database configuration for Heroku
 if 'DATABASE_URL' in os.environ:
@@ -227,7 +237,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Authentication settings
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/portfolio/register/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
