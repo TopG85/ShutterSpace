@@ -1513,6 +1513,67 @@ heroku restart --app <app>
 
 ---
 
+# Recent Bug Fixes & Issues Resolved
+
+## Server Error Resolution (November 2025)
+
+### Fixed: Registration Internal Server Errors
+
+**Issue:** New users encountered 500 internal server errors during registration despite successful account creation.
+
+**Root Causes Identified:**
+- Empty `SECRET_KEY` configuration causing Django `ImproperlyConfigured` errors
+- Missing `testserver` in `ALLOWED_HOSTS` preventing proper testing/development
+- Double profile creation conflict between manual creation and signal handler
+- Improper authentication flow redirects
+
+**Solutions Implemented:**
+- ✅ Added `SECRET_KEY` fallback configuration for development environments
+- ✅ Updated `ALLOWED_HOSTS` to include `testserver` and `localhost`
+- ✅ Removed manual `Profile.objects.create()` calls, relying on signal handler
+- ✅ Added authentication checks to redirect logged-in users from auth pages
+- ✅ Enhanced error handling and configuration validation
+
+**Validation Results:**
+- Registration now returns proper 302 redirects to login page
+- Profiles auto-create successfully without conflicts
+- Authentication flow properly redirects users bidirectionally
+- All server errors resolved with comprehensive testing
+
+### Fixed: Authentication Flow Issues
+
+**Issue:** Users experiencing redirect loops and improper access to authentication pages.
+
+**Solutions Implemented:**
+- ✅ Added `redirect_authenticated_user=True` to LoginView configuration
+- ✅ Implemented authentication checks in registration view
+- ✅ Enhanced URL patterns for proper authentication routing
+- ✅ Added proper `next` parameter handling for login redirects
+
+**Impact:** Smooth user authentication experience with proper redirects and access controls.
+
+### Configuration Improvements
+
+**Database Configuration:**
+- ✅ Improved PostgreSQL settings with proper SSL configuration
+- ✅ Enhanced database URL parsing with development fallbacks
+- ✅ Optimized connection pooling settings
+
+**Security Enhancements:**
+- ✅ Strengthened `SECRET_KEY` handling with environment validation
+- ✅ Updated `ALLOWED_HOSTS` configuration for development and production
+- ✅ Enhanced CSRF protection and security middleware
+
+## Testing & Validation
+
+All fixes have been thoroughly tested with:
+- ✅ Automated Django test client validation
+- ✅ User registration and login flow testing
+- ✅ Profile creation and authentication redirect verification
+- ✅ Server response status code validation (200 for pages, 302 for redirects)
+
+---
+
 # Website Field in User Profile
 
 The user profile includes a `website` field, allowing users to add a personal or portfolio website URL to their profile. This field is editable via the profile edit form and, if set, is intended to display as a clickable link in the profile sidebar.
