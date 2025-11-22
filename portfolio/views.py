@@ -82,7 +82,7 @@ def register(request):
         if form.is_valid():
             form.save()
             # Profile is automatically created by the post_save signal
-            # Redirect to login page after successful registration
+            # After login, user will be redirected to their profile page
             return redirect('login')
     else:
         form = UserCreationForm()

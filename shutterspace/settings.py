@@ -236,7 +236,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Authentication settings
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+# Redirect to user's profile page after login to encourage profile completion
+LOGIN_REDIRECT_URL = '/accounts/profile/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type

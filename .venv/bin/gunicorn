@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/danielcarson/Documents/Visual Studio Code Project/ShutterSpace/.venv/bin/python" "$0" "$@"
+'''exec' "/Users/danielcarson/Documents/Visual Studio Code Project/ShutterSpace/ShutterSpace/.venv/bin/python" "$0" "$@"
 ' '''
 import sys
 from gunicorn.app.wsgiapp import run
