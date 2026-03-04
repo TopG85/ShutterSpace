@@ -72,7 +72,7 @@ Same Idea with colour not detracting from the photographs I wanted the images to
 
 ### Full Wireframe PDF
 
-[View complete wireframe document](docs/readme_images/vinelifechurchwilmslowwf%20(1).pdf)
+[View complete wireframe document](docs/readme_images/shutterspacewireframe.pdf)
 
 ### Homepage Desktop Design
 
