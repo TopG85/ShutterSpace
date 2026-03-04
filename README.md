@@ -70,6 +70,10 @@ It also improve the contrast the red colour did cause some problems.
 
 Same Idea with colour not detracting from the photographs I wanted the images to be in digital frame and the ShutterSpace is the gallery for photographers and retouchers can showcase there work!
 
+### Full Wireframe PDF
+
+[View complete wireframe document](docs/readme_images/vinelifechurchwilmslowwf%20(1).pdf)
+
 ### Homepage Desktop Design
 
 ![Homepage Wireframe](docs/readme_images/New%20Wireframe%201.png)
