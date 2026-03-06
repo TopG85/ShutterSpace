@@ -245,6 +245,14 @@ class Like(models.Model):
 
 ```python
 class Notification(models.Model):
+    NOTIFICATION_TYPES = [
+        ('like', 'Like'),
+        ('comment', 'Comment'),
+        ('follow', 'Follow'),
+        ('photo_upload', 'Photo Upload'),
+        ('mention', 'Mention'),
+    ]
+
     recipient = models.ForeignKey(User, related_name='notifications')
     sender = models.ForeignKey(User, related_name='sent_notifications')
     notification_type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES)
