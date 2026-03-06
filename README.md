@@ -66,14 +66,6 @@ in a frame you don't want the colours to detract from the photography the the us
 to draw to the image and so the image stands out, it's why photography frame in a gallery are black and white.
 It also improve the contrast the red colour did cause some problems.
 
-## Wireframes
-
-Same Idea with colour not detracting from the photographs I wanted the images to be in digital frame and the ShutterSpace is the gallery for photographers and retouchers can showcase there work!
-
-### Full Wireframe PDF
-
-[View complete wireframe document](docs/readme_images/shutterspacewireframe.pdf)
-
 ### Homepage Desktop Design
 
 ![Homepage Wireframe](docs/readme_images/New%20Wireframe%201.png)
