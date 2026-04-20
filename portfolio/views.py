@@ -148,6 +148,12 @@ def upload_photo(request):
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
+    
+    # Allow public access to danielcarson's profile only
+    # Redirect other profiles to login if not authenticated
+    if username != "danielcarson" and not request.user.is_authenticated:
+        return redirect("login")
+    
     profile, created = Profile.objects.get_or_create(user=user)
     photos = Photo.objects.filter(owner=user).order_by('-created_at')
 
