@@ -145,7 +145,6 @@ def upload_photo(request):
     return render(request, 'upload_photo.html', {'form': form})
 
 
-@login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     
